@@ -115,6 +115,12 @@ Vue.use(VueRouter)
     name: 'leaveMessage',
     component: () => import(/* webpackChunkName: "leaveMessage" */ '../views/LeaveMessage.vue')
   },
+
+  {
+    path: '/more',
+    name: 'More',
+    component: () => import(/* webpackChunkName: "more" */ '../views/more/index.vue')
+  }  ,
   // 404
   {
     path: '*',
