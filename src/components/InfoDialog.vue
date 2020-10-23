@@ -5,7 +5,8 @@
       <div class="box">
         <vue-scroll :ops="scrollOps">
           <div class="vsrcoll-box">
-            <p>{{data && data.description}}</p>
+            <p v-if="literatureData">  {{ literatureData }}  </p>
+             <p v-else>{{data && data.description}}</p>
           </div>
         </vue-scroll>
       </div>
@@ -56,7 +57,8 @@ export default {
           keepShow: true,
           size: '11px'
         }
-      }
+      },
+      literatureData:"" //文件内容
     }
   },
   methods: {
@@ -67,6 +69,19 @@ export default {
     hideBox() {
       this.$refs.dialogBox.style.top = -999 + 'px'
       this.$refs.dialogBox.style.left = -999 + 'px'
+    },
+    // 查询文献接口
+    getLiterature(){
+      console.log('查询文献接口======'+ this.pos.title +'===========>执行成功')
+       this.$get(this.$Url.query.literature, {
+        literatureId: this.data.title
+      }).then(res => {
+         console.log(res)
+        let data = res.data
+        if (data) {
+         this.literatureData = res.data.literatureData;
+        }
+      }).catch(err => {})
     }
   },
   watch: {
@@ -85,6 +100,8 @@ export default {
         this.hideBox()
       }
     })
+
+    this.getLiterature();
   },
   destroyed() {
     this.$Bus.$off('hideInfoDialog')

@@ -42,6 +42,7 @@ const URL = {
     symptomQuery: base + 'mtApi/symptom/query', // 症状查询-查询症状
     byDisease: base + 'mtApi/symptom/byDisease', // 症状查询-根据多个症状查询对应的疾病列表
     querySymptom: base + 'mtApi/symptom/querySymptom', // 模糊查询症状
+    literature:base + 'mtApi/literature/byId'// 查询文献接口
   },
   collect: {
     // type值 0：疾病 1：基因 2：变异

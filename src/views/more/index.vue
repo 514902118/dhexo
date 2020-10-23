@@ -58,9 +58,9 @@
            例如，在医学研究文献中有如下一句话：
           We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.
           可构建两条训练数据：
-          a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.",
+            <!-- a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", -->
             label: "is associated with"}
-            b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.",
+            <!-- b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", -->
               label: "is not associated with"}
                两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。
               <el-table :data="section3" border style="width: 100%">
@@ -102,35 +102,35 @@
             </el-table-column>
             <el-table-column prop="POS" label="POS" width="180">
             </el-table-column>
-             <el-table-column prop="ID" label="ID" width="180">
+            <el-table-column prop="ID" label="ID" width="180">
             </el-table-column>
             <el-table-column prop="REF" label="REF" width="180">
             </el-table-column>
-             <el-table-column prop="ALT" label="ALT" width="180">
+            <el-table-column prop="ALT" label="ALT" width="180">
             </el-table-column>
             <el-table-column prop="GeneName" label="Gene Name" width="180">
             </el-table-column>
-             <el-table-column prop="SIFT" label="SIFT" width="180">
+            <el-table-column prop="SIFT" label="SIFT" width="180">
             </el-table-column>
             <el-table-column prop="Polyphen2HDIV" label="Polyphen2  HDIV" width="180">
             </el-table-column>
-             <el-table-column prop="Polyphen2HVAR" label="Polyphen2 HVAR" width="180">
+            <el-table-column prop="Polyphen2HVAR" label="Polyphen2 HVAR" width="180">
             </el-table-column>
             <el-table-column prop="LRT" label="LRT" width="180">
             </el-table-column>
-             <el-table-column prop="MutationTaster" label="Mutation Taster" width="180">
+            <el-table-column prop="MutationTaster" label="Mutation Taster" width="180">
             </el-table-column>
             <el-table-column prop="MutationAssessor" label="Mutation Assessor" width="180">
             </el-table-column>
-             <el-table-column prop="FATHMM" label="FATHMM" width="180">
+            <el-table-column prop="FATHMM" label="FATHMM" width="180">
             </el-table-column>
             <el-table-column prop="PROVEAN" label="PROVEAN" width="180">
             </el-table-column>
           </el-table>
 
-          o	尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel
-o	现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。 
-         <el-table :data="section400" border style="width: 100%">
+          o 尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel
+          o 现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。
+          <el-table :data="section400" border style="width: 100%">
             <el-table-column prop="title" label="致病性打分工具" width="180">
             </el-table-column>
             <el-table-column prop="Accuracy" label="正确率" width="180">
@@ -140,7 +140,7 @@ o	现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率
             <el-table-column prop="MissingRate" label="缺失率" width="180">
             </el-table-column>
           </el-table>
-          o	我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。 
+          o 我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。
         </p>
       </div>
 
