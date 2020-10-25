@@ -1,6 +1,6 @@
 <template>
   <div @click="handleHideDialog">
-    <vLoginHeader/>
+    <vLoginHeader />
     <div class="top">
       <div class="box">
         <p class="title">{{patientName}}</p>
@@ -38,9 +38,9 @@
             </div>
             <ul class="context">
               <template v-if="Object.keys(this.highAttention).length > 0">
-                <li v-for="(item, index) in this.highAttention" :key="index">
+                <li v-for="(item, index) in this.highAttention" :key="index" >
                   <p>{{item['变异']}}</p>
-                  <p>{{item['染色体位置']}}</p>
+                  <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
                   <p>{{item['Ref']}}</p>
                   <p>{{item['Alt']}}</p>
                   <p>{{item['基因型']}}</p>
@@ -51,9 +51,11 @@
                   <p>{{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}}</p>
                   <p>{{item['蛋白变化']}}</p>
                   <p>{{item['突变类型']}}</p>
-                  <p >
-                    <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter="handleShowDialog(ite.name, index, i, 'highAttention', $event)" @click="handleHideDialog" class="spn">
-                      {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
+                  <p>
+                    <span style="display:block;" v-for="(ite, i) in item['文献']" :key="i"
+                      @mouseenter="handleShowDialog(ite.name, index, i, 'highAttention', $event,'variantPmid')"
+                      @click="handleHideDialog(ite)" class="spn">
+                      {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? '' : ''}}
                     </span>
                   </p>
                 </li>
@@ -93,7 +95,7 @@
               <template v-if="Object.keys(this.middleAttention).length > 0">
                 <li v-for="(item, index) in this.middleAttention" :key="index">
                   <p>{{item['变异']}}</p>
-                  <p>{{item['染色体位置']}}</p>
+                  <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
                   <p>{{item['Ref']}}</p>
                   <p>{{item['Alt']}}</p>
                   <p>{{item['基因型']}}</p>
@@ -104,16 +106,21 @@
                   <p>{{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}}</p>
                   <p>{{item['蛋白变化']}}</p>
                   <p>{{item['突变类型']}}</p>
-                  <p >
+                  <p>
                     <template v-if="item['文献'].length <= 2">
-                      <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event)" @click="handleHideDialog" class="spn">
+                      <span style="display:block;" v-for="(ite, i) in item['文献']" :key="i"
+                        @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event,'variantPmid')"
+                        @click="handleHideDialog(ite)" class="spn">
                         {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
                       </span>
                     </template>
                     <template v-else>
-                      <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event)" @click="handleHideDialog" class="spn">
+                      <span v-for="(ite, i) in item['文献']" :key="i"
+                        @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event,'variantPmid')"
+                        @click="handleHideDialog(ite)" class="spn">
                         <template v-if="i<2">
-                          {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
+                          <span style="display:block;">
+                            {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? '' : ''}}</span>
                         </template>
                       </span>
                       <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
@@ -156,7 +163,7 @@
               <template v-if="Object.keys(this.otherAttention).length > 0">
                 <li v-for="(item, index) in this.otherAttention" :key="index">
                   <p>{{item['变异']}}</p>
-                  <p>{{item['染色体位置']}}</p>
+                  <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
                   <p>{{item['Ref']}}</p>
                   <p>{{item['Alt']}}</p>
                   <p>{{item['基因型']}}</p>
@@ -176,7 +183,7 @@
       </div>
       <!-- 参考文献 -->
       <div class="block block4">
-        <p class="title"><em>参考文献</em><span>reference</span></p>
+        <p class="title"><em>参考文献</em><span>references</span></p>
         <p class="description">
           <!-- [1]  Ammann, A. J., Wara, D. W., Cowan, M. J., Barrett, D. J., Stiehm, E. R. The DiGeorge syndrome and the fetal alcohol syndrome. Am. J. Dis. Child. 136: 906-908, 1982.
 
@@ -185,21 +192,17 @@
       </div>
     </div>
     <!-- 展示更多 -->
-    <el-dialog
-      title="文献"
-      :visible.sync="moreDialog"
-      width="700px"
-      append-to-body
-      center
-      class="eldialog more-dialog">
+    <el-dialog title="文献" :visible.sync="moreDialog" width="700px" append-to-body center class="eldialog more-dialog">
       <span></span>
-      <span v-for="(ite, i) in moreData" :key="i" @mouseenter="handleShowDialog(ite.name, 0, i, 'moreData', $event)" @click="handleHideDialog" class="spn">
+      <span v-for="(ite, i) in moreData" :key="i"
+        @mouseenter="handleShowDialog(ite.name, 0, i, 'moreData', $event,'variantPmid')" @click="handleHideDialog(ite)"
+        class="spn">
         {{ite.name}}{{Number(i) !== (moreData.length - 1) ? ',' : ''}}
       </span>
     </el-dialog>
     <!--  -->
-    <InfoDialog :pos="InfoDiaPos" :data="dialogInfo" v-if="showDialog1"/>
-    <vFooter/>
+    <InfoDialog :pos="InfoDiaPos" :data="dialogInfo" v-if="showDialog1" />
+    <vFooter />
   </div>
 </template>
 
@@ -207,7 +210,7 @@
 import vLoginHeader from '@/components/common/vLoginHeader'
 import vFooter from '@/components/common/vFooter'
 import InfoDialog from '@/components/InfoDialog'
-
+import * as Cookies from 'tiny-cookie'
 export default {
   components: {
     vLoginHeader,
@@ -275,12 +278,12 @@ export default {
           this.getWxInfo(allData['中度关注'], (d) => {
             this.middleAttention = d
           })
-          
+
           this.otherAttention = allData['其他']
 
         }
-        
-      }).catch(err => {})
+
+      }).catch(err => { })
     },
     getWxInfo(data, func) {
       let keys = Object.keys(data)
@@ -322,7 +325,8 @@ export default {
       })
     },
 
-    handleShowDialog(txt, index, i, sdata, $event) {
+
+    handleShowDialog(txt, index, i, sdata, $event, type) {
       if (txt === '-') {
         this.showDialog1 = false
         return
@@ -334,12 +338,13 @@ export default {
       } else {
         abst = this[sdata][index]['文献'][i]['abst']
       }
-      // console.log(123,this[sdata][index]['文献'][i])
-      // return
-      if (!abst) {
+
+      if (!abst && type != 'variantPmid' && sdata === 'moreData') {
+        debugger;
         this.$get(this.$Url.query.genebyOmId, {
           omim_id: txt
         }).then(res => {
+
           if (res.status === 200) {
             let data = res.data
             if (data) {
@@ -352,7 +357,7 @@ export default {
               } else {
                 this.$set(this[sdata][index]['文献'][i], 'abst', this.dialogInfo.description)
               }
-              
+
               this.showDialog1 = true
               let width = document.body.clientWidth
               let height = document.body.clientHeight
@@ -362,8 +367,40 @@ export default {
               }
             }
           }
-        }).catch(err => {})
+        }).catch(err => { })
+      } else if (type == "variantPmid") {
+
+
+        /**
+        * 查询文献接口 
+        */
+        window.$.ajax({
+          headers: {
+            token: Cookies.get("token")
+          },
+          url: this.$Url.query.literature,
+          data: {
+            literatureId: txt
+          },
+          success: res => {
+            console.log(res)
+             this.dialogInfo = {
+                title: txt,
+                description: res.data.literatureData,
+                type:'PMID:' + txt
+              }
+              this.showDialog1 = true
+              let width = document.body.clientWidth
+              let height = document.body.clientHeight
+              this.InfoDiaPos = {
+                pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
+                pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
+              }
+          }
+        })
+
       } else {
+
         this.dialogInfo = {
           title: txt,
           description: abst
@@ -377,14 +414,14 @@ export default {
         }
       }
     },
-    handleHideDialog() {
-      this.showDialog1 = false
+    handleHideDialog(ite) {
+      this.showDialog1 = false;
     },
     toPdf() {
       let formData = new FormData()
       formData.append('patientId', this.$route.query.patientId)
       let config = {
-        headers: { 'Content-Type': 'multipart/form-data'},
+        headers: { 'Content-Type': 'multipart/form-data' },
         responseType: 'arraybuffer'
       }
       this.$post(this.$Url.pdf.export, formData, config).then(res => {
@@ -407,12 +444,21 @@ export default {
           URL.revokeObjectURL(dom.href) // 释放URL 对象
           document.body.removeChild(dom)
         }
-      }).catch(err => {})
+      }).catch(err => { })
     },
     // 展示更多
     showMoreDialog(item) {
       this.moreData = item
       this.moreDialog = true
+    },
+
+    /**
+     * 染色体跳转
+     */
+    toLineHandle(item) {
+      let arr = item.split(':');
+      let openUrl = `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr${arr[0]}%3A${arr[1]}`
+      window.open(openUrl, '_blank');
     }
   },
   mounted() {
@@ -422,7 +468,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/_common';
+@import "@/static/_common";
 .top {
   position: relative;
   width: 100%;

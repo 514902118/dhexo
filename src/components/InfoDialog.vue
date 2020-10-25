@@ -1,12 +1,13 @@
 <template>
   <div ref="dialogBox" class="dialog-box" @click.stop="" @mouseleave="hideBox">
-    <p class="tit">{{data && data.title}}</p>
+
+    <p v-if="data && data.type" class="tit">{{data && data.type}}</p>
+    <p v-else class="tit">{{data && data.title}}</p>
     <div class="main">
       <div class="box">
         <vue-scroll :ops="scrollOps">
           <div class="vsrcoll-box">
-            <p v-if="literatureData">  {{ literatureData }}  </p>
-             <p v-else>{{data && data.description}}</p>
+            <p >{{data && data.description}}</p>
           </div>
         </vue-scroll>
       </div>
@@ -58,7 +59,6 @@ export default {
           size: '11px'
         }
       },
-      literatureData:"" //文件内容
     }
   },
   methods: {
@@ -70,19 +70,6 @@ export default {
       this.$refs.dialogBox.style.top = -999 + 'px'
       this.$refs.dialogBox.style.left = -999 + 'px'
     },
-    // 查询文献接口
-    getLiterature(){
-      console.log('查询文献接口======'+ this.pos.title +'===========>执行成功')
-       this.$get(this.$Url.query.literature, {
-        literatureId: this.data.title
-      }).then(res => {
-         console.log(res)
-        let data = res.data
-        if (data) {
-         this.literatureData = res.data.literatureData;
-        }
-      }).catch(err => {})
-    }
   },
   watch: {
     pos() {
@@ -100,8 +87,6 @@ export default {
         this.hideBox()
       }
     })
-
-    this.getLiterature();
   },
   destroyed() {
     this.$Bus.$off('hideInfoDialog')
@@ -110,7 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/_common';
+@import "@/static/_common";
 .dialog-box {
   position: absolute;
   top: 50%;
@@ -121,7 +106,7 @@ export default {
   border-radius: 14px;
   margin-top: -140px;
   cursor: initial;
-  background-color: rgba(201,201,201, 0.9);
+  background-color: rgba(201, 201, 201, 0.9);
   .tit {
     position: relative;
     top: -8px;
@@ -151,7 +136,7 @@ export default {
         line-height: 26px;
         padding-top: 22px;
         padding-bottom: 22px;
-        word-break: break-all;
+        // word-break: break-all;
         word-wrap: break-word;
         font-size: 20px;
         color: $fontColor7;

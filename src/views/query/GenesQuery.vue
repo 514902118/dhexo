@@ -75,7 +75,7 @@
                   <p>
                     <span class="spn" @click="toDetail(item['sNP'])">{{item['sNP']}}</span>
                   </p>
-                  <p>{{item.disease}}</p>
+                  <p style="flex:1.5;">{{item.disease}}</p>
                   <p>
                     <span class="spn" @mouseenter="handleShowDialog(item.omId, index, 'Gene_variant', $event)" @click="handleHideDialog3(item)">{{item.omId}}</span>
                   </p>

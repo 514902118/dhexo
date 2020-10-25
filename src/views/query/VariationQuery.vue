@@ -34,7 +34,7 @@
         <p class="title"><em>疾病关联</em><span>Disease association</span></p>
         <div class="gene-tab">
           <p class="tit">
-            <span>疾病名</span>
+            <span style="text-align:center; flex:1.6;">疾病名</span>
             <span>疾病ID</span>
             <span>遗传方式</span>
             <span>来源</span>
@@ -42,7 +42,7 @@
           </p>
           <ul class="context">
             <li>
-              <p style="text-align:center">
+              <p style="text-align:center; flex:1.6;">
                 <template v-if="typeof info.variantName === 'string'">{{info.variantName}}</template>
                 <template v-else>
                   <span v-for="(item, index) in info.variantName" :key="index">{{item}}<br/></span>
@@ -50,33 +50,46 @@
               </p>
               <p>
                 <template v-if="typeof info.variantPhenotype === 'string'">
-                  <span class="spn" @mouseenter="handleShowDialog(info.variantPhenotype, 'variantPhenotype', $event)" @click="handleHideDialog2(info.variantPhenotype)">
+                  <span class="spn" @mouseenter="handleShowDialog(info.variantPhenotype, 'variantPhenotype', $event,'variantPhenotype')" @click="handleHideDialog2(info.variantPhenotype)">
                     {{info.variantPhenotype}}
                   </span>
                 </template>
                 <template v-else>
-                  <span v-for="(item, index) in info.variantPhenotype" :key="index" class="spn" @mouseenter="handleShowDialog(item, 'variantPhenotype', $event)" @click="handleHideDialog2(item)">
+                  <span v-for="(item, index) in info.variantPhenotype" :key="index" class="spn" @mouseenter="handleShowDialog(item, 'variantPhenotype', $event,'variantPhenotype')" @click="handleHideDialog2(item)">
                     {{item}}<br/>
                   </span>
                 </template>
               </p>
               <p>
                 <template v-if="typeof info.variantInheritance === 'string'">{{info.variantInheritance}}</template>
-                <template v-else>{{info.variantInheritance.join(',')}}</template>
+                <template v-else>
+                    <!-- {{info.variantInheritance.join(',')}} -->
+                    <span style="display:block;" v-for="(item,index) in info.variantInheritance" :key="index">
+                      {{ item }}
+                    </span>
+                </template>
               </p>
               <p>
                 <template v-if="typeof info.variantSource === 'string'">{{info.variantSource}}</template>
-                <template v-else>{{info.variantSource.join(',')}}</template>
+                <template v-else>
+                  <!-- {{info.variantSource.join(',')}} -->
+                  <span style="display:block;" v-for="(item,index) in info.variantSource" :key="index">
+                    {{ item }}
+                  </span>
+                </template>
               </p>
               <p>
                 <template v-if="typeof info.variantPmid === 'string'">
-                  <span class="spn" @mouseenter="handleShowDialog(info.variantPmid, 'variantPmid', $event)" @click="handleHideDialog">
+                  <span class="spn" @mouseenter="handleShowDialog(info.variantPmid, 'variantPmid', $event,'variantPmid')" @click="handleHideDialog">
                     {{info.variantPmid}}
                   </span>
                 </template>
                 <template v-else>
-                  <span v-for="(ite, i) in info.variantPmid" :key="i" @mouseenter="handleShowDialog(ite, i, $event)" @click="handleHideDialog" class="spn">
-                    {{ite}}{{Number(i) !== (info.variantPmid.length - 1) ? ',' : ''}}
+                  <span style="display:block;"  
+                      v-for="(ite, i) in info.variantPmid" 
+                      :key="i" @mouseenter="handleShowDialog(ite, i, $event,'variantPmid')" 
+                      @click="handleHideDialog" class="spn">
+                    {{ite}}{{Number(i) !== (info.variantPmid.length - 1) ? ' ' : ''}}
                   </span>
                 </template>
               </p>
@@ -254,6 +267,7 @@ export default {
 
       // 疾病名
       if (typeof data.variantPhenotype11 === 'string') {
+
         if (data.variantPhenotype11 !== '') {
           this.getDiseaseName(data.variantPhenotype11, data => {
             this.info.variantName = data[0].diseaseName
@@ -262,8 +276,11 @@ export default {
           this.info.variantName = '暂无'
         }
       } else {
+         
         let variantName = []
         data.variantPhenotype11.forEach(v => {
+          Number(v)
+          console.log(v);
           this.getDiseaseName(v, data => {
             variantName.push(data[0].diseaseName)
             this.info.variantName = variantName
@@ -287,7 +304,7 @@ export default {
       }
       
     },
-    handleShowDialog(txt, index, $event) {
+    handleShowDialog(txt, index, $event,type) {
       if (txt === '-') {
         this.showDialog1 = false
         return
@@ -308,7 +325,7 @@ export default {
         }
       }
 
-      if (!thisDescription) {
+      if (!thisDescription && type=="variantPhenotype") {
         this.$get(this.$Url.query.diseaseInformation, {
           OMIM_id: txt
         }).then(res => {
@@ -316,8 +333,9 @@ export default {
             let data = res.data
             if (data) {
               this.dialogInfo = {
-                title: txt,
-                description: data.Description || data.definition_orp || '暂无'
+                title: txt ,
+                description: data.Description || data.definition_orp || '暂无',
+                type:index == 'variantPhenotype'? 'OMIM:'+ txt : 'PMID:' + txt
               }
 
               if (index === 'variantPhenotype') {
@@ -326,8 +344,9 @@ export default {
                 this.$set(this.info, 'variantPmid_thisDescription', this.dialogInfo.description)
               } else {
                 this.info.variantPmidArr.push({
-                  title: txt,
-                  description: this.dialogInfo.description
+                  title: txt ,
+                  description: this.dialogInfo.description,
+                  type:index == 'variantPhenotype'? 'OMIM:'+ txt : 'PMID:' + txt
                 })
               }
               
@@ -341,10 +360,30 @@ export default {
             }
           }
         }).catch(err => {})
+      } else if(!thisDescription && type=="variantPmid"){
+
+          /**
+           * 查询文献接口
+           */
+           this.$get(this.$Url.query.literature, {
+              literatureId: txt
+            }).then(res => {
+              console.log('查询文献接口=========成功');
+              let data = res.data
+              if (data) {
+                this.info.variantPmidArr.push({
+                  title: txt ,
+                  description: res.data.literatureData,
+                  type:'PMID:' + txt
+                })
+              }
+            }).catch(err => { })
+
       } else {
         this.dialogInfo = {
-          title: txt,
-          description: thisDescription
+          title: txt ,
+          description: thisDescription,
+          type:index == 'variantPhenotype'? 'OMIM:'+ txt : 'PMID:' + txt
         }
         this.showDialog1 = true
         let width = document.body.clientWidth

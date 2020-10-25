@@ -62,7 +62,7 @@
               </p>
               <ul class="context">
                 <li v-for="(item, index) in this.info.Phenotype_gene_relationship" :key="index">
-                  <p :title="item.Phenotype" style="text-align:center">{{item.Phenotype}}</p>
+                  <p :title="item.Phenotype" style="text-align:center; ">{{item.Phenotype}}</p>
                   <p :title="item.Gene" style="text-align:center">{{item.Gene}}</p>
                   <p>{{item.Location}}</p>
                   <p>
@@ -77,7 +77,7 @@
           </template>
           <template v-else>
             <ul class="aside" :class="{'brief-info': info.Mapping===''}">
-              <li><i>疾病名</i><p :title="info.Phenotype_gene_relationship[0].Phenotype">{{info.Phenotype_gene_relationship[0].Phenotype}}</p></li>
+              <li><i>疾病名</i><p style="text-align:center; " :title="info.Phenotype_gene_relationship[0].Phenotype">{{info.Phenotype_gene_relationship[0].Phenotype}}</p></li>
               <li><i>基因名</i><p :title="info.Phenotype_gene_relationship[0].Gene">{{info.Phenotype_gene_relationship[0].Gene}}</p></li>
               <li><i>染色体位置</i><p>{{info.Phenotype_gene_relationship[0].Location}}</p></li>
               <li><i>OMIM id</i>
@@ -424,6 +424,7 @@ export default {
             if (data) {
               this.dialogInfo = {
                 title: txt,
+                type: 'OMIM:'+txt,
                 description: data.gene_summary !== '' ? data.gene_summary : '暂无'
               }
               this.$set(this.info.Phenotype_gene_relationship[index], 'thisDescription', this.dialogInfo.description)
@@ -440,6 +441,7 @@ export default {
       } else {
         this.dialogInfo = {
           title: txt,
+          type: 'OMIM:'+txt,
           description: thisDescription
         }
         this.showDialog1 = true

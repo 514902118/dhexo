@@ -528,11 +528,11 @@ textarea {
       p {
         position: relative;
         flex: 1;
-        padding: 0 10px;
+        padding: 0 8px;
         font-size: 24px;
         color: $fontColor6;
         text-align: center;
-        word-break: break-all;
+        // word-break: break-all;
         word-wrap: break-word;
         &:nth-of-type(1) {
           text-align: left;
@@ -626,7 +626,7 @@ textarea {
             padding-top: 100px;
             padding-left: 40px;
             padding-right: 40px;
-            word-break: break-all;
+            // word-break: break-all;
             word-wrap: break-word;
             font-size: 22px;
           }
