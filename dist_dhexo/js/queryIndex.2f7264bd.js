@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["queryIndex"],{1659:function(e,n,t){"use strict";t.r(n);var r=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("router-view")],1)},u=[],a={},c=a,i=t("2877"),o=Object(i["a"])(c,r,u,!1,null,"0bbbb12a",null);n["default"]=o.exports}}]);
+//# sourceMappingURL=queryIndex.2f7264bd.js.map
