@@ -38,7 +38,7 @@
             </div>
             <ul class="context">
               <template v-if="Object.keys(this.highAttention).length > 0">
-                <li v-for="(item, index) in this.highAttention" :key="index" >
+                <li v-for="(item, index) in this.highAttention" :key="index">
                   <p>{{item['变异']}}</p>
                   <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
                   <p>{{item['Ref']}}</p>
@@ -47,8 +47,22 @@
                   <p>{{item['MAF(亚洲)']}}</p>
                   <p>{{item['基因']}}</p>
                   <p>{{item['致病分值']}}</p>
-                  <p>{{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}}</p>
-                  <p>{{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}}</p>
+                  <p>
+                    <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
+                    <span @mouseenter="showXGJBHandle(item['相关疾病'],$event)" style="display:block;"
+                      v-if="typeof item['相关疾病'] === 'string'"> {{ item['相关疾病']  }}</span>
+                    <span @mouseenter="showXGJBHandle(xgjbItem,$event)" style="display:block;" v-else
+                      v-for="(xgjbItem,xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
+                      {{ xgjbItem }}
+                    </span>
+                  </p>
+                  <p>
+                    <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
+                    <span style="display:block;" v-if="typeof item['来源'] === 'string'">{{ item['来源'] }}</span>
+                    <span style="display:block;" v-else v-for="(lyItem,lyIndex) in item['来源']" :key="lyIndex">
+                      {{ lyItem }}
+                    </span>
+                  </p>
                   <p>{{item['蛋白变化']}}</p>
                   <p>{{item['突变类型']}}</p>
                   <p>
@@ -102,8 +116,22 @@
                   <p>{{item['MAF(亚洲)']}}</p>
                   <p>{{item['基因']}}</p>
                   <p>{{item['致病分值']}}</p>
-                  <p>{{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}}</p>
-                  <p>{{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}}</p>
+                  <p>
+                    <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
+                    <span @mouseenter="showXGJBHandle(item['相关疾病'],$event)" style="display:block;"
+                      v-if="typeof item['相关疾病'] === 'string'"> {{ item['相关疾病']  }}</span>
+                    <span @mouseenter="showXGJBHandle(xgjbItem,$event)" style="display:block;" v-else
+                      v-for="(xgjbItem,xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
+                      {{ xgjbItem }}
+                    </span>
+                  </p>
+                  <p>
+                    <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
+                    <span style="display:block;" v-if="typeof item['来源'] === 'string'">{{ item['来源'] }}</span>
+                    <span style="display:block;" v-else v-for="(lyItem,lyIndex) in item['来源']" :key="lyIndex">
+                      {{ lyItem }}
+                    </span>
+                  </p>
                   <p>{{item['蛋白变化']}}</p>
                   <p>{{item['突变类型']}}</p>
                   <p>
@@ -218,6 +246,22 @@ export default {
     InfoDialog,
   },
   data() {
+    let loading = '' //定义loading变量
+    var number = 0
+    function startLoading() { //使用Element loading-start 方法
+      number++
+      loading = Loading.service({
+        lock: false,
+        text: '加载中，请稍后...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.3)',
+      });
+    }
+    function endLoading() { //使用Element loading-close 方法
+      number = 0
+      loading.close()
+    }
+
     return {
       patientName: this.$route.query.patientName || '',
       allData: {},
@@ -384,18 +428,18 @@ export default {
           },
           success: res => {
             console.log(res)
-             this.dialogInfo = {
-                title: txt,
-                description: res.data.literatureData,
-                type:'PMID:' + txt
-              }
-              this.showDialog1 = true
-              let width = document.body.clientWidth
-              let height = document.body.clientHeight
-              this.InfoDiaPos = {
-                pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
-                pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
-              }
+            this.dialogInfo = {
+              title: txt,
+              description: res.data.literatureData,
+              type: 'PMID:' + txt
+            }
+            this.showDialog1 = true
+            let width = document.body.clientWidth
+            let height = document.body.clientHeight
+            this.InfoDiaPos = {
+              pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
+              pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
+            }
           }
         })
 
@@ -459,6 +503,46 @@ export default {
       let arr = item.split(':');
       let openUrl = `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr${arr[0]}%3A${arr[1]}`
       window.open(openUrl, '_blank');
+    },
+
+    /**
+     * 相关疾病
+     */
+    showXGJBHandle(txt, $event) {
+      /**
+         * 查询相关疾病接口 
+         */
+      window.$.ajax({
+        headers: {
+          token: Cookies.get("token")
+        },
+        url: this.$Url.query.diseaseInformation,
+        data: {
+          OMIM_id: txt
+        },
+        success: res => {
+          if (res.status === 200) {
+            console.log('相关疾病', res.data)
+            let data = res.data
+            this.dialogInfo = {
+              title: txt,
+              description: data.Description || data.definition_orp || '暂无',
+              type: 'OMIM:' + txt
+            }
+            this.showDialog1 = true
+            let width = document.body.clientWidth
+            let height = document.body.clientHeight
+            this.InfoDiaPos = {
+              pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
+              pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
+            }
+          }
+        },
+        error: err => {
+        }
+      });
+
+
     }
   },
   mounted() {

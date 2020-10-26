@@ -37,11 +37,11 @@
         </p>
       </h4>
       <!-- <h4>{{info.disease_name}}2222</h4> -->
-      <div class="block block1">
+      <div class="block block1" v-if="info.Description !='暂无'">
         <p class="title"><em>疾病描述</em><span>Disease description</span></p>
         <p class="description">{{info.Description}}</p>
       </div>
-      <div class="block block2">
+      <div class="block block2"  v-if="info.Description !='暂无'">
         <p class="title"><em>简要信息</em><span>Brief information</span></p>
         <ul class="brief-info">
           <li><i>发病年龄</i><span>{{info.Age_of_onset_orp}}</span></li>
@@ -49,9 +49,17 @@
           <li><i>发病率</i><span>{{info.Prevalence_orp}}</span></li>
         </ul>
       </div>
-      <div class="block block3">
+      <div class="block block3" 
+          v-if="
+            isMoreRelationship && 
+            this.info.Phenotype_gene_relationship.length>0 &&
+            info.Phenotype_gene_relationship[0].OMIM_id !== '暂无' &&
+            info.Phenotype_gene_relationship[0].Location !== '暂无' &&
+            info.Phenotype_gene_relationship[0].Gene !== '暂无' &&
+            info.Phenotype_gene_relationship[0].Phenotype !== '暂无'
+          ">
         <p class="title"><em>基因关联</em><span>Gene association</span></p>
-        <div class="gene">
+        <div class="gene" >
           <template v-if="isMoreRelationship">
             <div class="diseases-tab diseases-tab1" style="margin-bottom:0">
               <p class="tit">
@@ -76,13 +84,16 @@
             </div>
           </template>
           <template v-else>
-            <ul class="aside" :class="{'brief-info': info.Mapping===''}">
+            <ul class="aside" :class="{'brief-info': info.Mapping===''}"  >
               <li><i>疾病名</i><p style="text-align:center; " :title="info.Phenotype_gene_relationship[0].Phenotype">{{info.Phenotype_gene_relationship[0].Phenotype}}</p></li>
               <li><i>基因名</i><p :title="info.Phenotype_gene_relationship[0].Gene">{{info.Phenotype_gene_relationship[0].Gene}}</p></li>
               <li><i>染色体位置</i><p>{{info.Phenotype_gene_relationship[0].Location}}</p></li>
               <li><i>OMIM id</i>
                 <p>
-                  <span :class="{spn: info.Phenotype_gene_relationship[0].OMIM_id !== '暂无'}" @mouseenter="handleShowDialog(info.Phenotype_gene_relationship[0].OMIM_id, 0, $event)" @click="handleHideDialog(info.Phenotype_gene_relationship[0])">
+                  <span 
+                    :class="{spn: info.Phenotype_gene_relationship[0].OMIM_id !== '暂无'}" 
+                    @mouseenter="handleShowDialog(info.Phenotype_gene_relationship[0].OMIM_id, 0, $event)" 
+                    @click="handleHideDialog(info.Phenotype_gene_relationship[0])">
                     {{info.Phenotype_gene_relationship[0].OMIM_id}}
                   </span>
                 </p>
@@ -95,13 +106,13 @@
           
         </div>
       </div>
-      <div class="block">
+      <div class="block" v-if="changeInfoTxt">
         <p class="title"><em>该疾病完整信息</em><span>Complete information of the disease</span></p>
       </div>
     </div>
     <!--  -->
     <div v-if="showDetails" class="complete-information">
-      <div class="all">
+      <div class="all" v-if="changeInfoTxt">
         <ul class="aside">
           <li v-for="(item, index) in changeInfoList" :key="index" :class="{'active': changeIndex === index}"  @click="changeInfo(item, index)" >{{item.cname}}</li>
         </ul>
@@ -287,7 +298,12 @@ export default {
           this.info.Inheritance_orp = data.Inheritance_orp || '暂无'
           this.info.Prevalence_orp = data.Prevalence_orp || '暂无'
 
-          let ship = data.Phenotype_gene_relationship
+          // this.info.Description = data.Description || data.definition_orp;
+          // this.info.Age_of_onset_orp = data.Age_of_onset_orp;
+          // this.info.Inheritance_orp = data.Inheritance_orp ;
+          // this.info.Prevalence_orp = data.Prevalence_orp;
+
+          let ship = data.Phenotype_gene_relationship;
           // console.log(444,ship)
           if (ship !== '' && typeof ship === 'string') {
             // 由于数据中存在None，不符合json规范，所以需要先转一下

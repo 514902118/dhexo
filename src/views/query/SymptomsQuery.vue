@@ -244,7 +244,8 @@ export default {
             if (data) {
               this.dialogInfo = {
                 title: txt,
-                description: data.Description || data.definition_orp || '暂无'
+                description: data.Description || data.definition_orp || '暂无',
+                type:'OMIM:'+txt
               }
               
               this.$set(this.list[index], 'thisDescription', this.dialogInfo.description)
@@ -262,7 +263,8 @@ export default {
       } else {
         this.dialogInfo = {
           title: txt,
-          description: thisDescription
+          description: thisDescription,
+          type:'OMIM:'+txt
         }
         this.showDialog1 = true
         let width = document.body.clientWidth
