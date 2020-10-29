@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- vHeader -->
-    <vHeader/>
+    <vHeader />
     <div class="more-box">
       <!-- 顶图 -->
       <div class="more-banner">
@@ -19,17 +19,17 @@
           <div class="patients-tab">
             <p class="tit">
               <span>数据库名称</span>
-              <span >实体类别</span>
+              <span>实体类别</span>
               <span style="flex:1.8">简述</span>
               <span>语言</span>
             </p>
             <ul class="context">
-                 <li v-for="(item, index) in section1" :key="index">
-                  <p class="txt-center">{{item.name}}</p>
-                  <p >{{item.type}}</p>
-                  <p class="txt-left"  >{{item.sketch}}</p>
-                  <p >{{item.language}}</p>
-                </li>
+              <li v-for="(item, index) in section1" :key="index">
+                <p class="txt-center">{{item.name}}</p>
+                <p>{{item.type}}</p>
+                <p class="txt-left">{{item.sketch}}</p>
+                <p>{{item.language}}</p>
+              </li>
             </ul>
           </div>
         </div>
@@ -79,21 +79,29 @@
             <!-- b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", -->
             label: "is not associated with"}
             两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。
-            <el-table :data="section3" border style="width: 100%">
-              <el-table-column prop="title" label="" width="180">
-              </el-table-column>
-              <el-table-column prop="Accuracy" label="Accuracy" width="180">
-              </el-table-column>
-              <el-table-column prop="F1Score" label="F1Score">
-              </el-table-column>
-            </el-table>
-
-            对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。
-            在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。
-
           </p>
+          <!-- section3 table -->
+          <div class="patients-tab">
+            <p class="tit">
+              <span></span>
+              <span class="txt-center">Accuracy</span>
+              <span>F1Score</span>
+            </p>
+            <ul class="context">
+              <li v-for="(item, index) in section3" :key="index">
+                <p class="txt-center">{{item.title}}</p>
+                <p>{{item.Accuracy}}</p>
+                <p>{{item.F1Score}}</p>
+              </li>
+            </ul>
+          </div>
+
+          对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。
+          在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。
+
         </div>
       </div>
+
       <!-- title4 -->
       <div class="section section4">
         <div class="section-cont">
@@ -105,60 +113,84 @@
             对变异导致的氨基酸水平变化进行预测，
             对变异所在位点在接近物种基因组上的保守性进行分析。
             这些工具打分尺度不统一，打分结果常有冲突，未经独立验证，显示可靠性有局限。
-            <el-table :data="section4" border style="width: 100%">
-              <el-table-column prop="title" label="致病性打分工具" width="180">
-              </el-table-column>
-              <el-table-column prop="content" label="打分和功能评价机制" width="180">
-              </el-table-column>
-            </el-table>
+          </p>
+          <!-- section4 table -->
+          <div class="patients-tab">
+            <p class="tit">
+              <span class="txt-center">致病性打分工具</span>
+              <span>打分和功能评价机制</span>
+            </p>
+            <ul class="context">
+              <li v-for="(item, index) in section4" :key="index">
+                <p class="txt-center">{{item.title}}</p>
+                <p>{{item.content}}</p>
+              </li>
+            </ul>
+          </div>
+          <p>
             我们对这 8 个工具的打分可靠性进行的独立评估，并使用机器学习算法构建了 meta-prediction 模型。
             从 OMIM 数据库中抽取已知的致病变异，作为正数据集，
             从 gnomeAD 数据库中抽取 OMIM 中未记载的，在全部人群中 MAF > 0.2 的变异，作为负数据集，
-            <el-table :data="section40" border style="width: 100%">
-              <el-table-column prop="CHROM" label="CHROM" width="180">
-              </el-table-column>
-              <el-table-column prop="POS" label="POS" width="180">
-              </el-table-column>
-              <el-table-column prop="ID" label="ID" width="180">
-              </el-table-column>
-              <el-table-column prop="REF" label="REF" width="180">
-              </el-table-column>
-              <el-table-column prop="ALT" label="ALT" width="180">
-              </el-table-column>
-              <el-table-column prop="GeneName" label="Gene Name" width="180">
-              </el-table-column>
-              <el-table-column prop="SIFT" label="SIFT" width="180">
-              </el-table-column>
-              <el-table-column prop="Polyphen2HDIV" label="Polyphen2  HDIV" width="180">
-              </el-table-column>
-              <el-table-column prop="Polyphen2HVAR" label="Polyphen2 HVAR" width="180">
-              </el-table-column>
-              <el-table-column prop="LRT" label="LRT" width="180">
-              </el-table-column>
-              <el-table-column prop="MutationTaster" label="Mutation Taster" width="180">
-              </el-table-column>
-              <el-table-column prop="MutationAssessor" label="Mutation Assessor" width="180">
-              </el-table-column>
-              <el-table-column prop="FATHMM" label="FATHMM" width="180">
-              </el-table-column>
-              <el-table-column prop="PROVEAN" label="PROVEAN" width="180">
-              </el-table-column>
-            </el-table>
+            <!-- section40 table -->
+            <div class="patients-tab">
+              <p class="tit">
+                <span class="txt-center">CHROM</span>
+                <span>POS</span>
+                <span>ID</span>
+                <span>REF</span>
+                <span>ALT</span>
+                <span>Gene Name</span>
+                <span>SIFT</span>
+                <span>Polyphen2 HDIV</span>
+                <span>Polyphen2 HVAR</span>
+                <span>LRT</span>
+                <span>Mutation Taster</span>
+                <span>Mutation Assessor</span>
+                <span>FATHMM</span>
+                <span>PROVEAN</span>
+              </p>
+              <ul class="context">
+                <li v-for="(item, index) in section40" :key="index">
+                  <p class="txt-center">{{item.CHROM}}</p>
+                  <p>{{item.POS}}</p>
+                  <p>{{item.ID}}</p>
+                  <p>{{item.REF}}</p>
+                  <p>{{item.ALT}}</p>
+                  <p>{{item.GeneName}}</p>
+                  <p>{{item.SIFT}}</p>
+                  <p>{{item.Polyphen2HDIV}}</p>
+                  <p>{{item.Polyphen2HVAR}}</p>
+                  <p>{{item.LRT}}</p>
+                  <p>{{item.MutationTaster}}</p>
+                  <p>{{item.MutationAssessor}}</p>
+                  <p>{{item.FATHMM}}</p>
+                  <p>{{item.PROVEAN}}</p>
+                </li>
+              </ul>
+            </div>
 
             尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel
             现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。
-            <el-table :data="section400" border style="width: 100%">
-              <el-table-column prop="title" label="致病性打分工具" width="180">
-              </el-table-column>
-              <el-table-column prop="Accuracy" label="正确率" width="180">
-              </el-table-column>
-              <el-table-column prop="errorRate" label="错误率" width="180">
-              </el-table-column>
-              <el-table-column prop="MissingRate" label="缺失率" width="180">
-              </el-table-column>
-            </el-table>
-            我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。
-          </p>
+            <!-- section400 table -->
+            <div class="patients-tab">
+              <p class="tit">
+                <span class="txt-center">致病性打分工具</span>
+                <span>正确率</span>
+                <span>错误率</span>
+                <span>缺失率</span>
+              </p>
+              <ul class="context">
+                <li v-for="(item, index) in section400" :key="index">
+                  <p class="txt-center">{{item.title}}</p>
+                  <p>{{item.Accuracy}}</p>
+                  <p>{{item.errorRate}}</p>
+                  <p>{{item.MissingRate}}</p>
+                </li>
+              </ul>
+            </div>
+            <p>
+              我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。
+            </p>
         </div>
       </div>
 
@@ -170,16 +202,58 @@
           现有 MAF 资源有多个问题：
           o 最权威的 ExAC 数据库使用的数据源包含很多病人的数据，造成 MAF 计算的偏差，
           o 不同的种群 （例如 Asian vs. Caucasian）的 MAF 有显著差异，多数工具未予考虑。
-          <el-table :data="section5" border style="width: 100%">
-            <el-table-column prop="SNPID" label="SNP ID" width="180"></el-table-column>
-            <el-table-column prop="Chromosome" label="Chromosome" width="180"></el-table-column>
-            <el-table-column prop="Position" label="Position"></el-table-column>
-            <el-table-column prop="ReferenceBase" label="Reference Base"></el-table-column>
-            <el-table-column prop="AlternativeBase" label="Alternative Base"></el-table-column>
-            <el-table-column prop="OverallMAF" label="Overall MAF"></el-table-column>
-            <el-table-column prop="MAFAmongEastAsians" label="MAF Among East Asians"></el-table-column>
-            <el-table-column prop="DiseaseImplicated" label="Disease Implicated"></el-table-column>
-          </el-table>
+          <!-- section5 table -->
+          <div class="patients-tab">
+            <p class="tit">
+              <span class="txt-center">SNP ID</span>
+              <span>Chromosome</span>
+              <span>Position</span>
+              <span>Reference Base</span>
+              <span>Alternative Base</span>
+              <span>Overall MAF</span>
+              <span>MAF Among East Asians</span>
+              <span>Disease Implicated</span>
+            </p>
+            <ul class="context">
+              <li v-for="(item, index) in section5" :key="index">
+                <p class="txt-center">{{item.SNPID}}</p>
+                <p>{{item.Chromosome}}</p>
+                <p>{{item.Position}}</p>
+                <p>{{item.ReferenceBase}}</p>
+                <p>{{item.AlternativeBase}}</p>
+                <p>{{item.OverallMAF}}</p>
+                <p>{{item.MAFAmongEastAsians}}</p>
+                <p>{{item.DiseaseImplicated}}</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- section50 table -->
+          <div class="patients-tab">
+            <p class="tit">
+              <span class="txt-center"></span>
+              <span>East Asian ancestry 东亚血统</span>
+              <span>African-American/African ancestry 非裔美国人/非洲血统</span>
+              <span>Ashkenazi Jewish ancestry 德系犹太血统 </span>
+              <span>Non-Finnish European ancestry 非芬兰的欧洲血统 </span>
+              <span>Other ancestry 其他 </span>
+              <span>South Asian ancestry 南亚血统 </span>
+              <span>Finnish ancestry 芬兰血统 </span>
+
+            </p>
+            <ul class="context">
+              <li v-for="(item, index) in section50" :key="index">
+                <p class="txt-center">{{item.MAF}}</p>
+                <p>{{item.EastAsian}}</p>
+                <p>{{item.African}}</p>
+                <p>{{item.Ashkenazi }}</p>
+                <p>{{item.Non}}</p>
+                <p>{{item.Other}}</p>
+                <p>{{item.South}}</p>
+                <p>{{item.Finnish}}</p>
+              </li>
+            </ul>
+          </div>
           <p>（从 overall MAF > 0.1 的变异位点上得到的统计）</p>
           <p> 我们在积累大量中国人群/亚洲人群的变异数据基础上，精准计算各个位点的种群特异的 MAF 值，结合 PGG、GenomeAD 数据库提供的种群特异 MAF 数据，用于我们的解读系统</p>
         </div>
@@ -217,7 +291,7 @@
 <script>
 import vHeader from '@/components/common/vHeader'
 import vFooter from '@/components/common/vFooter'
-import { section1 } from './section.js'
+import { section1, section3, section4, section40, section400, section5, section50 } from './section.js'
 export default {
   name: 'Home',
   components: {
@@ -227,58 +301,12 @@ export default {
   data() {
     return {
       section1,
-      section3: [
-        {
-          title: "Training Data ",
-          Accuracy: '0.992',
-          F1Score: '0.991 '
-        }
-      ],
-      section4: [
-        {
-          title: "SIFT ",
-          content: 'D: Deleterious (<=0.05), T: Tolerated (>0.05)'
-        }
-      ]
-      ,
-      section40: [
-        {
-          CHROM: "1",
-          POS: '55136529',
-          ID: 'rs480963',
-          REF: 'T',
-          ALT: 'C',
-          GeneName: 'MROH7',
-          SIFT: '0.153,T',
-          Polyphen2HDIV: '0.999,D',
-          Polyphen2HVAR: '0.962,D',
-          LRT: '0.010,N',
-          MutationTaster: '0.925,P',
-          MutationAssessor: '1.79,L',
-          FATHMM: '3.42,T',
-          PROVEAN: '1.76,N'
-        }
-      ],
-      section400: [
-        {
-          title: "SIFT",
-          Accuracy: '0.491',
-          errorRate: '0.097',
-          MissingRate: '0.412 '
-        }
-      ],
-      section5: [
-        {
-          SNPID: 'rs1799969',
-          Chromosome: '19',
-          Position: '10284116',
-          ReferenceBase: 'G',
-          AlternativeBase: 'A',
-          OverallMAF: '9%',
-          MAFAmongEastAsians: '0.03%',
-          DiseaseImplicated: 'ALZHEIMER DISEASE'
-        }
-      ]
+      section3,
+      section4,
+      section40,
+      section400,
+      section5,
+      section50
     }
   },
   methods: {
@@ -308,10 +336,10 @@ export default {
   }
   .section {
     padding: 100px 0;
-    .txt-center{
+    .txt-center {
       text-align: center;
     }
-    .txt-left{
+    .txt-left {
       text-align: left;
     }
     .section-cont {
