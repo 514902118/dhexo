@@ -95,32 +95,36 @@
           </h2>
 
           <!-- section3-top -->
-          <div class="section3-top">
-            <div class="section3-txt">
+          <div class="section3-top section3-txtbox">
+            <div class="section3-txt left">
               <img src="@/assets/more/222.png" alt="">
               <p>从 PubMed 的摘要文字中提取疾病、基因和变异位点之间的关联知识</p>
             </div>
-            <div class="section3-txt">
+            <div class="section3-txt right">
               <h2>我们主要构建了两类 NLP 模型：</h2>
               <h3>命名实体识别（NER）模型，采用 PubTator 技术</h3>
-              <p> o 疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。</p>
+              <p>
+                疾病实体的识别 F1分数为 0.782，<br />
+                基因实体的识别 F1 分数为 0.867，<br />
+                变异实体的识别 F1 分数为 0.914。<br />
+              </p>
             </div>
           </div>
           <!-- section3-top -->
-          <div class="section3-bottom">
-            <div class="section3-txt">
+          <div class="section3-bottom section3-txtbox ">
+            <div class="section3-txt left">
               <h3>关系抽取（RE）模型，采用基于深度神经网络的 BERT 技术</h3>
-              <p> o 构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
+              <p class="title1">构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
               <p>例如，在医学研究文献中有如下一句话：</p>
               <p>We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.</p>
               <p>可构建两条训练数据：</p>
               <p>{{ model.section3.a }}</p>
               <p>{{ model.section3.b }}</p>
             </div>
-            <div class="section3-txt">
-              <p> 两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。 </p>
+            <div class="section3-txt right">
+              <p class="title1"> 两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。 </p>
               <!-- section3 table -->
-              <div class="patients-tab">
+              <div class="patients-tab" style="margin:40px 0 60px 0;">
                 <p class="tit">
                   <span></span>
                   <span class="txt-center">Accuracy</span>
@@ -134,9 +138,10 @@
                   </li>
                 </ul>
               </div>
+              <p  class="title1">对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。</p>
+              <p  class="title1">在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。</p>
             </div>
-            <p>对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。</p>
-            <p>在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。</p>
+
           </div>
         </div>
       </div>
@@ -346,10 +351,10 @@ export default {
       section400,
       section5,
       section50,
-      model:{
-        section3:{
-          a:'a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
-          b:'b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}'
+      model: {
+        section3: {
+          a: 'a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
+          b: 'b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}'
         }
       }
     }
@@ -489,18 +494,78 @@ export default {
     }
   }
   .section3 {
-    .section3-top{
+    .section3-txtbox {
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
-      .section3-txt{
-        width:50%；
+      .section3-txt {
+        width: 50%;
+      }
+    }
+    .section3-top {
+      .left {
+        text-align: center;
+        img {
+          width: 324px;
+          display: block;
+          margin: 0 auto;
+        }
+        p {
+          color: #3bcaff;
+          text-align: center;
+          font-weight: normal;
+          font-size: 16px;
+          margin-top: 10px;
+        }
+      }
+      .right {
+        h2 {
+          margin-top: 50px;
+          font-size: 24px;
+          line-height: 48px;
+          color: #333;
+        }
+        p {
+          margin-top: 40px;
+          font-size: 18px;
+          line-height: 30px;
+          color: #666;
+          font-weight: normal;
+        }
+      }
+    }
+    .section3-bottom {
+      padding-top: 100px;
+      .left {
+        .title1 {
+          padding-bottom: 73px;
+          font-weight: 500;
+        }
+        p {
+          font-size: 18px;
+          line-height: 40px;
+          color: #333;
+          font-weight: normal;
+          padding-right: 80px;
+          margin-top: 10px;
+        }
+      }
+      .right {
+        .title1 {
+          font-weight: 500;
+        }
+         p {
+          font-size: 18px;
+          color: #333;
+          font-weight: normal;
+          margin-bottom: 20px;
+        }
       }
     }
   }
-  // .section4 {
-  //   background: #f9f9f9;
-  // }
+  .section4 {
+    background: #f9f9f9;
+  }
   // .section5 {
   // }
   // .section6 {
