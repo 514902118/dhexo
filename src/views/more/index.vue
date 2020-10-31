@@ -5,7 +5,6 @@
     <div class="more-box">
       <!-- 顶图 -->
       <div class="more-banner">
-        <img src="@/assets/more/more-banner.jpg" alt="">
         <h2 class="title">
           <img src="@/assets/more/logo.png" alt="">
           遗传病全外显子组智能解读引擎、智能解读系统技术要点
@@ -15,10 +14,15 @@
       <!-- title1 -->
       <div class="section section1">
         <div class="section-cont">
-          <h2 class="title">整合24个权威专业数据库，涵盖基因、症状（表型）、变异、蛋白、<br />功能预测和GWAS数据库资源，构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库</h2>
-          <div class="patients-tab">
+          <h2 class="title">
+            <i class="icon-tit icon-tit-left"></i>
+            整合24个权威专业数据库，涵盖基因、症状（表型）、变异、蛋白、<br />
+            功能预测和GWAS数据库资源，构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库
+            <i class="icon-tit icon-tit-right"></i>
+          </h2>
+          <div class="patients-tab" style="margin-bottom:0;">
             <p class="tit">
-              <span>数据库名称</span>
+              <span class="txt-center">数据库名称</span>
               <span>实体类别</span>
               <span style="flex:1.8">简述</span>
               <span>语言</span>
@@ -27,78 +31,113 @@
               <li v-for="(item, index) in section1" :key="index">
                 <p class="txt-center">{{item.name}}</p>
                 <p>{{item.type}}</p>
-                <p class="txt-left">{{item.sketch}}</p>
+                <p style="flex:1.8" class="txt-left">{{item.sketch}}</p>
                 <p>{{item.language}}</p>
               </li>
             </ul>
           </div>
         </div>
       </div>
-
       <!-- title2 -->
       <div class="section section2">
         <div class="section-cont">
-          <h2 class="title">以GRAKN 图数据库技术为支撑， 通过规则推断实体间的潜在关系，<br />进一步深挖生物医药领域大量数据的潜在价值，结合AI技术，构建知识图谱。</h2>
-          <img src="@/assets/more/111.png" alt="">
-          <p>GRAKN 是具有推理、查询语言功能的分布式图数据库（graph database）系统，能够高效查询显式存储的数据和隐式派生的信息。</p>
-          <p>
-            GRAKN 有如下特点：
-            允许使用 Entity-Relationship 模型建模。它由实体类型、关系类型和属性类型组成。与其他建模语言不同，GRAKN 允许定义类型层次结构、超实体、超关系和规则以构建丰富的知识模型，
-            提供了轻松快速地将类型继承功能。遵循面向对象的原理，这允许数据类型继承其父级的行为和属性，允许在知识架构中定义规则，从而扩展了模型的表达能力，因为当满足数据集中的某种逻辑形式时，系统可以得出新的结论，
-            具备推理功能，通过两种机制实现：基于类型的推理和基于规则的推理。这不仅可以得出新的结论并揭示原来隐藏的关系，而且还可以将复杂的模式抽象为简单的查询，
-            支持以分布式方式对大量数据执行计算。
+          <h2 class="title">
+            <i class="icon-tit icon-tit-left-cur"></i>
+            以GRAKN 图数据库技术为支撑， 通过规则推断实体间的潜在关系，<br />
+            进一步深挖生物医药领域大量数据的潜在价值，结合AI技术，构建知识图谱。
+            <i class="icon-tit icon-tit-right-cur"></i>
+          </h2>
+          <div class="img-box">
+            <img src="@/assets/more/111.png" alt="">
+            <p>本项目建立的知识库 schema</p>
+          </div>
 
-            GRAKN 在本项目上显示的主要优势：
-            可以通过规则来推断潜在的关系
-            例如：已知 A变异在 B 基因上，A 变异与 C 疾病有关。我们可以通过编写规则，让 GRAKN 自动识别出 B 基因与 C 疾病的关联性。
-            有效使用 GRAKN 有助于进一步深挖生物医药领域有大量的公开数据的潜在价值。
-            可以很高效的查询关联数据：图数据库对关联查询在存储模型、数据结构、查询算法等方面进行了针对性的优化。
-            作为先进的图数据库，GRAKN 有结合 AI 的潜力，使得我们可以以 GRAKN 为基础构建知识图谱。
-          </p>
+          <div class="section2-cont">
+            <!-- left -->
+            <div class="section2-txt left">
+              <h2>
+                GRAKN 是具有推理、查询语言功能
+                的分布式图数据库（graph database）系
+                统，能够高效查询显式存储的数据和隐式派生的信息。
+                <i></i>
+              </h2>
+              <h3>GRAKN 在本项目上显示的主要优势：</h3>
+              <p>
+                可以通过规则来推断潜在的关系 <br />
+                例如：已知 A变异在 B 基因上，A 变异与 C 疾病有关。我们可以通过编写规则，让 GRAKN 自动识别出 B 基因与 C 疾病的关联性。 <br />
+                有效使用 GRAKN 有助于进一步深挖生物医药领域有大量的公开数据的潜在价值。
+              </p>
+              <p> 可以很高效的查询关联数据：图数据库对关联查询在存储模型、数据结构、查询算法等方面进行了针对性的优化。</p>
+              <p> 作为先进的图数据库，GRAKN 有结合 AI 的潜力，使得我们可以以 GRAKN 为基础构建知识图谱。</p>
+            </div>
+            <!-- right -->
+            <div class="section2-txt right">
+              <h3> GRAKN 有如下特点：</h3>
+              <p>允许使用 Entity-Relationship 模型建模。它由实体类型、关系类型和属性类型组成。与其他建模语言不同，GRAKN 允许定义类型层次结构、超实体、超关系和规则以构建丰富的知识模型，</p>
+              <p>提供了轻松快速地将类型继承功能。遵循面向对象的原理，这允许数据类型继承其父级的行为和属性，允许在知识架构中定义规则，从而扩展了模型的表达能力，因为当满足数据集中的某种逻辑形式时，系统可以得出新的结论，
+              </p>
+              <p>具备推理功能，通过两种机制实现：基于类型的推理和基于规则的推理。这不仅可以得出新的结论并揭示原来隐藏的关系，而且还可以将复杂的模式抽象为简单的查询，</p>
+              <p>支持以分布式方式对大量数据执行计算。</p>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <!-- title3 -->
       <div class="section section3">
         <div class="section-cont">
-          <h2 class="title"> 利用人工智能（AI）技术支持的自然语言处理（NLP）技术从专业医学研究文献中实现知识的自动获取，并实现知识库资源的随时更新。</h2>
+          <h2 class="title">
+            <i class="icon-tit icon-tit-left"></i>
+            利用人工智能（AI）技术支持的自然语言处理（NLP）<br />
+            技术从专业医学研究文献中实现知识的自动获取，并实现知识库资源的随时更新。
+            <i class="icon-tit icon-tit-right"></i>
+          </h2>
 
-          <p>我们主要构建了两类 NLP 模型：
-            命名实体识别（NER）模型，采用 PubTator 技术
-            o 疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。
-            <img src="@/assets/more/222.png" alt="">
-            从 PubMed 的摘要文字中提取疾病、基因和变异位点之间的关联知识
-
-            关系抽取（RE）模型，采用基于深度神经网络的 BERT 技术
-            o 构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型
-            例如，在医学研究文献中有如下一句话：
-            We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.
-            可构建两条训练数据：
-            <!-- a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", -->
-            label: "is associated with"}
-            <!-- b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", -->
-            label: "is not associated with"}
-            两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。
-          </p>
-          <!-- section3 table -->
-          <div class="patients-tab">
-            <p class="tit">
-              <span></span>
-              <span class="txt-center">Accuracy</span>
-              <span>F1Score</span>
-            </p>
-            <ul class="context">
-              <li v-for="(item, index) in section3" :key="index">
-                <p class="txt-center">{{item.title}}</p>
-                <p>{{item.Accuracy}}</p>
-                <p>{{item.F1Score}}</p>
-              </li>
-            </ul>
+          <!-- section3-top -->
+          <div class="section3-top">
+            <div class="section3-txt">
+              <img src="@/assets/more/222.png" alt="">
+              <p>从 PubMed 的摘要文字中提取疾病、基因和变异位点之间的关联知识</p>
+            </div>
+            <div class="section3-txt">
+              <h2>我们主要构建了两类 NLP 模型：</h2>
+              <h3>命名实体识别（NER）模型，采用 PubTator 技术</h3>
+              <p> o 疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。</p>
+            </div>
           </div>
-
-          对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。
-          在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。
-
+          <!-- section3-top -->
+          <div class="section3-bottom">
+            <div class="section3-txt">
+              <h3>关系抽取（RE）模型，采用基于深度神经网络的 BERT 技术</h3>
+              <p> o 构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
+              <p>例如，在医学研究文献中有如下一句话：</p>
+              <p>We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.</p>
+              <p>可构建两条训练数据：</p>
+              <p>{{ model.section3.a }}</p>
+              <p>{{ model.section3.b }}</p>
+            </div>
+            <div class="section3-txt">
+              <p> 两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。 </p>
+              <!-- section3 table -->
+              <div class="patients-tab">
+                <p class="tit">
+                  <span></span>
+                  <span class="txt-center">Accuracy</span>
+                  <span>F1Score</span>
+                </p>
+                <ul class="context">
+                  <li v-for="(item, index) in section3" :key="index">
+                    <p class="txt-center">{{item.title}}</p>
+                    <p>{{item.Accuracy}}</p>
+                    <p>{{item.F1Score}}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p>对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。</p>
+            <p>在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。</p>
+          </div>
         </div>
       </div>
 
@@ -306,7 +345,13 @@ export default {
       section40,
       section400,
       section5,
-      section50
+      section50,
+      model:{
+        section3:{
+          a:'a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
+          b:'b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}'
+        }
+      }
     }
   },
   methods: {
@@ -319,10 +364,14 @@ export default {
 @import "@/static/_common";
 .home {
   width: 100%;
+  min-width: 1000px;
   .more-banner {
+    width: 100%;
+    overflow: hidden;
     text-align: center;
     height: 370px;
     position: relative;
+    background: url("~@/assets/more/more-banner.jpg") no-repeat center top;
     h2.title {
       width: 100%;
       position: absolute;
@@ -346,7 +395,6 @@ export default {
       width: 1200px;
       margin: 0 auto;
     }
-
     h2.title {
       width: 100%;
       text-align: center;
@@ -354,24 +402,111 @@ export default {
       font-weight: normal;
       margin-bottom: 40px;
       line-height: 40px;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: center;
+      i.icon-tit {
+        width: 61px;
+        height: 57px;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 0 30px;
+      }
+      i.icon-tit-left {
+        background-image: url("~@/assets/more/images_03.png");
+      }
+      i.icon-tit-right {
+        background-image: url("~@/assets/more/images_05.png");
+      }
+      i.icon-tit-left-cur {
+        background-image: url("~@/assets/more/images_09.png");
+      }
+      i.icon-tit-right-cur {
+        background-image: url("~@/assets/more/images_10.png");
+      }
     }
   }
-  .section1 {
-  }
+
   .section2 {
     background: #f9f9f9;
+    .img-box {
+      width: 100%;
+      img {
+        display: block;
+        width: 100%;
+      }
+      p {
+        color: #3bcaff;
+        text-align: right;
+        font-weight: normal;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+    }
+    .section2-cont {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      h2 {
+        font-size: 24px;
+        line-height: 48px;
+        color: #333;
+        padding-right: 80px;
+        i {
+          display: block;
+          width: 40px;
+          height: 4px;
+          margin-top: 15px;
+          background: #3bcaff;
+        }
+      }
+      .section2-txt {
+        width: 50%;
+      }
+      .left {
+        h3 {
+          margin-top: 114px;
+        }
+        p {
+          padding-right: 100px;
+          margin-top: 40px;
+          font-size: 18px;
+          line-height: 30px;
+          color: #666;
+          font-weight: normal;
+        }
+      }
+      .right {
+        padding-left: 60px;
+        p {
+          margin-top: 40px;
+          font-size: 18px;
+          line-height: 30px;
+          color: #666;
+        }
+      }
+    }
   }
   .section3 {
+    .section3-top{
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      .section3-txt{
+        width:50%；
+      }
+    }
   }
-  .section4 {
-    background: #f9f9f9;
-  }
-  .section5 {
-  }
-  .section6 {
-    background: #f9f9f9;
-  }
-  .section7 {
-  }
+  // .section4 {
+  //   background: #f9f9f9;
+  // }
+  // .section5 {
+  // }
+  // .section6 {
+  //   background: #f9f9f9;
+  // }
+  // .section7 {
+  // }
 }
 </style>
