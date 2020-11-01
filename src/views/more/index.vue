@@ -12,7 +12,7 @@
       </div>
 
       <!-- title1 -->
-      <div class="section section1">
+      <div id="section1" ref="section1" class="section section1">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left"></i>
@@ -40,7 +40,7 @@
       </div>
 
       <!-- title2 -->
-      <div class="section section2">
+      <div id="section2" ref="section2" class="section section2">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left-cur"></i>
@@ -99,7 +99,7 @@
       </div>
 
       <!-- title3 -->
-      <div class="section section3">
+      <div id="section3" ref="section3" class="section section3">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left"></i>
@@ -177,7 +177,7 @@
       </div>
 
       <!-- title4 -->
-      <div class="section section4 horizontal-bar">
+      <div id="section4" ref="section4" class="section section4 horizontal-bar">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left-cur"></i>
@@ -303,7 +303,7 @@
       </div>
 
       <!-- title5 -->
-      <div class="section section5 horizontal-bar">
+      <div id="section5" ref="section5" class="section section5 horizontal-bar">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left"></i>
@@ -401,7 +401,7 @@
       </div>
 
       <!-- title6 -->
-      <div class="section section6">
+      <div id="section6" ref="section6" class="section section6">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left-cur"></i>
@@ -412,7 +412,7 @@
       </div>
 
       <!-- title7 -->
-      <div class="section section7">
+      <div id="section7" ref="section7" class="section section7">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left"></i>
@@ -518,7 +518,29 @@ export default {
       },
     };
   },
-  methods: {},
+  mounted() {
+    this.linkHandle();
+  },
+  methods: {
+    linkHandle() {
+      var hash = window.location.hash;
+      var index = hash.lastIndexOf("#");
+      if (index != -1) {
+        var id = hash.substring(index + 1, hash.length + 1);
+        var div = document.getElementById(id);
+        if (div) {
+          setTimeout(function () {
+            console.log($(div).offset().top);
+            //$('html,body').scrollTop($(div).offset().top - 43);
+            $("html, body").animate(
+              { scrollTop: $(div).offset().top - 0 },
+              100
+            );
+          }, 100);
+        }
+      }
+    },
+  },
 };
 </script>
 

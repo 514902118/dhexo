@@ -3,7 +3,7 @@
     <vLoginHeader />
     <div class="top">
       <div class="box">
-        <p class="title">{{patientName}}</p>
+        <p class="title">{{ patientName }}</p>
         <div class="elbtn" @click="toPdf">下载</div>
         <!-- <router-link :to="{ name: 'patientsReport', query: {id: this.$route.query.vcfId}}" tag="div" class="elbtn">下载</router-link> -->
         <!-- <div class="elbtn" @></div> -->
@@ -15,8 +15,16 @@
         <p class="title"><em>高度关注</em><span>High attention</span></p>
         <div class="gene-tab tab">
           <div class="tit tit-fix"></div>
-          <div class="context-fix" :class="{'no-data': Object.keys(this.highAttention).length <= 0}">
-            <p v-if="Object.keys(this.highAttention).length <= 0" class="no-data">暂无数据</p>
+          <div
+            class="context-fix"
+            :class="{ 'no-data': Object.keys(this.highAttention).length <= 0 }"
+          >
+            <p
+              v-if="Object.keys(this.highAttention).length <= 0"
+              class="no-data"
+            >
+              暂无数据
+            </p>
           </div>
           <vue-scroll :ops="scrollOps">
             <div class="tit tit2">
@@ -39,37 +47,73 @@
             <ul class="context">
               <template v-if="Object.keys(this.highAttention).length > 0">
                 <li v-for="(item, index) in this.highAttention" :key="index">
-                  <p>{{item['变异']}}</p>
-                  <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
-                  <p>{{item['Ref']}}</p>
-                  <p>{{item['Alt']}}</p>
-                  <p>{{item['基因型']}}</p>
-                  <p>{{item['MAF(亚洲)']}}</p>
-                  <p>{{item['基因']}}</p>
-                  <p>{{item['致病分值']}}</p>
+                  <p>{{ item["变异"] }}</p>
+                  <p class="more" @click="toLineHandle(item['染色体位置'])">
+                    {{ item["染色体位置"] }}
+                  </p>
+                  <p>{{ item["Ref"] }}</p>
+                  <p>{{ item["Alt"] }}</p>
+                  <p>{{ item["基因型"] }}</p>
+                  <p>{{ item["MAF(亚洲)"] }}</p>
+                  <p>{{ item["基因"] }}</p>
+                  <p>{{ item["致病分值"] }}</p>
                   <p>
                     <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
-                    <span @mouseenter="showXGJBHandle(item['相关疾病'],$event)" style="display:block;"
-                      v-if="typeof item['相关疾病'] === 'string'"> {{ item['相关疾病']  }}</span>
-                    <span @mouseenter="showXGJBHandle(xgjbItem,$event)" style="display:block;" v-else
-                      v-for="(xgjbItem,xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
+                    <span
+                      @mouseenter="showXGJBHandle(item['相关疾病'], $event)"
+                      style="display: block"
+                      v-if="typeof item['相关疾病'] === 'string'"
+                    >
+                      {{ item["相关疾病"] }}</span
+                    >
+                    <span
+                      @mouseenter="showXGJBHandle(xgjbItem, $event)"
+                      style="display: block"
+                      v-else
+                      v-for="(xgjbItem, xgjbIndex) in item['相关疾病']"
+                      :key="xgjbIndex"
+                    >
                       {{ xgjbItem }}
                     </span>
                   </p>
                   <p>
                     <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
-                    <span style="display:block;" v-if="typeof item['来源'] === 'string'">{{ item['来源'] }}</span>
-                    <span style="display:block;" v-else v-for="(lyItem,lyIndex) in item['来源']" :key="lyIndex">
+                    <span
+                      style="display: block"
+                      v-if="typeof item['来源'] === 'string'"
+                      >{{ item["来源"] }}</span
+                    >
+                    <span
+                      style="display: block"
+                      v-else
+                      v-for="(lyItem, lyIndex) in item['来源']"
+                      :key="lyIndex"
+                    >
                       {{ lyItem }}
                     </span>
                   </p>
-                  <p>{{item['蛋白变化']}}</p>
-                  <p>{{item['突变类型']}}</p>
+                  <p>{{ item["蛋白变化"] }}</p>
+                  <p>{{ item["突变类型"] }}</p>
                   <p>
-                    <span style="display:block;" v-for="(ite, i) in item['文献']" :key="i"
-                      @mouseenter="handleShowDialog(ite.name, index, i, 'highAttention', $event,'variantPmid')"
-                      @click="handleHideDialog(ite)" class="spn">
-                      {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? '' : ''}}
+                    <span
+                      style="display: block"
+                      v-for="(ite, i) in item['文献']"
+                      :key="i"
+                      @mouseenter="
+                        handleShowDialog(
+                          ite.name,
+                          index,
+                          i,
+                          'highAttention',
+                          $event,
+                          'variantPmid'
+                        )
+                      "
+                      @click="handleHideDialog(ite)"
+                      class="spn"
+                    >
+                      {{ ite.name
+                      }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
                     </span>
                   </p>
                 </li>
@@ -108,50 +152,107 @@
             <ul class="context">
               <template v-if="Object.keys(this.middleAttention).length > 0">
                 <li v-for="(item, index) in this.middleAttention" :key="index">
-                  <p>{{item['变异']}}</p>
-                  <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
-                  <p>{{item['Ref']}}</p>
-                  <p>{{item['Alt']}}</p>
-                  <p>{{item['基因型']}}</p>
-                  <p>{{item['MAF(亚洲)']}}</p>
-                  <p>{{item['基因']}}</p>
-                  <p>{{item['致病分值']}}</p>
+                  <p>{{ item["变异"] }}</p>
+                  <p class="more" @click="toLineHandle(item['染色体位置'])">
+                    {{ item["染色体位置"] }}
+                  </p>
+                  <p>{{ item["Ref"] }}</p>
+                  <p>{{ item["Alt"] }}</p>
+                  <p>{{ item["基因型"] }}</p>
+                  <p>{{ item["MAF(亚洲)"] }}</p>
+                  <p>{{ item["基因"] }}</p>
+                  <p>{{ item["致病分值"] }}</p>
                   <p>
                     <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
-                    <span @mouseenter="showXGJBHandle(item['相关疾病'],$event)" style="display:block;"
-                      v-if="typeof item['相关疾病'] === 'string'"> {{ item['相关疾病']  }}</span>
-                    <span @mouseenter="showXGJBHandle(xgjbItem,$event)" style="display:block;" v-else
-                      v-for="(xgjbItem,xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
+                    <span
+                      @mouseenter="showXGJBHandle(item['相关疾病'], $event)"
+                      style="display: block"
+                      v-if="typeof item['相关疾病'] === 'string'"
+                    >
+                      {{ item["相关疾病"] }}</span
+                    >
+                    <span
+                      @mouseenter="showXGJBHandle(xgjbItem, $event)"
+                      style="display: block"
+                      v-else
+                      v-for="(xgjbItem, xgjbIndex) in item['相关疾病']"
+                      :key="xgjbIndex"
+                    >
                       {{ xgjbItem }}
                     </span>
                   </p>
                   <p>
                     <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
-                    <span style="display:block;" v-if="typeof item['来源'] === 'string'">{{ item['来源'] }}</span>
-                    <span style="display:block;" v-else v-for="(lyItem,lyIndex) in item['来源']" :key="lyIndex">
+                    <span
+                      style="display: block"
+                      v-if="typeof item['来源'] === 'string'"
+                      >{{ item["来源"] }}</span
+                    >
+                    <span
+                      style="display: block"
+                      v-else
+                      v-for="(lyItem, lyIndex) in item['来源']"
+                      :key="lyIndex"
+                    >
                       {{ lyItem }}
                     </span>
                   </p>
-                  <p>{{item['蛋白变化']}}</p>
-                  <p>{{item['突变类型']}}</p>
+                  <p>{{ item["蛋白变化"] }}</p>
+                  <p>{{ item["突变类型"] }}</p>
                   <p>
                     <template v-if="item['文献'].length <= 2">
-                      <span style="display:block;" v-for="(ite, i) in item['文献']" :key="i"
-                        @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event,'variantPmid')"
-                        @click="handleHideDialog(ite)" class="spn">
-                        {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
+                      <span
+                        style="display: block"
+                        v-for="(ite, i) in item['文献']"
+                        :key="i"
+                        @mouseenter="
+                          handleShowDialog(
+                            ite.name,
+                            index,
+                            i,
+                            'middleAttention',
+                            $event,
+                            'variantPmid'
+                          )
+                        "
+                        @click="handleHideDialog(ite)"
+                        class="spn"
+                      >
+                        {{ ite.name
+                        }}{{ Number(i) !== item["文献"].length - 1 ? "," : "" }}
                       </span>
                     </template>
                     <template v-else>
-                      <span v-for="(ite, i) in item['文献']" :key="i"
-                        @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event,'variantPmid')"
-                        @click="handleHideDialog(ite)" class="spn">
-                        <template v-if="i<2">
-                          <span style="display:block;">
-                            {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? '' : ''}}</span>
+                      <span
+                        v-for="(ite, i) in item['文献']"
+                        :key="i"
+                        @mouseenter="
+                          handleShowDialog(
+                            ite.name,
+                            index,
+                            i,
+                            'middleAttention',
+                            $event,
+                            'variantPmid'
+                          )
+                        "
+                        @click="handleHideDialog(ite)"
+                        class="spn"
+                      >
+                        <template v-if="i < 2">
+                          <span style="display: block">
+                            {{ ite.name
+                            }}{{
+                              Number(i) !== item["文献"].length - 1 ? "" : ""
+                            }}</span
+                          >
                         </template>
                       </span>
-                      <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
+                      <span
+                        class="spn more"
+                        @click="showMoreDialog(item['文献'])"
+                        >更多>></span
+                      >
                     </template>
                     <!-- <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event)" @click="handleHideDialog" class="spn">
                       {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
@@ -190,16 +291,18 @@
             <ul class="context">
               <template v-if="Object.keys(this.otherAttention).length > 0">
                 <li v-for="(item, index) in this.otherAttention" :key="index">
-                  <p>{{item['变异']}}</p>
-                  <p class="more" @click="toLineHandle(item['染色体位置'])">{{item['染色体位置']}}</p>
-                  <p>{{item['Ref']}}</p>
-                  <p>{{item['Alt']}}</p>
-                  <p>{{item['基因型']}}</p>
-                  <p>{{item['MAF(亚洲)']}}</p>
-                  <p>{{item['基因']}}</p>
-                  <p>{{item['致病分值']}}</p>
-                  <p>{{item['蛋白变化']}}</p>
-                  <p>{{item['突变类型']}}</p>
+                  <p>{{ item["变异"] }}</p>
+                  <p class="more" @click="toLineHandle(item['染色体位置'])">
+                    {{ item["染色体位置"] }}
+                  </p>
+                  <p>{{ item["Ref"] }}</p>
+                  <p>{{ item["Alt"] }}</p>
+                  <p>{{ item["基因型"] }}</p>
+                  <p>{{ item["MAF(亚洲)"] }}</p>
+                  <p>{{ item["基因"] }}</p>
+                  <p>{{ item["致病分值"] }}</p>
+                  <p>{{ item["蛋白变化"] }}</p>
+                  <p>{{ item["突变类型"] }}</p>
                 </li>
               </template>
               <template v-else>
@@ -210,9 +313,14 @@
         </div>
       </div>
       <!-- 参考文献 -->
-      <div class="block block4">
+      <div class="block block4 references">
         <p class="title"><em>参考文献</em><span>references</span></p>
         <p class="description">
+          <span v-for="(item, index) in references" :key="index">
+            <em @mouseenter="viewLiteratureLayerHandle(item, $event)">{{
+              item
+            }}</em>
+          </span>
           <!-- [1]  Ammann, A. J., Wara, D. W., Cowan, M. J., Barrett, D. J., Stiehm, E. R. The DiGeorge syndrome and the fetal alcohol syndrome. Am. J. Dis. Child. 136: 906-908, 1982.
 
 [2]  Asamoto, H., Furuta, M. DiGeorge syndrome associated with glioma and two kinds of viral infection. (Letter) New Eng. J. Med. 296: 1235 only, 1977. -->
@@ -220,12 +328,25 @@
       </div>
     </div>
     <!-- 展示更多 -->
-    <el-dialog title="文献" :visible.sync="moreDialog" width="700px" append-to-body center class="eldialog more-dialog">
+    <el-dialog
+      title="文献"
+      :visible.sync="moreDialog"
+      width="700px"
+      append-to-body
+      center
+      class="eldialog more-dialog"
+    >
       <span></span>
-      <span v-for="(ite, i) in moreData" :key="i"
-        @mouseenter="handleShowDialog(ite.name, 0, i, 'moreData', $event,'variantPmid')" @click="handleHideDialog(ite)"
-        class="spn">
-        {{ite.name}}{{Number(i) !== (moreData.length - 1) ? ',' : ''}}
+      <span
+        v-for="(ite, i) in moreData"
+        :key="i"
+        @mouseenter="
+          handleShowDialog(ite.name, 0, i, 'moreData', $event, 'variantPmid')
+        "
+        @click="handleHideDialog(ite)"
+        class="spn"
+      >
+        {{ ite.name }}{{ Number(i) !== moreData.length - 1 ? "," : "" }}
       </span>
     </el-dialog>
     <!--  -->
@@ -235,10 +356,10 @@
 </template>
 
 <script>
-import vLoginHeader from '@/components/common/vLoginHeader'
-import vFooter from '@/components/common/vFooter'
-import InfoDialog from '@/components/InfoDialog'
-import * as Cookies from 'tiny-cookie'
+import vLoginHeader from "@/components/common/vLoginHeader";
+import vFooter from "@/components/common/vFooter";
+import InfoDialog from "@/components/InfoDialog";
+import * as Cookies from "tiny-cookie";
 export default {
   components: {
     vLoginHeader,
@@ -246,24 +367,26 @@ export default {
     InfoDialog,
   },
   data() {
-    let loading = '' //定义loading变量
-    var number = 0
-    function startLoading() { //使用Element loading-start 方法
-      number++
+    let loading = ""; //定义loading变量
+    var number = 0;
+    function startLoading() {
+      //使用Element loading-start 方法
+      number++;
       loading = Loading.service({
         lock: false,
-        text: '加载中，请稍后...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.3)',
+        text: "加载中，请稍后...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.3)",
       });
     }
-    function endLoading() { //使用Element loading-close 方法
-      number = 0
-      loading.close()
+    function endLoading() {
+      //使用Element loading-close 方法
+      number = 0;
+      loading.close();
     }
 
     return {
-      patientName: this.$route.query.patientName || '',
+      patientName: this.$route.query.patientName || "",
       allData: {},
       // 高度关注
       highAttention: {},
@@ -273,7 +396,7 @@ export default {
       otherAttention: {},
       scrollOps: {
         vuescroll: {
-          mode: 'native'
+          mode: "native",
         },
         scrollPanel: {
           initialScrollY: false,
@@ -283,226 +406,247 @@ export default {
         },
         // 轨道
         rail: {
-          background: '#f1f1f1',
+          background: "#f1f1f1",
           opacity: 1,
-          size: '5px',
-          specifyBorderRadius: '6px',
-          gutterOfEnds: '100px',
+          size: "5px",
+          specifyBorderRadius: "6px",
+          gutterOfEnds: "100px",
         },
         // 滚动条
         bar: {
-          background: '#959595',
+          background: "#959595",
           onlyShowBarOnScroll: true,
           showDelay: 0,
           keepShow: true,
-          size: '11px'
-        }
+          size: "11px",
+        },
       },
       showDialog1: false,
       InfoDiaPos: {},
       dialogInfo: {},
       moreDialog: false,
-      moreData: []
-    }
+      moreData: [],
+      references: [], // 参考文献
+    };
   },
   methods: {
     init() {
       this.$get(this.$Url.vcf.detail, {
-        vcfId: this.$route.query.vcfId
-      }).then(res => {
-        let data = res.data
-        if (data) {
-          let allData = JSON.parse(data)
-          // this.highAttention = allData['高度关注']
-          this.getWxInfo(allData['高度关注'], (d) => {
-            this.highAttention = d
-          })
+        vcfId: this.$route.query.vcfId,
+      })
+        .then((res) => {
+          let data = res.data;
+          if (data) {
+            let allData = JSON.parse(data);
+            // this.highAttention = allData['高度关注']
+            this.getWxInfo(allData["高度关注"], (d) => {
+              this.highAttention = d;
+            });
 
-          // let middleAttention = allData['中度关注']
-          this.getWxInfo(allData['中度关注'], (d) => {
-            this.middleAttention = d
-          })
+            // let middleAttention = allData['中度关注']
+            this.getWxInfo(allData["中度关注"], (d) => {
+              this.middleAttention = d;
+            });
 
-          this.otherAttention = allData['其他']
+            this.otherAttention = allData["其他"];
 
-        }
-
-      }).catch(err => { })
+            this.concatHandle();
+          }
+        })
+        .catch((err) => {});
     },
     getWxInfo(data, func) {
-      let keys = Object.keys(data)
-      let values = Object.values(data)
-      values.forEach(v => {
-        let wx = v['文献']
-        if (typeof wx !== 'string') {
-          let arr = []
+      let keys = Object.keys(data);
+      let values = Object.values(data);
+      values.forEach((v) => {
+        let wx = v["文献"];
+        if (typeof wx !== "string") {
+          let arr = [];
           for (let j in wx) {
-            let child = wx[j].split(',')
-            let cArr = []
+            let child = wx[j].split(",");
+            let cArr = [];
             for (let k in child) {
-              if (child[k] !== 'None') {
+              if (child[k] !== "None") {
                 cArr.push({
                   name: child[k],
-                  abst: ''
-                })
+                  abst: "",
+                });
               }
             }
-            child = cArr
-            arr.push(...child)
+            child = cArr;
+            arr.push(...child);
           }
-          v['文献'] = arr
+          v["文献"] = arr;
         } else {
-          let child = wx.split(',')
-          let cArr = []
+          let child = wx.split(",");
+          let cArr = [];
           for (let i in child) {
-            if (child[i] !== 'None') {
+            if (child[i] !== "None") {
               cArr.push({
                 name: child[i],
-                abst: ''
-              })
+                abst: "",
+              });
             }
           }
-          child = cArr
-          v['文献'] = child
+          child = cArr;
+          v["文献"] = child;
         }
-        func && func(data)
-      })
+        func && func(data);
+      });
     },
 
-
     handleShowDialog(txt, index, i, sdata, $event, type) {
-      if (txt === '-') {
-        this.showDialog1 = false
-        return
+      if (txt === "-") {
+        this.showDialog1 = false;
+        return;
       }
 
-      let abst = ''
-      if (sdata === 'moreData') {
-        abst = this[sdata][i]['abst']
+      let abst = "";
+      if (sdata === "moreData") {
+        abst = this[sdata][i]["abst"];
       } else {
-        abst = this[sdata][index]['文献'][i]['abst']
+        abst = this[sdata][index]["文献"][i]["abst"];
       }
 
-      if (!abst && type != 'variantPmid' && sdata === 'moreData') {
+      if (!abst && type != "variantPmid" && sdata === "moreData") {
         debugger;
         this.$get(this.$Url.query.genebyOmId, {
-          omim_id: txt
-        }).then(res => {
+          omim_id: txt,
+        })
+          .then((res) => {
+            if (res.status === 200) {
+              let data = res.data;
+              if (data) {
+                this.dialogInfo = {
+                  title: txt,
+                  description:
+                    data.gene_summary !== "" ? data.gene_summary : "暂无",
+                };
+                if (sdata === "moreData") {
+                  this.$set(
+                    this[sdata][i],
+                    "abst",
+                    this.dialogInfo.description
+                  );
+                } else {
+                  this.$set(
+                    this[sdata][index]["文献"][i],
+                    "abst",
+                    this.dialogInfo.description
+                  );
+                }
 
-          if (res.status === 200) {
-            let data = res.data
-            if (data) {
-              this.dialogInfo = {
-                title: txt,
-                description: data.gene_summary !== '' ? data.gene_summary : '暂无'
-              }
-              if (sdata === 'moreData') {
-                this.$set(this[sdata][i], 'abst', this.dialogInfo.description)
-              } else {
-                this.$set(this[sdata][index]['文献'][i], 'abst', this.dialogInfo.description)
-              }
-
-              this.showDialog1 = true
-              let width = document.body.clientWidth
-              let height = document.body.clientHeight
-              this.InfoDiaPos = {
-                pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
-                pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
+                this.showDialog1 = true;
+                let width = document.body.clientWidth;
+                let height = document.body.clientHeight;
+                this.InfoDiaPos = {
+                  pageX:
+                    $event.pageX + 300 > width
+                      ? $event.pageX - 380
+                      : $event.pageX,
+                  pageY:
+                    $event.pageY + 300 > height
+                      ? $event.pageY - 300
+                      : $event.pageY,
+                };
               }
             }
-          }
-        }).catch(err => { })
+          })
+          .catch((err) => {});
       } else if (type == "variantPmid") {
-
-
         /**
-        * 查询文献接口 
-        */
+         * 查询文献接口
+         */
         window.$.ajax({
           headers: {
-            token: Cookies.get("token")
+            token: Cookies.get("token"),
           },
           url: this.$Url.query.literature,
           data: {
-            literatureId: txt
+            literatureId: txt,
           },
-          success: res => {
-            console.log(res)
+          success: (res) => {
+            console.log(res);
             this.dialogInfo = {
               title: txt,
               description: res.data.literatureData,
-              type: 'PMID:' + txt
-            }
-            this.showDialog1 = true
-            let width = document.body.clientWidth
-            let height = document.body.clientHeight
+              type: "PMID:" + txt,
+            };
+            this.showDialog1 = true;
+            let width = document.body.clientWidth;
+            let height = document.body.clientHeight;
             this.InfoDiaPos = {
-              pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
-              pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
-            }
-          }
-        })
-
+              pageX:
+                $event.pageX + 300 > width ? $event.pageX - 380 : $event.pageX,
+              pageY:
+                $event.pageY + 300 > height ? $event.pageY - 300 : $event.pageY,
+            };
+          },
+        });
       } else {
-
         this.dialogInfo = {
           title: txt,
-          description: abst
-        }
-        this.showDialog1 = true
-        let width = document.body.clientWidth
-        let height = document.body.clientHeight
+          description: abst,
+        };
+        this.showDialog1 = true;
+        let width = document.body.clientWidth;
+        let height = document.body.clientHeight;
         this.InfoDiaPos = {
-          pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
-          pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
-        }
+          pageX: $event.pageX + 300 > width ? $event.pageX - 380 : $event.pageX,
+          pageY:
+            $event.pageY + 300 > height ? $event.pageY - 300 : $event.pageY,
+        };
       }
     },
     handleHideDialog(ite) {
       this.showDialog1 = false;
     },
     toPdf() {
-      let formData = new FormData()
-      formData.append('patientId', this.$route.query.patientId)
+      let formData = new FormData();
+      formData.append("patientId", this.$route.query.patientId);
       let config = {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        responseType: 'arraybuffer'
-      }
-      this.$post(this.$Url.pdf.export, formData, config).then(res => {
-        let dom = document.createElement('a')
-        let data = res
-        let blob = new Blob([data], { type: 'application/pdf;charset-UTF-8' })
-        let fileName = this.patientName + '的全外解读报告.pdf'
-        if (blob.size < 100) {
-          this.$message({
-            type: 'warning',
-            duration: 2000,
-            message: '报告解析中，请稍后下载'
-          })
-        } else {
-          dom.download = fileName
-          dom.style.display = 'none'
-          dom.href = URL.createObjectURL(blob)
-          document.body.appendChild(dom)
-          dom.click()
-          URL.revokeObjectURL(dom.href) // 释放URL 对象
-          document.body.removeChild(dom)
-        }
-      }).catch(err => { })
+        headers: { "Content-Type": "multipart/form-data" },
+        responseType: "arraybuffer",
+      };
+      this.$post(this.$Url.pdf.export, formData, config)
+        .then((res) => {
+          let dom = document.createElement("a");
+          let data = res;
+          let blob = new Blob([data], {
+            type: "application/pdf;charset-UTF-8",
+          });
+          let fileName = this.patientName + "的全外解读报告.pdf";
+          if (blob.size < 100) {
+            this.$message({
+              type: "warning",
+              duration: 2000,
+              message: "报告解析中，请稍后下载",
+            });
+          } else {
+            dom.download = fileName;
+            dom.style.display = "none";
+            dom.href = URL.createObjectURL(blob);
+            document.body.appendChild(dom);
+            dom.click();
+            URL.revokeObjectURL(dom.href); // 释放URL 对象
+            document.body.removeChild(dom);
+          }
+        })
+        .catch((err) => {});
     },
     // 展示更多
     showMoreDialog(item) {
-      this.moreData = item
-      this.moreDialog = true
+      this.moreData = item;
+      this.moreDialog = true;
     },
 
     /**
      * 染色体跳转
      */
     toLineHandle(item) {
-      let arr = item.split(':');
-      let openUrl = `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr${arr[0]}%3A${arr[1]}`
-      window.open(openUrl, '_blank');
+      let arr = item.split(":");
+      let openUrl = `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr${arr[0]}%3A${arr[1]}`;
+      window.open(openUrl, "_blank");
     },
 
     /**
@@ -510,45 +654,99 @@ export default {
      */
     showXGJBHandle(txt, $event) {
       /**
-         * 查询相关疾病接口 
-         */
+       * 查询相关疾病接口
+       */
       window.$.ajax({
         headers: {
-          token: Cookies.get("token")
+          token: Cookies.get("token"),
         },
         url: this.$Url.query.diseaseInformation,
         data: {
-          OMIM_id: txt
+          OMIM_id: txt,
         },
-        success: res => {
+        success: (res) => {
           if (res.status === 200) {
-            console.log('相关疾病', res.data)
-            let data = res.data
+            console.log("相关疾病", res.data);
+            let data = res.data;
             this.dialogInfo = {
               title: txt,
-              description: data.Description || data.definition_orp || '暂无',
-              type: 'OMIM:' + txt
-            }
-            this.showDialog1 = true
-            let width = document.body.clientWidth
-            let height = document.body.clientHeight
+              description: data.Description || data.definition_orp || "暂无",
+              type: "OMIM:" + txt,
+            };
+            this.showDialog1 = true;
+            let width = document.body.clientWidth;
+            let height = document.body.clientHeight;
             this.InfoDiaPos = {
-              pageX: ($event.pageX + 300) > width ? $event.pageX - 380 : $event.pageX,
-              pageY: ($event.pageY + 300) > height ? $event.pageY - 300 : $event.pageY
-            }
+              pageX:
+                $event.pageX + 300 > width ? $event.pageX - 380 : $event.pageX,
+              pageY:
+                $event.pageY + 300 > height ? $event.pageY - 300 : $event.pageY,
+            };
           }
         },
-        error: err => {
-        }
+        error: (err) => {},
+      });
+    },
+
+    /**
+     * 参考文献
+     */
+    concatHandle() {
+      // 高度关注 合并 中毒关注
+
+      let highAttentionObj = Object.keys(this.highAttention).map((item) => {
+        let highAttentionItem = this.highAttention[item]["文献"].map(
+          (fItem) => fItem.name
+        );
+        return highAttentionItem;
       });
 
+      let middleAttentionObj = Object.keys(this.middleAttention).map((item) => {
+        let middleAttentionItem = this.middleAttention[item]["文献"].map(
+          (fItem) => fItem.name
+        );
+        return middleAttentionItem;
+      });
 
-    }
+      let highAttentionArr = [].concat(...highAttentionObj);
+      let middleAttentionArr = [].concat(...middleAttentionObj);
+      this.references = highAttentionArr.concat(middleAttentionArr);
+      this.references = this.references.filter((item) => item != "-");
+    },
+
+    viewLiteratureLayerHandle(txt, $event) {
+      window.$.ajax({
+        headers: {
+          token: Cookies.get("token"),
+        },
+        url: this.$Url.query.literature,
+        data: {
+          literatureId: txt,
+        },
+        success: (res) => {
+          console.log(res);
+          this.dialogInfo = {
+            title: txt,
+            description: res.data.literatureData,
+            type: "PMID:" + txt,
+          };
+          this.showDialog1 = true;
+          let width = document.body.clientWidth;
+          let height = document.body.clientHeight;
+          this.InfoDiaPos = {
+            pageX:
+              $event.pageX + 300 > width ? $event.pageX - 380 : $event.pageX,
+            pageY:
+              $event.pageY + 300 > height ? $event.pageY - 300 : $event.pageY,
+          };
+        },
+      });
+    },
   },
   mounted() {
-    this.init()
-  }
-}
+    this.init();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -663,5 +861,22 @@ export default {
 }
 .spn {
   font-size: 20px;
+}
+.references {
+  .description {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      cursor: pointer;
+      width: 100px;
+      padding: 5px 10px;
+      em {
+        font-style: normal;
+      }
+      &:hover {
+        color: #3bcaff;
+      }
+    }
+  }
 }
 </style>

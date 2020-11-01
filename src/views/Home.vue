@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- vHeader -->
-    <vHeader/>
+    <vHeader />
     <div class="banner">
       <!-- <img src="../assets/banner.jpg" alt="" ondragstart="return false"/> -->
     </div>
@@ -11,24 +11,41 @@
         <div class="left">
           <div class="info">
             <h4>遗传病解读</h4>
-            <p>成功开发出“全外”人工智能解读引<br/>擎实现遗传病“全外”数据全自动智<br/>能解读，为业界唯一。</p>
-            <div class="more-btn">了解更多</div>
+            <p>
+              成功开发出“全外”人工智能解读引<br />擎实现遗传病“全外”数据全自动智<br />能解读，为业界唯一。
+            </p>
+            <router-link
+              tag="div"
+              class="more-btn"
+              :to="{ path: '/more?#section1' }"
+              >了解更多</router-link
+            >
           </div>
         </div>
         <div class="right">
           <div class="rect"></div>
-          <img src="../assets/home-01.png" alt="" ondragstart="return false">
+          <img src="../assets/home-01.png" alt="" ondragstart="return false" />
         </div>
       </div>
       <!-- two -->
       <div class="two">
-        <div class="left"><img src="../assets/home-02.png" alt="" ondragstart="return false"/></div>
+        <div class="left">
+          <img src="../assets/home-02.png" alt="" ondragstart="return false" />
+        </div>
         <div class="right">
           <div class="info">
             <h4>最完整的知识数据库</h4>
             <div class="rect">
-              <p>构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库，底层以 GRAKN 图数据库技术做支撑。</p>
-              <div class="more-btn">了解更多</div>
+              <p>
+                构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库，底层以
+                GRAKN 图数据库技术做支撑。
+              </p>
+              <router-link
+                tag="div"
+                class="more-btn"
+                :to="{ path: '/more?#section2' }"
+                >了解更多</router-link
+              >
             </div>
           </div>
         </div>
@@ -40,83 +57,144 @@
             <div class="rect-inner">
               <h4>医学研究文献及时同步</h4>
               <div>
-                <p>利用人工智能（AI）技术支持的自然语言处理（NLP）技术从专业医学研究文献中实现知识的自动获取，并实现知识库资源的随时更新。</p>
-                <div class="more-btn">了解更多</div>
+                <p>
+                  利用人工智能（AI）技术支持的自然语言处理（NLP）技术从专业医学研究文献中实现知识的自动获取，并实现知识库资源的随时更新。
+                </p>
+                <router-link
+                  tag="div"
+                  class="more-btn"
+                  :to="{ path: '/more?#section3' }"
+                  >了解更多</router-link
+                >
               </div>
             </div>
           </div>
         </div>
         <div class="right">
-          <img src="../assets/home-03.png" alt="" ondragstart="return false"/>
+          <img src="../assets/home-03.png" alt="" ondragstart="return false" />
         </div>
       </div>
       <!-- four -->
       <div class="four">
         <div class="left">
           <div class="elcarousel">
-            <el-carousel ref="carousel" height="500" :autoplay="false" arrow="never" indicator-position="outside" @change="handleChange">
+            <el-carousel
+              ref="carousel"
+              height="500"
+              :autoplay="false"
+              arrow="never"
+              indicator-position="outside"
+              @change="handleChange"
+            >
               <el-carousel-item>
-                <img class="img" src="../assets/home-04.png" alt="" ondragstart="return false">
+                <img
+                  class="img"
+                  src="../assets/home-04.png"
+                  alt=""
+                  ondragstart="return false"
+                />
               </el-carousel-item>
               <el-carousel-item>
-                <img class="img" src="../assets/home-05.png" alt="" ondragstart="return false">
+                <img
+                  class="img"
+                  src="../assets/home-05.png"
+                  alt=""
+                  ondragstart="return false"
+                />
               </el-carousel-item>
               <el-carousel-item>
-                <img class="img" src="../assets/home-06.png" alt="" ondragstart="return false">
+                <img
+                  class="img"
+                  src="../assets/home-06.png"
+                  alt=""
+                  ondragstart="return false"
+                />
               </el-carousel-item>
               <el-carousel-item>
-                <img class="img" src="../assets/home-07.png" alt="" ondragstart="return false">
+                <img
+                  class="img"
+                  src="../assets/home-07.png"
+                  alt=""
+                  ondragstart="return false"
+                />
               </el-carousel-item>
             </el-carousel>
           </div>
-          
         </div>
         <div class="right">
           <div class="rect">
             <ul class="list">
-              <li :class="{'active': this.activeIndex === 0}" @mouseenter="handleEnter(0)"><p>开发完成基于机器学习模型的集成化变异位点致病性打分机制</p></li>
-              <li :class="{'active': this.activeIndex === 1}" @mouseenter="handleEnter(1)"><p>采用精准的种群特异性的次等位基因频率（MAF）对变异位点评估</p></li>
-              <li :class="{'active': this.activeIndex === 2}" @mouseenter="handleEnter(2)"><p>实现由知识图谱技术支持的报告智能展示</p></li>
-              <li :class="{'active': this.activeIndex === 3}" @mouseenter="handleEnter(3)"><p>使用可拓展性的前沿前端和后端技术</p></li>
+              <li
+                :class="{ active: this.activeIndex === 0 }"
+                @mouseenter="handleEnter(0)"
+              >
+                <router-link tag="p" :to="{ path: '/more?#section4' }"
+                  >开发完成基于机器学习模型的集成化变异位点致病性打分机制</router-link
+                >
+              </li>
+              <li
+                :class="{ active: this.activeIndex === 1 }"
+                @mouseenter="handleEnter(1)"
+              >
+                <router-link tag="p" :to="{ path: '/more?#section5' }"
+                  >采用精准的种群特异性的次等位基因频率（MAF）对变异位点评估</router-link
+                >
+              </li>
+              <li
+                :class="{ active: this.activeIndex === 2 }"
+                @mouseenter="handleEnter(2)"
+              >
+                <router-link tag="p" :to="{ path: '/more?#section6' }"
+                  >实现由知识图谱技术支持的报告智能展示</router-link
+                >
+              </li>
+              <li
+                :class="{ active: this.activeIndex === 3 }"
+                @mouseenter="handleEnter(3)"
+              >
+                <router-link tag="p" :to="{ path: '/more?#section7' }"
+                  >使用可拓展性的前沿前端和后端技术</router-link
+                >
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
     <!-- vFooter -->
-    <vFooter/>
+    <vFooter />
   </div>
 </template>
 
 <script>
-import vHeader from '@/components/common/vHeader'
-import vFooter from '@/components/common/vFooter'
+import vHeader from "@/components/common/vHeader";
+import vFooter from "@/components/common/vFooter";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     vHeader,
-    vFooter
+    vFooter,
   },
   data() {
     return {
-      activeIndex: 0
-    }
+      activeIndex: 0,
+    };
   },
   methods: {
     handleEnter(index) {
-      this.activeIndex = index
-      this.$refs.carousel.setActiveItem(index)
+      this.activeIndex = index;
+      this.$refs.carousel.setActiveItem(index);
     },
     handleChange(activeIndex) {
-      this.activeIndex = activeIndex
-    }
-  }
-}
+      this.activeIndex = activeIndex;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/_common';
+@import "@/static/_common";
 .home {
   width: 100%;
   .banner {
@@ -139,7 +217,7 @@ export default {
       overflow: hidden;
       .left {
         position: relative;
-        flex: .65;
+        flex: 0.65;
         .info {
           position: absolute;
           top: 50%;
@@ -185,7 +263,7 @@ export default {
       }
       .right {
         position: relative;
-        flex: .35;
+        flex: 0.35;
         max-width: 704px;
         .rect {
           width: 100%;
@@ -212,7 +290,7 @@ export default {
       overflow: hidden;
       .left {
         position: relative;
-        flex: .5;
+        flex: 0.5;
         img {
           position: absolute;
           top: 50%;
@@ -223,7 +301,7 @@ export default {
         }
       }
       .right {
-        flex: .5;
+        flex: 0.5;
         .info {
           width: 520px;
           margin-top: 126px;
@@ -263,7 +341,7 @@ export default {
       overflow: hidden;
       .left {
         position: relative;
-        flex: .45;
+        flex: 0.45;
         .rect-outer {
           position: relative;
           height: 100%;
@@ -305,7 +383,7 @@ export default {
       }
       .right {
         position: relative;
-        flex: .55;
+        flex: 0.55;
         img {
           position: absolute;
           top: 50%;
@@ -323,7 +401,7 @@ export default {
       background-color: $bgColor1;
       .left {
         position: relative;
-        flex: .55;
+        flex: 0.55;
         .elcarousel {
           position: absolute;
           top: 50%;
@@ -341,7 +419,7 @@ export default {
       }
       .right {
         position: relative;
-        flex: .45;
+        flex: 0.45;
         .rect {
           position: absolute;
           top: 50%;
