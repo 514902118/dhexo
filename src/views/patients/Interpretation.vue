@@ -313,18 +313,20 @@
         </div>
       </div>
       <!-- 参考文献 -->
-      <div class="block block4 references">
+      <div class="block block4 references" v-if="searchLiterature.length > 0">
         <p class="title"><em>参考文献</em><span>references</span></p>
-        <p class="description">
-          <span v-for="(item, index) in references" :key="index">
-            <em @mouseenter="viewLiteratureLayerHandle(item, $event)">{{
-              item
-            }}</em>
-          </span>
-          <!-- [1]  Ammann, A. J., Wara, D. W., Cowan, M. J., Barrett, D. J., Stiehm, E. R. The DiGeorge syndrome and the fetal alcohol syndrome. Am. J. Dis. Child. 136: 906-908, 1982.
-
-[2]  Asamoto, H., Furuta, M. DiGeorge syndrome associated with glioma and two kinds of viral infection. (Letter) New Eng. J. Med. 296: 1235 only, 1977. -->
-        </p>
+        <div class="references-cont">
+          <p v-for="(item, index) in searchLiterature" :key="index">
+            <span>{{ index + 1 }}、</span>{{ item }}
+          </p>
+        </div>
+        <!-- <div class="description">
+          [1] Ammann, A. J., Wara, D. W., Cowan, M. J., Barrett, D. J., Stiehm,
+          E. R. The DiGeorge syndrome and the fetal alcohol syndrome. Am. J.
+          Dis. Child. 136: 906-908, 1982. [2] Asamoto, H., Furuta, M. DiGeorge
+          syndrome associated with glioma and two kinds of viral infection.
+          (Letter) New Eng. J. Med. 296: 1235 only, 1977.
+        </div> -->
       </div>
     </div>
     <!-- 展示更多 -->
@@ -426,7 +428,8 @@ export default {
       dialogInfo: {},
       moreDialog: false,
       moreData: [],
-      references: [], // 参考文献
+      references: [], // 参考文献号
+      searchLiterature: [], //参考文献数据
     };
   },
   methods: {
@@ -712,34 +715,30 @@ export default {
       let middleAttentionArr = [].concat(...middleAttentionObj);
       this.references = highAttentionArr.concat(middleAttentionArr);
       this.references = this.references.filter((item) => item != "-");
+      this.searchLiteratureHandle();
     },
 
-    viewLiteratureLayerHandle(txt, $event) {
-      window.$.ajax({
-        headers: {
-          token: Cookies.get("token"),
-        },
-        url: this.$Url.query.literature,
-        data: {
-          literatureId: txt,
-        },
-        success: (res) => {
-          console.log(res);
-          this.dialogInfo = {
-            title: txt,
-            description: res.data.literatureData,
-            type: "PMID:" + txt,
-          };
-          this.showDialog1 = true;
-          let width = document.body.clientWidth;
-          let height = document.body.clientHeight;
-          this.InfoDiaPos = {
-            pageX:
-              $event.pageX + 300 > width ? $event.pageX - 380 : $event.pageX,
-            pageY:
-              $event.pageY + 300 > height ? $event.pageY - 300 : $event.pageY,
-          };
-        },
+    /**
+     * 参考文献
+     */
+    searchLiteratureHandle() {
+      if (this.references.length != 0) {
+        this.references.forEach((item, index) => {
+          if (index < 10) {
+            this.viewLiteratureLayerHandle(item);
+          }
+        });
+      }
+      console.log(this.searchLiterature);
+    },
+
+    viewLiteratureLayerHandle(txt) {
+      this.$get(this.$Url.query.literature, {
+        literatureId: txt,
+      }).then((res) => {
+        if (res.status === 200) {
+          this.searchLiterature.push(res.data.reference);
+        }
       });
     },
   },
@@ -863,6 +862,17 @@ export default {
   font-size: 20px;
 }
 .references {
+  .references-cont {
+    display: flex;
+    flex-wrap: wrap;
+    p {
+      padding-bottom: 25px;
+      line-height: 40px;
+      // text-indent: 25px;
+      font-size: 22px;
+      color: #333;
+    }
+  }
   .description {
     display: flex;
     flex-wrap: wrap;
