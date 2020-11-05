@@ -18,12 +18,11 @@
             <i class="icon-tit icon-tit-left"></i>
             整合24个权威专业数据库，涵盖基因、症状（表型）、变异、蛋白、功能预测和GWAS数据库资源，构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库
           </h2>
-
-          <el-table :data="section1" border style="width: 100%">
-            <el-table-column prop="name" label="数据库名称"> </el-table-column>
-            <el-table-column prop="type" label="实体类别"> </el-table-column>
-            <el-table-column prop="sketch" label="简述"> </el-table-column>
-            <el-table-column prop="language" label="语言"> </el-table-column>
+          <el-table :data="section1" :cell-style="rowClass" :header-cell-style="headClass" border style="width: 100%">
+            <el-table-column align="center" width="260px" prop="name" label="数据库名称"> </el-table-column>
+            <el-table-column align="center" width="260px" prop="type" label="实体类别"> </el-table-column>
+            <el-table-column align="center" prop="sketch" label="简述"> </el-table-column>
+            <el-table-column align="center" width="160px" prop="language" label="语言"> </el-table-column>
           </el-table>
         </div>
       </div>
@@ -40,9 +39,9 @@
             <img src="@/assets/more/111.png" alt="" />
             <p>本项目建立的知识库 schema</p>
           </div>
-         
+
           <div class="section-txt">
-             <p class="clear mt30"></p>
+            <p class="clear mt30"></p>
             <p>GRAKN 是具有推理、查询语言功能 的分布式图数据库（graph database）系 统，能够高效查询显式存储的数据和隐式派生的信息。</p>
             <p class="clear mt30"></p>
             <p>GRAKN 有如下特点：</p>
@@ -86,25 +85,25 @@
             <p class="clear mt30"></p>
             <p><em></em><span>关系抽取（RE）模型，采用基于深度神经网络的 BERT 技术</span></p>
             <p class="tit2">o 构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
-
             <p class="tit2"><em></em><span>例如，在医学研究文献中有如下一句话： </span></p>
             <p class="tit3"> We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.</p>
             <p class="tit3"><span>可构建两条训练数据：</span></p>
             <p class="tit4"><span>{{ model.section3.a }}</span></p>
             <p class="tit4">{{ model.section3.b }}</p>
             <p class="tit2"><em></em><span>两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。</span></p>
-            <el-table :data="section3" border style="width: 100%">
-              <el-table-column prop="title" label=""> </el-table-column>
-              <el-table-column prop="Accuracy" label="Accuracy">
-              </el-table-column>
-              <el-table-column prop="F1Score" label="F1Score"></el-table-column>
+            <p class="clear mt30"></p>
+            <el-table :data="section3" :cell-style="rowClass" :header-cell-style="headClass"  border class="sectionTable">
+              <el-table-column align="center"  prop="title" label=""> </el-table-column>
+              <el-table-column align="center"  prop="Accuracy" label="Accuracy"></el-table-column>
+              <el-table-column align="center"  prop="F1Score" label="F1Score"></el-table-column>
             </el-table>
+            <p class="clear mt30"></p>
             <p class="tit2"><em></em><span>对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。 </span></p>
             <p class="tit2"><em></em><span>在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。
               </span></p>
           </div>
         </div>
-         <div class="clear"></div>
+        <div class="clear"></div>
       </div>
 
       <!-- title4 -->
@@ -114,76 +113,59 @@
             <i class="icon-tit icon-tit-left-cur"></i>
             开发完成基于机器学习模型的集成化变异位点致病性打分机制
           </h2>
-
           <div class="section4-cont">
-            <div class="secton4-top">
-              <div class="section4-txt left">
-                <h2>
-                  近年来，有很多生物信息团队开发了对变异位点的致病性进行打分的工具。被广泛应用的有大约8个。
-                  <i></i>
-                </h2>
-              </div>
-              <div class="section4-txt right">
-                <h3>依据</h3>
-                <p>对变异导致的氨基酸水平变化进行预测，</p>
-                <p>对变异所在位点在接近物种基因组上的保守性进行分析。</p>
-                <h3 class="mt30">
-                  这些工具打分尺度不统一，打分结果常有冲突，未经独立验证，显示可靠性有局限。
-                </h3>
-              </div>
-            </div>
-            <div class="section-center">
+            <div class="section-txt">
+              <p class="tit1">近年来，有很多生物信息团队开发了对变异位点的致病性进行打分的工具。被广泛应用的有大约 8 个。</p>
+              <p><em></em><span>依据：</span></p>
+              <p class="tit2">o 对变异导致的氨基酸水平变化进行预测，</p>
+              <p class="tit2">o 对变异所在位点在接近物种基因组上的保守性进行分析。</p>
+              <p><em></em>这些工具打分尺度不统一，打分结果常有冲突，未经独立验证，显示可靠性有局限。</p>
+              <p class="clear mt30"></p>
               <!-- section4 table -->
-              <el-table :data="section4" border style="width: 100%">
-                <el-table-column prop="title" label="致病性打分工具">
+              <el-table :data="section4" :cell-style="rowClass" :header-cell-style="headClass" border style="width: 100%">
+                <el-table-column align="center"  width="300px" prop="title" label="致病性打分工具">
                 </el-table-column>
-                <el-table-column prop="content" label="打分和功能评价机制">
+                <el-table-column align="left" prop="content" label="打分和功能评价机制">
                 </el-table-column>
               </el-table>
-              <h3>
-                我们对这8个工具的打分可靠性进行的独立评估，并使用机器学习算法构建了meta-prediction
-                模型。
-              </h3>
-              <p>从OMIM 数据库中抽取已知的致病变异，作为正数据集，</p>
-              <p>
-                从 gnomeAD 数据库中抽取OMIM 中未记载的，在全部人群中 MAF > 0.2
-                的变异，作为负数据集，
-              </p>
+              <p class="clear mt30"></p>
+              <p><em></em>我们对这 8 个工具的打分可靠性进行的独立评估，并使用机器学习算法构建了 meta-prediction 模型。</p>
+              <p class="tit2">o 从 OMIM 数据库中抽取已知的致病变异，作为正数据集，</p>
+              <p class="tit2">o 从 gnomeAD 数据库中抽取 OMIM 中未记载的，在全部人群中 MAF > 0.2 的变异，作为负数据集， </p>
+              <p class="clear mt30"></p>
 
-              <el-table :data="section40" border style="width: 100%">
-                <el-table-column prop="CHROM" label="CHROM"></el-table-column>
-                <el-table-column prop="POS" label="POS"></el-table-column>
-                <el-table-column prop="ID" label="ID"></el-table-column>
-                <el-table-column prop="REF" label="REF"></el-table-column>
-                <el-table-column prop="ALT" label="ALT"></el-table-column>
-                <el-table-column prop="GeneName" label="Gene Name"></el-table-column>
-                <el-table-column prop="SIFT" label="SIFT"></el-table-column>
-                <el-table-column prop="Polyphen2HDIV" label="Polyphen2 HDIV"></el-table-column>
-                <el-table-column prop="Polyphen2HVAR" label="Polyphen2 HVAR"></el-table-column>
-                <el-table-column prop="LRT" label="LRT"></el-table-column>
-                <el-table-column prop="MutationTaster" label="Mutation Taster"></el-table-column>
-                <el-table-column prop="MutationAssessor" label="Mutation Assessor"></el-table-column>
-                <el-table-column prop="FATHMM" label="FATHMM"></el-table-column>
-                <el-table-column prop="PROVEAN" label="PROVEAN"></el-table-column>
+               <vue-scroll :ops="scrollOps">
+              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section40" border style="width:2779px;">
+                <el-table-column align="center" width="160px" prop="CHROM" label="CHROM"></el-table-column>
+                <el-table-column align="center" width="178px" prop="POS" label="POS"></el-table-column>
+                <el-table-column align="center" width="180px" prop="ID" label="ID"></el-table-column>
+                <el-table-column align="center" width="160px" prop="REF" label="REF"></el-table-column>
+                <el-table-column align="center" width="160px" prop="ALT" label="ALT"></el-table-column>
+                <el-table-column align="center" width="200px" prop="GeneName" label="Gene Name"></el-table-column>
+                <el-table-column align="center" width="160px" prop="SIFT" label="SIFT"></el-table-column>
+                <el-table-column align="center" width="260px" prop="Polyphen2HDIV" label="Polyphen2 HDIV"></el-table-column>
+                <el-table-column align="center" width="260px" prop="Polyphen2HVAR" label="Polyphen2 HVAR"></el-table-column>
+                <el-table-column align="center" width="180px" prop="LRT" label="LRT"></el-table-column>
+                <el-table-column align="center" width="260px" prop="MutationTaster" label="Mutation Taster"></el-table-column>
+                <el-table-column align="center" width="260px" prop="MutationAssessor" label="Mutation Assessor"></el-table-column>
+                <el-table-column align="center" width="180px" prop="FATHMM" label="FATHMM"></el-table-column>
+                <el-table-column align="center" width="180px" prop="PROVEAN" label="PROVEAN"></el-table-column>
               </el-table>
-              <p>
-                尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机
-                (SVM），RBF kernel
-              </p>
-              <p>
-                现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在
-                30.7% 和 44.6% 之间。
-              </p>
-              <p>我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。</p>
+               </vue-scroll>
+              <p class="clear mt30"></p>
+              <p class="tit2">o 尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel</p>
+              <p class="tit2">o 现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。 </p>
+              <p class="tit2">o 我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。 </p>
+              <p class="clear mt30"></p>
               <!-- section400 table -->
-              <el-table :data="section400" border style="width: 100%">
-                <el-table-column prop="title" label="致病性打分工具">
+              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section400" border style="width: 100%">
+                <el-table-column  align="center" prop="title" label="致病性打分工具">
                 </el-table-column>
-                <el-table-column prop="Accuracy" label="正确率">
+                <el-table-column  align="center" prop="Accuracy" label="正确率">
                 </el-table-column>
-                <el-table-column prop="errorRate" label="错误率">
+                <el-table-column  align="center" prop="errorRate" label="错误率">
                 </el-table-column>
-                <el-table-column prop="MissingRate" label="缺失率">
+                <el-table-column  align="center" prop="MissingRate" label="缺失率">
                 </el-table-column>
               </el-table>
             </div>
@@ -198,56 +180,46 @@
             <i class="icon-tit icon-tit-left"></i>
             采用精准的种群特异性的次等位基因频率（MAF）对变异位点评估
           </h2>
-          <div class="section5-top">
-            <div class="section5-txt">
-              <h2>
-                MAF：变异在人群中出现的频率.
-                <i></i>
-              </h2>
-            </div>
-            <div class="section5-txt">
-              <h3>现有 MAF 资源有多个问题</h3>
-              <p>
-                最权威的 ExAC 数据库使用的数据源包含很多病人的数据，造成 MAF
-                计算的偏差，
-              </p>
-              <p>
-                不同的种群 （例如 Asian vs. Caucasian）的 MAF
-                有显著差异，多数工具未予考虑。
-              </p>
-            </div>
+
+          <div class="section-txt">
+            <p class="tit1">MAF：变异在人群中出现的频率.</p>
+            <p><em></em> <span>现有 MAF 资源有多个问题：</span></p>
+            <p class="tit2">o 最权威的 ExAC 数据库使用的数据源包含很多病人的数据，造成 MAF 计算的偏差， </p>
+            <p class="tit2">o 不同的种群 （例如 Asian vs. Caucasian）的 MAF 有显著差异，多数工具未予考虑。</p>
+            <p class="clear mt30"></p>
+            <!-- section5 table -->
+            <vue-scroll :ops="scrollOps">
+            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border style="width:1981px">
+              <el-table-column align="center" width="200px"  prop="SNPID" label="SNP ID"></el-table-column>
+              <el-table-column align="center" width="220px"  prop="Chromosome" label="Chromosome"></el-table-column>
+              <el-table-column align="center" width="200px"  prop="Position" label="Position"></el-table-column>
+              <el-table-column align="center" width="240px"  prop="ReferenceBase" label="Reference Base"></el-table-column>
+              <el-table-column align="center" width="240px"  prop="AlternativeBase" label="Alternative Base"></el-table-column>
+              <el-table-column align="center" width="200px"  prop="OverallMAF" label="Overall MAF"></el-table-column>
+              <el-table-column align="center" width="340px"  prop="MAFAmongEastAsians" label="MAF Among East Asians"></el-table-column>
+              <el-table-column align="center"   width="340px" prop="DiseaseImplicated" label="Disease Implicated"></el-table-column>
+            </el-table>
+            </vue-scroll>
+            <p class="clear mt30"></p>
+            <!-- section50 table -->
+            <vue-scroll :ops="scrollOps">
+            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border style="width:2461px">
+              <el-table-column align="center" width="200px" prop="MAF" label=""></el-table-column>
+              <el-table-column align="center" width="280px" prop="EastAsian" label="East Asian ancestry 东亚血统"></el-table-column>
+              <el-table-column align="center" width="430px" prop="African" label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
+              <el-table-column align="center" width="370px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统"> </el-table-column>
+              <el-table-column align="center" width="410px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统"> </el-table-column>
+              <el-table-column align="center" width="220px" prop="Other" label="Other ancestry 其他 "></el-table-column>
+              <el-table-column align="center" width="310px" prop="South" label="South Asian ancestry 南亚血统 "></el-table-column>
+              <el-table-column align="center" width="240px" prop="Finnish" label="Finnish ancestry 芬兰血统 "></el-table-column>
+            </el-table>
+            </vue-scroll>
+            <p class="tip">（从 overall MAF > 0.1 的变异位点上得到的统计）</p>
+            <p class="clear mt30"></p>
+            <p><em></em> <span>我们在积累大量中国人群/亚洲人群的变异数据基础上，精准计算各个位点的种群特异的 MAF 值，结合 PGG、GenomeAD
+                数据库提供的种群特异MAF数据，用于我们的解读系统。</span></p>
           </div>
-          <!-- section5 table -->
-          <el-table :data="section5" border style="width: 100%">
-            <el-table-column prop="SNPID" label="SNP ID"></el-table-column>
-            <el-table-column prop="Chromosome" label="Chromosome"></el-table-column>
-            <el-table-column prop="Position" label="Position"></el-table-column>
-            <el-table-column prop="ReferenceBase" label="Reference Base"></el-table-column>
-            <el-table-column prop="AlternativeBase" label="Alternative Base"></el-table-column>
-            <el-table-column prop="OverallMAF" label="Overall MAF"></el-table-column>
-            <el-table-column prop="MAFAmongEastAsians" label="MAF Among East Asians"></el-table-column>
-            <el-table-column prop="DiseaseImplicated" label="Disease Implicated"></el-table-column>
-          </el-table>
-
-          <!-- section50 table -->
-
-          <el-table :data="section50" border style="width: 100%">
-            <el-table-column prop="MAF" label=""></el-table-column>
-            <el-table-column prop="EastAsian" label="East Asian ancestry 东亚血统"></el-table-column>
-            <el-table-column prop="African" label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
-            <el-table-column prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统">
-            </el-table-column>
-            <el-table-column prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统">
-            </el-table-column>
-            <el-table-column prop="Other" label="Other ancestry 其他 "></el-table-column>
-            <el-table-column prop="South" label="South Asian ancestry 南亚血统 "></el-table-column>
-            <el-table-column prop="Finnish" label="Finnish ancestry 芬兰血统 "></el-table-column>
-          </el-table>
-          <h3 style="text-align: center">
-            我们在积累大量中国人群/亚洲人群的变异数据基础上，精准计算各个位点的种群特异的
-            MAF 值，<br />结合 PGG、GenomeAD 数据库提供的种群特异 MAF
-            数据，用于我们的解读系统
-          </h3>
+          <div class="clear"></div>
         </div>
       </div>
 
@@ -259,6 +231,7 @@
             实现由知识图谱技术支持的报告智能展示
           </h2>
         </div>
+        <div class="clear"></div>
       </div>
 
       <!-- title7 -->
@@ -268,34 +241,19 @@
             <i class="icon-tit icon-tit-left"></i>
             使用可拓展性的前沿前端和后端技术。
           </h2>
-
-          <div class="section7-box">
-            <div class="section7-txt">
-              <h3>采用前、后端完全分离的开发模式，前后端通过 API 交互。</h3>
-              <p>降低前后端的耦合度，提升开发效率</p>
-              <h3 class="mt20">
-                前端以 html，css，javascript 为基础，以 React 为架构搭建。
-              </h3>
-            </div>
-            <div class="section7-txt">
-              <h3>
-                后端以 Java 为语言为基础，以 Spring cloud
-                系列开源框架为基础架构进行开发。
-              </h3>
-              <p>Java 编程语言具有面向对象，跨平台，功能强大的特点，</p>
-              <p>
-                Spring cloud 利用 Spring boot
-                的开发便利性巧妙地简化了分布式系统基础设施的开发，
-              </p>
-              <p>利用 Nacos 创建配置管理、服务注册发现的服务，</p>
-              <p>利用 Spring cloud security oauth2 开发了权限控制的功能，</p>
-              <p>
-                通过 Spring cloud zuul
-                实现路由和负载均衡的功能，构建分布式服务系统。
-              </p>
-            </div>
+          <div class="section-txt">
+            <p><em></em><span>采用前、后端完全分离的开发模式，前后端通过 API 交互。</span></p>
+            <p class="tit2">o 降低前后端的耦合度，提升开发效率。</p>
+            <p><em></em> 前端以 html，css，javascript 为基础，以 React 为架构搭建。<span></span></p>
+            <p><em></em><span>后端以 Java 为语言为基础，以 Spring cloud 系列开源框架为基础架构进行开发。</span></p>
+            <p class="tit2"> o Java 编程语言具有面向对象，跨平台，功能强大的特点，</p>
+            <p class="tit2"> o Spring cloud 利用 Spring boot 的开发便利性巧妙地简化了分布式系统基础设施的开发，</p>
+            <p class="tit2"> o 利用 Nacos 创建配置管理、服务注册发现的服务，</p>
+            <p class="tit2"> o 利用 Spring cloud security oauth2 开发了权限控制的功能，</p>
+            <p class="tit2"> o 通过 Spring cloud zuul 实现路由和负载均衡的功能，构建分布式服务系统。</p>
           </div>
         </div>
+        <div class="clear"></div>
       </div>
     </div>
     <!-- vFooter -->
@@ -379,8 +337,6 @@ export default {
         var div = document.getElementById(id);
         if (div) {
           setTimeout(function () {
-            console.log($(div).offset().top);
-            //$('html,body').scrollTop($(div).offset().top - 43);
             $("html, body").animate(
               { scrollTop: $(div).offset().top - 0 },
               100
@@ -389,6 +345,14 @@ export default {
         }
       }
     },
+    // 表头样式设置
+    headClass () {
+      return 'text-align: center; color:#333; font-size:24px; line-height: 35px;'
+    },
+    // 表格样式设置
+    rowClass () {
+      return 'color:#333; font-size:18px;'
+    }
   },
 };
 </script>
@@ -444,6 +408,7 @@ export default {
       line-height: 48px;
       font-weight: normal;
       padding: 0 35px;
+      margin-bottom: 30px;
       i.icon-tit {
         position: absolute;
         left: 0;
@@ -473,10 +438,13 @@ export default {
       .mt30 {
         padding-top: 30px;
       }
+      .tit1 {
+        padding-left: 36px;
+      }
       .tit2 {
         padding-left: 120px;
-        span{
-          width:calc(100% - 230px);
+        span {
+          width: calc(100% - 230px);
         }
       }
       .tit3 {
@@ -510,7 +478,6 @@ export default {
       }
     }
   }
-
   .section2 {
     background: #f9f9f9;
   }
@@ -523,94 +490,17 @@ export default {
         width: 100%;
       }
     }
+    .sectionTable {
+      width: 700px;
+      margin-left: 280px;
+    }
   }
   .section4 {
     background: #f9f9f9;
-    .section4-cont {
-      .secton4-top {
-        margin-top: 50px;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        margin-top: 80px;
-        .section4-txt {
-          width: 50%;
-        }
-        .left {
-          padding-left: 80px;
-          h2 {
-            font-size: 24px;
-            line-height: 48px;
-            color: #333;
-            padding-right: 100px;
-            i {
-              display: block;
-              width: 40px;
-              height: 4px;
-              margin-top: 40px;
-              background: #3bcaff;
-            }
-          }
-        }
-        .right {
-          padding-left: 80px;
-          .mt30 {
-            margin-top: 30px;
-          }
-        }
-      }
-      .section-center {
-        margin-top: 100px;
-        h3,
-        p {
-          text-align: center;
-        }
-        h3 {
-          padding-bottom: 20px;
-        }
-      }
-    }
-    p {
-      color: #333;
-      text-align: left;
-      font-weight: 500;
-      font-size: 16px;
-      margin-top: 10px;
-      line-height: 30px;
-    }
   }
   .section5 {
-    .section5-top {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      margin-top: 80px;
-      .section5-txt {
-        width: 50%;
-        h2 {
-          padding-left: 150px;
-          i {
-            display: block;
-            width: 40px;
-            height: 4px;
-            margin-top: 70px;
-            background: #3bcaff;
-          }
-        }
-        h3 {
-          margin-bottom: 10px;
-        }
-        p {
-          color: #333;
-          font-weight: 500;
-          font-size: 16px;
-          margin-top: 10px;
-          line-height: 30px;
-        }
-      }
-    }
     .tip {
-      color: #3bcaff;
+      color: #3bcaff !important;
       text-align: center;
       font-weight: normal;
       font-size: 16px;
@@ -621,29 +511,40 @@ export default {
   .section6 {
     background: #f9f9f9;
   }
-  .section7 {
-    .section7-box {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      margin-top: 80px;
-      .section7-txt {
-        width: 50%;
-      }
-      .mt20 {
-        margin-top: 20px;
-      }
-      h3 {
-        margin-bottom: 20px;
-      }
-      p {
-        color: #333;
-        font-weight: 500;
-        font-size: 16px;
-        margin-top: 10px;
-        line-height: 30px;
-      }
-    }
+}
+</style>
+<style lang="scss"  >
+.home {
+  .el-table--border:after,
+  .el-table--group:after,
+  .el-table:before {
+    background-color: #3bcaff;
+  }
+
+  .el-table--border,
+  .el-table--group {
+    border-color: #3bcaff;
+  }
+
+  .el-table td,
+  .el-table th.is-leaf {
+    border-bottom: 1px solid #3bcaff;
+    padding: 20px;
+  }
+
+  .el-table--border th,
+  .el-table--border th.gutter:last-of-type {
+    border-bottom: 1px solid #3bcaff;
+  }
+
+  .el-table--border td,
+  .el-table--border th {
+    border-right: 1px solid #3bcaff;
+  }
+  .el-table th>.cell{
+    line-height: 35px;
   }
 }
 </style>
+
+
