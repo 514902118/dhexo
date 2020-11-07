@@ -78,7 +78,7 @@
                         </span>
                       </template>
                       <template v-else>
-                         <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" andleShowDialog( ite.name, index,i, 'highAttention',  $event, 'variantPmid' )
+                         <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'highAttention',  $event, 'variantPmid' )
                         " @click="handleHideDialog(ite)" class="spn">
                         <template v-if="i < 2">
                           {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}
@@ -170,7 +170,7 @@
                       </span>
                     </template>
                     <template v-else>
-                      <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" andleShowDialog( ite.name, index,i, 'middleAttention',  $event, 'variantPmid' )
+                      <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'middleAttention',  $event, 'variantPmid' )
                         " @click="handleHideDialog(ite)" class="spn">
                         <template v-if="i < 2">
                           <span style="display: block">
