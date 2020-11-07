@@ -43,7 +43,7 @@ const section1 = [
     name: 'HPO',
     type: '症状（表型）+基因',
     sketch: '基因及疾病的概述，以及疾病的各个症状',
-    language: '英文'
+    language: '中文+英文'
   }, {
     name: 'Human Gene Mutation Database',
     type: '变异+疾病',

@@ -55,8 +55,8 @@
             <p class="clear mt30"></p>
             <p>GRAKN 在本项目上显示的主要优势：</p>
             <p><em></em><span>可以通过规则来推断潜在的关系</span></p>
-            <p class="tit2"> o 例如：已知 A变异在 B 基因上，A 变异与 C 疾病有关。我们可以通过编写规则，让 GRAKN 自动识别出 B 基因与 C 疾病的关联性。</p>
-            <p class="tit2"> o 有效使用 GRAKN 有助于进一步深挖生物医药领域有大量的公开数据的潜在价值。</p>
+            <p class="tit2"> <i>o </i>例如：已知 A变异在 B 基因上，A 变异与 C 疾病有关。我们可以通过编写规则，让 GRAKN 自动识别出 B 基因与 C 疾病的关联性。</p>
+            <p class="tit2"> <i>o </i>有效使用 GRAKN 有助于进一步深挖生物医药领域有大量的公开数据的潜在价值。</p>
             <p><em></em>可以很高效的查询关联数据：图数据库对关联查询在存储模型、数据结构、查询算法等方面进行了针对性的优化</p>
             <p><em></em>作为先进的图数据库，GRAKN 有结合 AI 的潜力，使得我们可以以 GRAKN 为基础构建知识图谱。</p>
           </div>
@@ -76,7 +76,7 @@
             <p class="clear mt30"></p>
             <p>我们主要构建了两类 NLP 模型：</p>
             <p><em></em><span>命名实体识别（NER）模型，采用 PubTator 技术</span></p>
-            <p class="tit2">o 疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。</p>
+            <p class="tit2"><i>o </i>疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。</p>
             <p class="clear mt30"></p>
             <div class="img-box">
               <img src="@/assets/more/222.png" alt="" />
@@ -84,12 +84,12 @@
             </div>
             <p class="clear mt30"></p>
             <p><em></em><span>关系抽取（RE）模型，采用基于深度神经网络的 BERT 技术</span></p>
-            <p class="tit2">o 构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
+            <p class="tit2"><i>o </i>构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
             <p class="tit2"><em></em><span>例如，在医学研究文献中有如下一句话： </span></p>
             <p class="tit3"> We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.</p>
             <p class="tit3"><span>可构建两条训练数据：</span></p>
-            <p class="tit4"><span>{{ model.section3.a }}</span></p>
-            <p class="tit4">{{ model.section3.b }}</p>
+            <p class="tit4"><i>a. </i><span>{{ model.section3.a }}</span></p>
+            <p class="tit4"><i>b. </i><span>{{ model.section3.b }}</span></p>
             <p class="tit2"><em></em><span>两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。</span></p>
             <p class="clear mt30"></p>
             <el-table :data="section3" :cell-style="rowClass" :header-cell-style="headClass"  border class="sectionTable">
@@ -117,8 +117,8 @@
             <div class="section-txt">
               <p class="tit1">近年来，有很多生物信息团队开发了对变异位点的致病性进行打分的工具。被广泛应用的有大约 8 个。</p>
               <p><em></em><span>依据：</span></p>
-              <p class="tit2">o 对变异导致的氨基酸水平变化进行预测，</p>
-              <p class="tit2">o 对变异所在位点在接近物种基因组上的保守性进行分析。</p>
+              <p class="tit2"><i>o </i>对变异导致的氨基酸水平变化进行预测，</p>
+              <p class="tit2"><i>o </i>对变异所在位点在接近物种基因组上的保守性进行分析。</p>
               <p><em></em>这些工具打分尺度不统一，打分结果常有冲突，未经独立验证，显示可靠性有局限。</p>
               <p class="clear mt30"></p>
               <!-- section4 table -->
@@ -130,8 +130,8 @@
               </el-table>
               <p class="clear mt30"></p>
               <p><em></em>我们对这 8 个工具的打分可靠性进行的独立评估，并使用机器学习算法构建了 meta-prediction 模型。</p>
-              <p class="tit2">o 从 OMIM 数据库中抽取已知的致病变异，作为正数据集，</p>
-              <p class="tit2">o 从 gnomeAD 数据库中抽取 OMIM 中未记载的，在全部人群中 MAF > 0.2 的变异，作为负数据集， </p>
+              <p class="tit2"><i>o </i>从 OMIM 数据库中抽取已知的致病变异，作为正数据集，</p>
+              <p class="tit2"><i>o </i>从 gnomeAD 数据库中抽取 OMIM 中未记载的，在全部人群中 MAF > 0.2 的变异，作为负数据集， </p>
               <p class="clear mt30"></p>
 
                <vue-scroll :ops="scrollOps">
@@ -153,9 +153,9 @@
               </el-table>
                </vue-scroll>
               <p class="clear mt30"></p>
-              <p class="tit2">o 尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel</p>
-              <p class="tit2">o 现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。 </p>
-              <p class="tit2">o 我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。 </p>
+              <p class="tit2"><i>o </i>尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel</p>
+              <p class="tit2"><i>o </i>现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。 </p>
+              <p class="tit2"><i>o </i>我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。 </p>
               <p class="clear mt30"></p>
               <!-- section400 table -->
               <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section400" border style="width: 100%">
@@ -184,8 +184,8 @@
           <div class="section-txt">
             <p class="tit1">MAF：变异在人群中出现的频率.</p>
             <p><em></em> <span>现有 MAF 资源有多个问题：</span></p>
-            <p class="tit2">o 最权威的 ExAC 数据库使用的数据源包含很多病人的数据，造成 MAF 计算的偏差， </p>
-            <p class="tit2">o 不同的种群 （例如 Asian vs. Caucasian）的 MAF 有显著差异，多数工具未予考虑。</p>
+            <p class="tit2"><i>o </i>最权威的 ExAC 数据库使用的数据源包含很多病人的数据，造成 MAF 计算的偏差， </p>
+            <p class="tit2"><i>o </i>不同的种群 （例如 Asian vs. Caucasian）的 MAF 有显著差异，多数工具未予考虑。</p>
             <p class="clear mt30"></p>
             <!-- section5 table -->
             <vue-scroll :ops="scrollOps">
@@ -243,14 +243,14 @@
           </h2>
           <div class="section-txt">
             <p><em></em><span>采用前、后端完全分离的开发模式，前后端通过 API 交互。</span></p>
-            <p class="tit2">o 降低前后端的耦合度，提升开发效率。</p>
+            <p class="tit2"><i>o </i>降低前后端的耦合度，提升开发效率。</p>
             <p><em></em> 前端以 html，css，javascript 为基础，以 React 为架构搭建。<span></span></p>
             <p><em></em><span>后端以 Java 为语言为基础，以 Spring cloud 系列开源框架为基础架构进行开发。</span></p>
-            <p class="tit2"> o Java 编程语言具有面向对象，跨平台，功能强大的特点，</p>
-            <p class="tit2"> o Spring cloud 利用 Spring boot 的开发便利性巧妙地简化了分布式系统基础设施的开发，</p>
-            <p class="tit2"> o 利用 Nacos 创建配置管理、服务注册发现的服务，</p>
-            <p class="tit2"> o 利用 Spring cloud security oauth2 开发了权限控制的功能，</p>
-            <p class="tit2"> o 通过 Spring cloud zuul 实现路由和负载均衡的功能，构建分布式服务系统。</p>
+            <p class="tit2"><i>o </i>Java 编程语言具有面向对象，跨平台，功能强大的特点，</p>
+            <p class="tit2"><i>o </i>Spring cloud 利用 Spring boot 的开发便利性巧妙地简化了分布式系统基础设施的开发，</p>
+            <p class="tit2"><i>o </i>利用 Nacos 创建配置管理、服务注册发现的服务，</p>
+            <p class="tit2"><i>o </i>利用 Spring cloud security oauth2 开发了权限控制的功能，</p>
+            <p class="tit2"><i>o </i>通过 Spring cloud zuul 实现路由和负载均衡的功能，构建分布式服务系统。</p>
           </div>
         </div>
         <div class="clear"></div>
@@ -290,10 +290,8 @@ export default {
       section50,
       model: {
         section3: {
-          a:
-            'a. {text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
-          b:
-            'b. {text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}',
+          a:'{text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
+          b:'{text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}',
         },
       },
       scrollOps: {
@@ -446,6 +444,11 @@ export default {
         span {
           width: calc(100% - 230px);
         }
+        i{
+          font-style: normal;
+          display: inline-block;
+          padding:0 30px;
+        }
       }
       .tit3 {
         padding-left: 240px;
@@ -455,6 +458,11 @@ export default {
         word-wrap: break-word;
         overflow: hidden;
         width: 920px;
+        i{
+          font-style: normal;
+          padding: 0 30px;
+          float: left;
+        }
       }
 
       p {

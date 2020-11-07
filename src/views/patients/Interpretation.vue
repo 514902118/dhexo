@@ -15,14 +15,8 @@
         <p class="title"><em>高度关注</em><span>High attention</span></p>
         <div class="gene-tab tab">
           <div class="tit tit-fix"></div>
-          <div
-            class="context-fix"
-            :class="{ 'no-data': Object.keys(this.highAttention).length <= 0 }"
-          >
-            <p
-              v-if="Object.keys(this.highAttention).length <= 0"
-              class="no-data"
-            >
+          <div class="context-fix" :class="{ 'no-data': Object.keys(this.highAttention).length <= 0 }">
+            <p v-if="Object.keys(this.highAttention).length <= 0" class="no-data">
               暂无数据
             </p>
           </div>
@@ -59,62 +53,40 @@
                   <p>{{ item["致病分值"] }}</p>
                   <p>
                     <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
-                    <span
-                      @mouseenter="showXGJBHandle(item['相关疾病'], $event)"
-                      style="display: block"
-                      v-if="typeof item['相关疾病'] === 'string'"
-                    >
-                      {{ item["相关疾病"] }}</span
-                    >
-                    <span
-                      @mouseenter="showXGJBHandle(xgjbItem, $event)"
-                      style="display: block"
-                      v-else
-                      v-for="(xgjbItem, xgjbIndex) in item['相关疾病']"
-                      :key="xgjbIndex"
-                    >
+                    <span @mouseenter="showXGJBHandle(item['相关疾病'], $event)" style="display: block"
+                      v-if="typeof item['相关疾病'] === 'string'">
+                      {{ item["相关疾病"] }}</span>
+                    <span @mouseenter="showXGJBHandle(xgjbItem, $event)" style="display: block" v-else
+                      v-for="(xgjbItem, xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
                       {{ xgjbItem }}
                     </span>
                   </p>
                   <p>
                     <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
-                    <span
-                      style="display: block"
-                      v-if="typeof item['来源'] === 'string'"
-                      >{{ item["来源"] }}</span
-                    >
-                    <span
-                      style="display: block"
-                      v-else
-                      v-for="(lyItem, lyIndex) in item['来源']"
-                      :key="lyIndex"
-                    >
+                    <span style="display: block" v-if="typeof item['来源'] === 'string'">{{ item["来源"] }}</span>
+                    <span style="display: block" v-else v-for="(lyItem, lyIndex) in item['来源']" :key="lyIndex">
                       {{ lyItem }}
                     </span>
                   </p>
                   <p>{{ item["蛋白变化"] }}</p>
                   <p>{{ item["突变类型"] }}</p>
                   <p>
-                    <span
-                      style="display: block"
-                      v-for="(ite, i) in item['文献']"
-                      :key="i"
-                      @mouseenter="
-                        handleShowDialog(
-                          ite.name,
-                          index,
-                          i,
-                          'highAttention',
-                          $event,
-                          'variantPmid'
-                        )
-                      "
-                      @click="handleHideDialog(ite)"
-                      class="spn"
-                    >
-                      {{ ite.name
-                      }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
-                    </span>
+                      <template v-if="item['文献'].length <= 2">
+                        <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog(  ite.name,  index,  i, 'highAttention',  $event,  'variantPmid' )
+                          " @click="handleHideDialog(ite)" class="spn">
+                          {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
+                        </span>
+                      </template>
+                      <template v-else>
+                         <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" andleShowDialog( ite.name, index,i, 'highAttention',  $event, 'variantPmid' )
+                        " @click="handleHideDialog(ite)" class="spn">
+                        <template v-if="i < 2">
+                          {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}
+                        </template>
+                      </span>
+                      <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
+                    
+                      </template>
                   </p>
                 </li>
               </template>
@@ -164,36 +136,18 @@
                   <p>{{ item["致病分值"] }}</p>
                   <p>
                     <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
-                    <span
-                      @mouseenter="showXGJBHandle(item['相关疾病'], $event)"
-                      style="display: block"
-                      v-if="typeof item['相关疾病'] === 'string'"
-                    >
-                      {{ item["相关疾病"] }}</span
-                    >
-                    <span
-                      @mouseenter="showXGJBHandle(xgjbItem, $event)"
-                      style="display: block"
-                      v-else
-                      v-for="(xgjbItem, xgjbIndex) in item['相关疾病']"
-                      :key="xgjbIndex"
-                    >
+                    <span @mouseenter="showXGJBHandle(item['相关疾病'], $event)" style="display: block"
+                      v-if="typeof item['相关疾病'] === 'string'">
+                      {{ item["相关疾病"] }}</span>
+                    <span @mouseenter="showXGJBHandle(xgjbItem, $event)" style="display: block" v-else
+                      v-for="(xgjbItem, xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
                       {{ xgjbItem }}
                     </span>
                   </p>
                   <p>
                     <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
-                    <span
-                      style="display: block"
-                      v-if="typeof item['来源'] === 'string'"
-                      >{{ item["来源"] }}</span
-                    >
-                    <span
-                      style="display: block"
-                      v-else
-                      v-for="(lyItem, lyIndex) in item['来源']"
-                      :key="lyIndex"
-                    >
+                    <span style="display: block" v-if="typeof item['来源'] === 'string'">{{ item["来源"] }}</span>
+                    <span style="display: block" v-else v-for="(lyItem, lyIndex) in item['来源']" :key="lyIndex">
                       {{ lyItem }}
                     </span>
                   </p>
@@ -201,11 +155,7 @@
                   <p>{{ item["突变类型"] }}</p>
                   <p>
                     <template v-if="item['文献'].length <= 2">
-                      <span
-                        style="display: block"
-                        v-for="(ite, i) in item['文献']"
-                        :key="i"
-                        @mouseenter="
+                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter="
                           handleShowDialog(
                             ite.name,
                             index,
@@ -214,45 +164,20 @@
                             $event,
                             'variantPmid'
                           )
-                        "
-                        @click="handleHideDialog(ite)"
-                        class="spn"
-                      >
+                        " @click="handleHideDialog(ite)" class="spn">
                         {{ ite.name
                         }}{{ Number(i) !== item["文献"].length - 1 ? "," : "" }}
                       </span>
                     </template>
                     <template v-else>
-                      <span
-                        v-for="(ite, i) in item['文献']"
-                        :key="i"
-                        @mouseenter="
-                          handleShowDialog(
-                            ite.name,
-                            index,
-                            i,
-                            'middleAttention',
-                            $event,
-                            'variantPmid'
-                          )
-                        "
-                        @click="handleHideDialog(ite)"
-                        class="spn"
-                      >
+                      <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" andleShowDialog( ite.name, index,i, 'middleAttention',  $event, 'variantPmid' )
+                        " @click="handleHideDialog(ite)" class="spn">
                         <template v-if="i < 2">
                           <span style="display: block">
-                            {{ ite.name
-                            }}{{
-                              Number(i) !== item["文献"].length - 1 ? "" : ""
-                            }}</span
-                          >
+                            {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}</span>
                         </template>
                       </span>
-                      <span
-                        class="spn more"
-                        @click="showMoreDialog(item['文献'])"
-                        >更多>></span
-                      >
+                      <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
                     </template>
                     <!-- <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event)" @click="handleHideDialog" class="spn">
                       {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
@@ -317,7 +242,7 @@
         <p class="title"><em>参考文献</em><span>references</span></p>
         <div class="references-cont">
           <p v-for="(item, index) in searchLiterature" :key="index">
-            <span>{{ index + 1 }}、</span>{{ item }}
+            <span>{{ index + 1 }}.</span>{{ item }}
           </p>
         </div>
         <!-- <div class="description">
@@ -330,24 +255,11 @@
       </div>
     </div>
     <!-- 展示更多 -->
-    <el-dialog
-      title="文献"
-      :visible.sync="moreDialog"
-      width="700px"
-      append-to-body
-      center
-      class="eldialog more-dialog"
-    >
+    <el-dialog title="文献" :visible.sync="moreDialog" width="700px" append-to-body center class="eldialog more-dialog">
       <span></span>
-      <span
-        v-for="(ite, i) in moreData"
-        :key="i"
-        @mouseenter="
+      <span v-for="(ite, i) in moreData" :key="i" @mouseenter="
           handleShowDialog(ite.name, 0, i, 'moreData', $event, 'variantPmid')
-        "
-        @click="handleHideDialog(ite)"
-        class="spn"
-      >
+        " @click="handleHideDialog(ite)" class="spn">
         {{ ite.name }}{{ Number(i) !== moreData.length - 1 ? "," : "" }}
       </span>
     </el-dialog>
@@ -368,10 +280,10 @@ export default {
     vFooter,
     InfoDialog,
   },
-  data() {
+  data () {
     let loading = ""; //定义loading变量
     var number = 0;
-    function startLoading() {
+    function startLoading () {
       //使用Element loading-start 方法
       number++;
       loading = Loading.service({
@@ -381,7 +293,7 @@ export default {
         background: "rgba(0, 0, 0, 0.3)",
       });
     }
-    function endLoading() {
+    function endLoading () {
       //使用Element loading-close 方法
       number = 0;
       loading.close();
@@ -433,7 +345,7 @@ export default {
     };
   },
   methods: {
-    init() {
+    init () {
       this.$get(this.$Url.vcf.detail, {
         vcfId: this.$route.query.vcfId,
       })
@@ -456,9 +368,9 @@ export default {
             this.concatHandle();
           }
         })
-        .catch((err) => {});
+        .catch((err) => { });
     },
-    getWxInfo(data, func) {
+    getWxInfo (data, func) {
       let keys = Object.keys(data);
       let values = Object.values(data);
       values.forEach((v) => {
@@ -498,7 +410,7 @@ export default {
       });
     },
 
-    handleShowDialog(txt, index, i, sdata, $event, type) {
+    handleShowDialog (txt, index, i, sdata, $event, type) {
       if (txt === "-") {
         this.showDialog1 = false;
         return;
@@ -555,7 +467,7 @@ export default {
               }
             }
           })
-          .catch((err) => {});
+          .catch((err) => { });
       } else if (type == "variantPmid") {
         /**
          * 查询文献接口
@@ -601,10 +513,10 @@ export default {
         };
       }
     },
-    handleHideDialog(ite) {
+    handleHideDialog (ite) {
       this.showDialog1 = false;
     },
-    toPdf() {
+    toPdf () {
       let formData = new FormData();
       formData.append("patientId", this.$route.query.patientId);
       let config = {
@@ -635,10 +547,10 @@ export default {
             document.body.removeChild(dom);
           }
         })
-        .catch((err) => {});
+        .catch((err) => { });
     },
     // 展示更多
-    showMoreDialog(item) {
+    showMoreDialog (item) {
       this.moreData = item;
       this.moreDialog = true;
     },
@@ -646,7 +558,7 @@ export default {
     /**
      * 染色体跳转
      */
-    toLineHandle(item) {
+    toLineHandle (item) {
       let arr = item.split(":");
       let openUrl = `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr${arr[0]}%3A${arr[1]}`;
       window.open(openUrl, "_blank");
@@ -655,7 +567,7 @@ export default {
     /**
      * 相关疾病
      */
-    showXGJBHandle(txt, $event) {
+    showXGJBHandle (txt, $event) {
       /**
        * 查询相关疾病接口
        */
@@ -687,14 +599,14 @@ export default {
             };
           }
         },
-        error: (err) => {},
+        error: (err) => { },
       });
     },
 
     /**
      * 参考文献
      */
-    concatHandle() {
+    concatHandle () {
       // 高度关注 合并 中毒关注
 
       let highAttentionObj = Object.keys(this.highAttention).map((item) => {
@@ -721,7 +633,7 @@ export default {
     /**
      * 参考文献
      */
-    searchLiteratureHandle() {
+    searchLiteratureHandle () {
       if (this.references.length != 0) {
         this.references.forEach((item, index) => {
           if (index < 10) {
@@ -732,7 +644,7 @@ export default {
       console.log(this.searchLiterature);
     },
 
-    viewLiteratureLayerHandle(txt) {
+    viewLiteratureLayerHandle (txt) {
       this.$get(this.$Url.query.literature, {
         literatureId: txt,
       }).then((res) => {
@@ -742,7 +654,7 @@ export default {
       });
     },
   },
-  mounted() {
+  mounted () {
     this.init();
   },
 };
