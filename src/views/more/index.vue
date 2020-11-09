@@ -13,16 +13,17 @@
 
       <!-- title1 -->
       <div id="section1" ref="section1" class="section section1">
+        <h2 class="title">
+          <i class="icon-tit icon-tit-left"></i>
+          整合24个权威专业数据库，涵盖基因、症状（表型）、变异、蛋白、功能预测和GWAS数据库资源，构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库
+        </h2>
         <div class="section-cont">
-          <h2 class="title">
-            <i class="icon-tit icon-tit-left"></i>
-            整合24个权威专业数据库，涵盖基因、症状（表型）、变异、蛋白、功能预测和GWAS数据库资源，构建了业内最完整的疾病-症状（表型）-基因-变异位点知识库
-          </h2>
-          <el-table :data="section1" :cell-style="rowClass" :header-cell-style="headClass" border style="width: 100%">
-            <el-table-column align="center" width="260px" prop="name" label="数据库名称"> </el-table-column>
-            <el-table-column align="center" width="260px" prop="type" label="实体类别"> </el-table-column>
+
+          <el-table :data="section1" :cell-style="rowClass" :header-cell-style="headClass" border style="width: 100%;">
+            <el-table-column align="center" width="160px" prop="name" label="数据库名称"> </el-table-column>
+            <el-table-column align="center" width="160px" prop="type" label="实体类别"> </el-table-column>
             <el-table-column align="center" prop="sketch" label="简述"> </el-table-column>
-            <el-table-column align="center" width="160px" prop="language" label="语言"> </el-table-column>
+            <el-table-column align="center" width="83px" prop="language" label="语言"> </el-table-column>
           </el-table>
         </div>
       </div>
@@ -55,10 +56,11 @@
             <p class="clear mt30"></p>
             <p>GRAKN 在本项目上显示的主要优势：</p>
             <p><em></em><span>可以通过规则来推断潜在的关系</span></p>
-            <p class="tit2"> <i>o </i>例如：已知 A变异在 B 基因上，A 变异与 C 疾病有关。我们可以通过编写规则，让 GRAKN 自动识别出 B 基因与 C 疾病的关联性。</p>
-            <p class="tit2"> <i>o </i>有效使用 GRAKN 有助于进一步深挖生物医药领域有大量的公开数据的潜在价值。</p>
-            <p><em></em>可以很高效的查询关联数据：图数据库对关联查询在存储模型、数据结构、查询算法等方面进行了针对性的优化</p>
-            <p><em></em>作为先进的图数据库，GRAKN 有结合 AI 的潜力，使得我们可以以 GRAKN 为基础构建知识图谱。</p>
+            <p class="tit2"> <i>o </i><span>例如：已知 A变异在 B 基因上，A 变异与 C 疾病有关。我们可以通过编写规则，让 GRAKN 自动识别出 B 基因与 C
+                疾病的关联性。</span></p>
+            <p class="tit2"> <i>o </i><span>有效使用 GRAKN 有助于进一步深挖生物医药领域有大量的公开数据的潜在价值。</span></p>
+            <p><em></em><span>可以很高效的查询关联数据：图数据库对关联查询在存储模型、数据结构、查询算法等方面进行了针对性的优化</span></p>
+            <p><em></em><span>作为先进的图数据库，GRAKN 有结合 AI 的潜力，使得我们可以以 GRAKN 为基础构建知识图谱。</span></p>
           </div>
           <div class="clear"></div>
         </div>
@@ -67,16 +69,17 @@
 
       <!-- title3 -->
       <div id="section3" ref="section3" class="section section3">
+        <h2 class="title" style="width:1013px">
+          <i class="icon-tit icon-tit-left"></i>
+          利用人工智能（AI）技术支持的自然语言处理（NLP）技术从专业医学研究文献中实现知识的自动获取，并实现知识库资源的随时更新。
+        </h2>
         <div class="section-cont">
-          <h2 class="title">
-            <i class="icon-tit icon-tit-left"></i>
-            利用人工智能（AI）技术支持的自然语言处理（NLP）技术从专业医学研究文献中实现知识的自动获取，并实现知识库资源的随时更新。
-          </h2>
+
           <div class="section-txt">
-            <p class="clear mt30"></p>
+            <p class="clear"></p>
             <p>我们主要构建了两类 NLP 模型：</p>
             <p><em></em><span>命名实体识别（NER）模型，采用 PubTator 技术</span></p>
-            <p class="tit2"><i>o </i>疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。</p>
+            <p class="tit2"><i>o </i><span>疾病实体的识别 F1分数为 0.782，基因实体的识别 F1 分数为 0.867，变异实体的识别 F1 分数为 0.914。</span></p>
             <p class="clear mt30"></p>
             <div class="img-box">
               <img src="@/assets/more/222.png" alt="" />
@@ -84,22 +87,24 @@
             </div>
             <p class="clear mt30"></p>
             <p><em></em><span>关系抽取（RE）模型，采用基于深度神经网络的 BERT 技术</span></p>
-            <p class="tit2"><i>o </i>构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</p>
-            <p class="tit2"><em></em><span>例如，在医学研究文献中有如下一句话： </span></p>
-            <p class="tit3"> We found that GeneB is the most frequently mutated gene in DiseaseA, but not GeneC.</p>
+            <p class="tit2"><i>o </i><span>构建了两个 RE 模型，疾病-基因关系模型，和疾病-变异位点关系模型</span></p>
+            <p class="tit2 tit20"><em></em><span>例如，在医学研究文献中有如下一句话： </span></p>
+            <p class="tit3" style="word-spacing:8px"> We found that GeneB is the most frequently mutated gene in
+              DiseaseA, but not GeneC.</p>
             <p class="tit3"><span>可构建两条训练数据：</span></p>
-            <p class="tit4"><i>a. </i><span>{{ model.section3.a }}</span></p>
-            <p class="tit4"><i>b. </i><span>{{ model.section3.b }}</span></p>
-            <p class="tit2"><em></em><span>两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。</span></p>
+            <p class="tit4"><i>a. </i><span style="word-spacing:4px">{{ model.section3.a }}</span></p>
+            <p class="tit4"><i>b. </i><span style="word-spacing:4px">{{ model.section3.b }}</span></p>
+            <p class="tit2 tit20"><em></em><span>两位经验丰富的生物信息工程师，经过交叉验证，完成训练数据集的构建，包含 1472 条数据。</span></p>
             <p class="clear mt30"></p>
-            <el-table :data="section3" :cell-style="rowClass" :header-cell-style="headClass"  border class="sectionTable">
-              <el-table-column align="center"  prop="title" label=""> </el-table-column>
-              <el-table-column align="center"  prop="Accuracy" label="Accuracy"></el-table-column>
-              <el-table-column align="center"  prop="F1Score" label="F1Score"></el-table-column>
+            <el-table :data="section3" :cell-style="rowClass" :header-cell-style="headClass" border
+              class="sectionTable">
+              <el-table-column align="center" prop="title" label=""> </el-table-column>
+              <el-table-column align="center" width="120px" prop="Accuracy" label="Accuracy"></el-table-column>
+              <el-table-column align="center" width="120px" prop="F1Score" label="F1 Score"></el-table-column>
             </el-table>
             <p class="clear mt30"></p>
-            <p class="tit2"><em></em><span>对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。 </span></p>
-            <p class="tit2"><em></em><span>在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。
+            <p class="tit2 tit20"><em></em><span>对神经网络的框架和参数进行了优化，调整 regularization term，克服 overfitting 问题。 </span></p>
+            <p class="tit2 tit20"><em></em><span>在 PubMed 的文献摘要中测试，平均每 6 个摘要可以抽取一条疾病-基因的关系，每 120 个摘要可以抽取一条疾病-变异位点的关系。
               </span></p>
           </div>
         </div>
@@ -122,8 +127,9 @@
               <p><em></em>这些工具打分尺度不统一，打分结果常有冲突，未经独立验证，显示可靠性有局限。</p>
               <p class="clear mt30"></p>
               <!-- section4 table -->
-              <el-table :data="section4" :cell-style="rowClass" :header-cell-style="headClass" border style="width: 100%">
-                <el-table-column align="center"  width="300px" prop="title" label="致病性打分工具">
+              <el-table :data="section4" :cell-style="rowClass" :header-cell-style="headClass" border
+                style="width: 640px;margin-left:200px;">
+                <el-table-column align="center" width="190px" prop="title" label="致病性打分工具">
                 </el-table-column>
                 <el-table-column align="left" prop="content" label="打分和功能评价机制">
                 </el-table-column>
@@ -133,39 +139,55 @@
               <p class="tit2"><i>o </i>从 OMIM 数据库中抽取已知的致病变异，作为正数据集，</p>
               <p class="tit2"><i>o </i>从 gnomeAD 数据库中抽取 OMIM 中未记载的，在全部人群中 MAF > 0.2 的变异，作为负数据集， </p>
               <p class="clear mt30"></p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-               <vue-scroll :ops="scrollOps">
-              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section40" border style="width:2779px;">
-                <el-table-column align="center" width="160px" prop="CHROM" label="CHROM"></el-table-column>
-                <el-table-column align="center" width="178px" prop="POS" label="POS"></el-table-column>
-                <el-table-column align="center" width="180px" prop="ID" label="ID"></el-table-column>
-                <el-table-column align="center" width="160px" prop="REF" label="REF"></el-table-column>
-                <el-table-column align="center" width="160px" prop="ALT" label="ALT"></el-table-column>
-                <el-table-column align="center" width="200px" prop="GeneName" label="Gene Name"></el-table-column>
-                <el-table-column align="center" width="160px" prop="SIFT" label="SIFT"></el-table-column>
-                <el-table-column align="center" width="260px" prop="Polyphen2HDIV" label="Polyphen2 HDIV"></el-table-column>
-                <el-table-column align="center" width="260px" prop="Polyphen2HVAR" label="Polyphen2 HVAR"></el-table-column>
-                <el-table-column align="center" width="180px" prop="LRT" label="LRT"></el-table-column>
-                <el-table-column align="center" width="260px" prop="MutationTaster" label="Mutation Taster"></el-table-column>
-                <el-table-column align="center" width="260px" prop="MutationAssessor" label="Mutation Assessor"></el-table-column>
-                <el-table-column align="center" width="180px" prop="FATHMM" label="FATHMM"></el-table-column>
-                <el-table-column align="center" width="180px" prop="PROVEAN" label="PROVEAN"></el-table-column>
-              </el-table>
-               </vue-scroll>
-              <p class="clear mt30"></p>
+      <div class="section4" style="padding-top:110px;">
+        <div class="section-txt">
+          <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section40" border
+            style="width:1300px; margin:0 auto;">
+            <el-table-column align="center" width="90px" prop="CHROM" label="CHROM"></el-table-column>
+            <el-table-column align="center" width="90px" prop="POS" label="POS"></el-table-column>
+            <el-table-column align="center" width="110px" prop="ID" label="ID"></el-table-column>
+            <el-table-column align="center" width="60px" prop="REF" label="REF"></el-table-column>
+            <el-table-column align="center" width="60px" prop="ALT" label="ALT"></el-table-column>
+            <el-table-column align="center" width="80px" prop="GeneName" label="Gene Name"></el-table-column>
+            <el-table-column align="center" width="64px" prop="SIFT" label="SIFT"></el-table-column>
+            <el-table-column align="center" width="120px" prop="Polyphen2HDIV" label="Polyphen2 HDIV">
+            </el-table-column>
+            <el-table-column align="center" width="120px" prop="Polyphen2HVAR" label="Polyphen2 HVAR">
+            </el-table-column>
+            <el-table-column align="center" width="70px" prop="LRT" label="LRT"></el-table-column>
+            <el-table-column align="center" width="108px" prop="MutationTaster" label="Mutation Taster">
+            </el-table-column>
+            <el-table-column align="center" width="108px" prop="MutationAssessor" label="Mutation Assessor">
+            </el-table-column>
+            <el-table-column align="center" width="110px" prop="FATHMM" label="FATHMM"></el-table-column>
+            <el-table-column align="center" prop="PROVEAN" label="PROVEAN"></el-table-column>
+          </el-table>
+        </div>
+      </div>
+
+      <div class="section section4 horizontal-bar" style="margin-top:-15px;">
+        <div class="section-cont">
+          <div class="section4-cont">
+            <div class="section-txt">
               <p class="tit2"><i>o </i>尝试了多种线性和非线性 meta-prediction 算法，最后选用支持向量机 (SVM），RBF kernel</p>
               <p class="tit2"><i>o </i>现有 8 个打分工具打分的正确率在 44% 和 66.5% 之间，缺失率在 30.7% 和 44.6% 之间。 </p>
               <p class="tit2"><i>o </i>我们开发的基于 SVM 的工具取得正确率 92%，没有缺失。 </p>
               <p class="clear mt30"></p>
               <!-- section400 table -->
-              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section400" border style="width: 100%">
-                <el-table-column  align="center" prop="title" label="致病性打分工具">
+              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section400" border
+                style="width: 500px; margin-left:204px;">
+                <el-table-column width="190px" align="center" prop="title" label="致病性打分工具">
                 </el-table-column>
-                <el-table-column  align="center" prop="Accuracy" label="正确率">
+                <el-table-column width="110px" align="center" prop="Accuracy" label="正确率">
                 </el-table-column>
-                <el-table-column  align="center" prop="errorRate" label="错误率">
+                <el-table-column width="110px" align="center" prop="errorRate" label="错误率">
                 </el-table-column>
-                <el-table-column  align="center" prop="MissingRate" label="缺失率">
+                <el-table-column align="center" prop="MissingRate" label="缺失率">
                 </el-table-column>
               </el-table>
             </div>
@@ -189,30 +211,42 @@
             <p class="clear mt30"></p>
             <!-- section5 table -->
             <vue-scroll :ops="scrollOps">
-            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border style="width:1981px">
-              <el-table-column align="center" width="200px"  prop="SNPID" label="SNP ID"></el-table-column>
-              <el-table-column align="center" width="220px"  prop="Chromosome" label="Chromosome"></el-table-column>
-              <el-table-column align="center" width="200px"  prop="Position" label="Position"></el-table-column>
-              <el-table-column align="center" width="240px"  prop="ReferenceBase" label="Reference Base"></el-table-column>
-              <el-table-column align="center" width="240px"  prop="AlternativeBase" label="Alternative Base"></el-table-column>
-              <el-table-column align="center" width="200px"  prop="OverallMAF" label="Overall MAF"></el-table-column>
-              <el-table-column align="center" width="340px"  prop="MAFAmongEastAsians" label="MAF Among East Asians"></el-table-column>
-              <el-table-column align="center"   width="340px" prop="DiseaseImplicated" label="Disease Implicated"></el-table-column>
-            </el-table>
+              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border
+                style="width:1981px">
+                <el-table-column align="center" width="200px" prop="SNPID" label="SNP ID"></el-table-column>
+                <el-table-column align="center" width="220px" prop="Chromosome" label="Chromosome"></el-table-column>
+                <el-table-column align="center" width="200px" prop="Position" label="Position"></el-table-column>
+                <el-table-column align="center" width="240px" prop="ReferenceBase" label="Reference Base">
+                </el-table-column>
+                <el-table-column align="center" width="240px" prop="AlternativeBase" label="Alternative Base">
+                </el-table-column>
+                <el-table-column align="center" width="200px" prop="OverallMAF" label="Overall MAF"></el-table-column>
+                <el-table-column align="center" width="340px" prop="MAFAmongEastAsians" label="MAF Among East Asians">
+                </el-table-column>
+                <el-table-column align="center" width="340px" prop="DiseaseImplicated" label="Disease Implicated">
+                </el-table-column>
+              </el-table>
             </vue-scroll>
             <p class="clear mt30"></p>
             <!-- section50 table -->
             <vue-scroll :ops="scrollOps">
-            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border style="width:2461px">
-              <el-table-column align="center" width="200px" prop="MAF" label=""></el-table-column>
-              <el-table-column align="center" width="280px" prop="EastAsian" label="East Asian ancestry 东亚血统"></el-table-column>
-              <el-table-column align="center" width="430px" prop="African" label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
-              <el-table-column align="center" width="370px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统"> </el-table-column>
-              <el-table-column align="center" width="410px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统"> </el-table-column>
-              <el-table-column align="center" width="220px" prop="Other" label="Other ancestry 其他 "></el-table-column>
-              <el-table-column align="center" width="310px" prop="South" label="South Asian ancestry 南亚血统 "></el-table-column>
-              <el-table-column align="center" width="240px" prop="Finnish" label="Finnish ancestry 芬兰血统 "></el-table-column>
-            </el-table>
+              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border
+                style="width:2461px">
+                <el-table-column align="center" width="200px" prop="MAF" label=""></el-table-column>
+                <el-table-column align="center" width="280px" prop="EastAsian" label="East Asian ancestry 东亚血统">
+                </el-table-column>
+                <el-table-column align="center" width="430px" prop="African"
+                  label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
+                <el-table-column align="center" width="370px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统">
+                </el-table-column>
+                <el-table-column align="center" width="410px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统">
+                </el-table-column>
+                <el-table-column align="center" width="220px" prop="Other" label="Other ancestry 其他 "></el-table-column>
+                <el-table-column align="center" width="310px" prop="South" label="South Asian ancestry 南亚血统 ">
+                </el-table-column>
+                <el-table-column align="center" width="240px" prop="Finnish" label="Finnish ancestry 芬兰血统 ">
+                </el-table-column>
+              </el-table>
             </vue-scroll>
             <p class="tip">（从 overall MAF > 0.1 的变异位点上得到的统计）</p>
             <p class="clear mt30"></p>
@@ -290,8 +324,8 @@ export default {
       section50,
       model: {
         section3: {
-          a:'{text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
-          b:'{text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}',
+          a: '{text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
+          b: '{text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}',
         },
       },
       scrollOps: {
@@ -349,7 +383,7 @@ export default {
     },
     // 表格样式设置
     rowClass () {
-      return 'color:#333; font-size:18px;'
+      return 'color:#333; font-size:18px; padding-right:0; padding-left:0px; '
     }
   },
 };
@@ -365,9 +399,13 @@ export default {
 .clear {
   zoom: 1;
 }
+.more-box {
+  width: 100%;
+  overflow: hidden;
+}
 .home {
   width: 100%;
-  min-width: 1000px;
+  min-width: 900px;
   .more-banner {
     width: 100%;
     overflow: hidden;
@@ -387,7 +425,7 @@ export default {
     }
   }
   .section {
-    padding: 100px 0;
+    padding: 40px 0;
     .txt-center {
       text-align: center;
     }
@@ -395,18 +433,21 @@ export default {
       text-align: left;
     }
     .section-cont {
-      width: 1200px;
+      width: 1000px;
       margin: 0 auto;
     }
     h2.title {
+      width: 996px;
+      margin: 0 auto;
       position: relative;
-      width: calc(100% - 70px);
+      // width: calc(100% - 70px);
       text-align: left;
-      font-size: 24px;
+      font-size: 30px;
       line-height: 48px;
       font-weight: normal;
       padding: 0 35px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
+      padding-right: 10px;
       i.icon-tit {
         position: absolute;
         left: 0;
@@ -434,7 +475,7 @@ export default {
     }
     .section-txt {
       .mt30 {
-        padding-top: 30px;
+        padding-top: 15px;
       }
       .tit1 {
         padding-left: 36px;
@@ -444,23 +485,32 @@ export default {
         span {
           width: calc(100% - 230px);
         }
-        i{
-          font-style: normal;
-          display: inline-block;
-          padding:0 30px;
-        }
-      }
-      .tit3 {
-        padding-left: 240px;
-      }
-      .tit4 {
-        padding-left: 280px;
-        word-wrap: break-word;
-        overflow: hidden;
-        width: 920px;
-        i{
+        i {
           font-style: normal;
           padding: 0 30px;
+          padding-left: 56px;
+          float: left;
+        }
+      }
+      .tit20 {
+        padding-left: 220px;
+      }
+      .tit3 {
+        box-sizing: border-box;
+        padding-left: 318px;
+      }
+      .tit4 {
+        box-sizing: border-box;
+        padding-left: 338px;
+        word-wrap: break-word;
+        overflow: hidden;
+        // width: 920px;
+        i {
+          font-style: normal;
+          padding: 0 30px;
+          float: left;
+        }
+        span {
           float: left;
         }
       }
@@ -477,7 +527,7 @@ export default {
           height: 10px;
           background: #333;
           float: left;
-          margin: 15px 35px 0 75px;
+          margin: 15px 35px 0 52px;
         }
         span {
           float: left;
@@ -492,15 +542,15 @@ export default {
   .section3 {
     .img-box {
       margin: 0 auto;
-      width: 60% !important;
+      width: 88% !important;
       img {
         display: block;
         width: 100%;
       }
     }
     .sectionTable {
-      width: 700px;
-      margin-left: 280px;
+      width: 404px;
+      margin-left: 390px;
     }
   }
   .section4 {
@@ -531,26 +581,41 @@ export default {
 
   .el-table--border,
   .el-table--group {
-    border-color: #3bcaff;
+    border: 2px solid #3bcaff;
+    border-bottom-width: 0px;
+    border-right-width: 1px;
   }
 
   .el-table td,
   .el-table th.is-leaf {
-    border-bottom: 1px solid #3bcaff;
-    padding: 20px;
+    border-bottom: 2px solid #3bcaff;
+    padding: 10px 0;
   }
 
   .el-table--border th,
   .el-table--border th.gutter:last-of-type {
-    border-bottom: 1px solid #3bcaff;
+    border-bottom: 2px solid #3bcaff;
   }
 
   .el-table--border td,
   .el-table--border th {
-    border-right: 1px solid #3bcaff;
+    border-right: 2px solid #3bcaff;
   }
-  .el-table th>.cell{
+  .el-table th > .cell {
     line-height: 35px;
+  }
+  .el-table td > .cell {
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    width: 100%;
+    padding: 0;
+  }
+  .el-table .cell,
+  .el-table--border td:first-child .cell,
+  .el-table--border th:first-child .cell {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 </style>

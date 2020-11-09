@@ -12,7 +12,7 @@ const section1 = [
   }, {
     name: 'dbSNP',
     type: '变异',
-    sketch: '1200多万个在外显子区域上的SNP，以及他们所map的gene',
+    sketch: '1200多万个在外显子区域上的SNP,以及他们所map的gene',
     language: '英文'
   }, {
     name: 'FATHMM',
@@ -97,7 +97,7 @@ const section1 = [
   }, {
     name: 'PGG',
     type: '变异',
-    sketch: '变异	1200多万个在外显子区域上的SNP的详细信息，包括染色体、位置、ref、alt以及在不同population上的MAF',
+    sketch: '1200多万个在外显子区域上的SNP的详细信息，包括染色体、位置、ref、alt以及在不同population上的MAF',
     language: '英文'
   }, {
     name: 'PolyPhen2',
