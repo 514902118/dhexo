@@ -139,7 +139,7 @@
           </div>
         </div>
       </div>
-       <div class="clear"></div>
+      <div class="clear"></div>
       <div class="section4">
         <div class="section-txt">
           <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section40" border
@@ -165,7 +165,7 @@
           </el-table>
         </div>
       </div>
-       <div class="clear"></div>
+      <div class="clear"></div>
       <div class="section section4" style="margin-top:-15px;">
         <div class="section-cont">
           <div class="section4-cont">
@@ -190,7 +190,7 @@
           </div>
         </div>
       </div>
-       <div class="clear"></div>
+      <div class="clear"></div>
       <!-- =======================title5======================= -->
       <div id="section5" ref="section5" class="section section5 ">
         <div class="section-cont">
@@ -211,14 +211,18 @@
         <div class="section-cont">
           <div class="section-txt">
             <!-- section5 table -->
-            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border style="width:1080px; margin:0 auto;">
+            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border
+              style="width:1080px; margin:0 auto;">
               <el-table-column align="center" width="110px" prop="SNPID" label="SNP ID"></el-table-column>
               <el-table-column align="center" width="120px" prop="Chromosome" label="Chromosome"></el-table-column>
               <el-table-column align="center" width="110px" prop="Position" label="Position"></el-table-column>
-              <el-table-column align="center" width="120px" prop="ReferenceBase" label="Reference Base"></el-table-column>
-              <el-table-column align="center" width="120px" prop="AlternativeBase" label="Alternative Base"></el-table-column>
+              <el-table-column align="center" width="120px" prop="ReferenceBase" label="Reference Base">
+              </el-table-column>
+              <el-table-column align="center" width="120px" prop="AlternativeBase" label="Alternative Base">
+              </el-table-column>
               <el-table-column align="center" width="120px" prop="OverallMAF" label="Overall MAF"></el-table-column>
-              <el-table-column align="center" width="120px" prop="MAFAmongEastAsians" label="MAF Among East Asians"></el-table-column>
+              <el-table-column align="center" width="120px" prop="MAFAmongEastAsians" label="MAF Among East Asians">
+              </el-table-column>
               <el-table-column align="center" prop="DiseaseImplicated" label="Disease Implicated"></el-table-column>
             </el-table>
           </div>
@@ -232,12 +236,17 @@
             <!-- section50 table -->
             <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border>
               <el-table-column align="center" width="90px" prop="MAF" label=""></el-table-column>
-              <el-table-column align="center" width="100px" prop="EastAsian" label="East Asian ancestry 东亚血统"></el-table-column>
-              <el-table-column align="center" width="150px" prop="African" label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
-              <el-table-column align="center" width="160px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统"></el-table-column>
-              <el-table-column align="center" width="160px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统"></el-table-column>
+              <el-table-column align="center" width="100px" prop="EastAsian" label="East Asian ancestry 东亚血统">
+              </el-table-column>
+              <el-table-column align="center" width="150px" prop="African"
+                label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
+              <el-table-column align="center" width="160px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统">
+              </el-table-column>
+              <el-table-column align="center" width="160px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统">
+              </el-table-column>
               <el-table-column align="center" width="100px" prop="Other" label="Other ancestry 其他 "></el-table-column>
-              <el-table-column align="center" width="120px" prop="South" label="South Asian ancestry 南亚血统 "></el-table-column>
+              <el-table-column align="center" width="120px" prop="South" label="South Asian ancestry 南亚血统 ">
+              </el-table-column>
               <el-table-column align="center" prop="Finnish" label="Finnish ancestry 芬兰血统 "></el-table-column>
             </el-table>
             <p class="tip">（从 overall MAF > 0.1 的变异位点上得到的统计）</p>
@@ -259,7 +268,7 @@
         <div class="section-cont">
           <h2 class="title" style="margin-bottom:0;">
             <i class="icon-tit icon-tit-left-cur"></i>
-           实现由知识图谱技术支持的报告智能展示。
+            实现由知识图谱技术支持的报告智能展示。
           </h2>
         </div>
         <div class="clear"></div>
@@ -452,7 +461,7 @@ export default {
       .tit2 {
         padding-left: 120px;
         span {
-          width: calc(100% - 230px);
+          width: calc(100% - 300px);
         }
         i {
           font-style: normal;
@@ -542,33 +551,42 @@ export default {
 </style>
 <style lang="scss"  >
 .home {
+
+
+
   .el-table--border:after,
   .el-table--group:after,
   .el-table:before {
     background-color: #3bcaff;
+    width: 0;
   }
 
   .el-table--border,
   .el-table--group {
-    border: 2px solid #3bcaff;
-    border-bottom-width: 0px;
-    border-right-width: 1px;
+    // border: 3px solid #3bcaff;
+    // border-bottom-width: 0px;
+    // border-right-width: 0px;
+    border:0;
+    border-left: 3px solid #3bcaff;
   }
 
   .el-table td,
   .el-table th.is-leaf {
-    border-bottom: 2px solid #3bcaff;
+    border-bottom: 3px solid #3bcaff;
     padding: 10px 0;
   }
 
   .el-table--border th,
   .el-table--border th.gutter:last-of-type {
-    border-bottom: 2px solid #3bcaff;
+    border-bottom: 3px solid #3bcaff;
   }
 
   .el-table--border td,
   .el-table--border th {
-    border-right: 2px solid #3bcaff;
+    border-right: 3px solid #3bcaff;
+  }
+   .el-table--border th {
+    border-top: 3px solid #3bcaff;
   }
   .el-table th > .cell {
     line-height: 35px;
@@ -591,6 +609,7 @@ export default {
     padding-left: 0;
     padding-right: 0;
   }
+ 
 }
 </style>
 
