@@ -10,8 +10,7 @@
           遗传病全外显子组智能解读引擎、智能解读系统技术要点
         </h2>
       </div>
-
-      <!-- title1 -->
+      <!-- =======================title1======================= -->
       <div id="section1" ref="section1" class="section section1">
         <h2 class="title">
           <i class="icon-tit icon-tit-left"></i>
@@ -27,8 +26,7 @@
           </el-table>
         </div>
       </div>
-
-      <!-- title2 -->
+      <!-- =======================title2======================= -->
       <div id="section2" ref="section2" class="section section2">
         <div class="section-cont">
           <h2 class="title">
@@ -66,8 +64,7 @@
         </div>
         <div class="clear"></div>
       </div>
-
-      <!-- title3 -->
+      <!-- =======================title3======================= -->
       <div id="section3" ref="section3" class="section section3">
         <h2 class="title" style="width:1013px">
           <i class="icon-tit icon-tit-left"></i>
@@ -110,9 +107,8 @@
         </div>
         <div class="clear"></div>
       </div>
-
-      <!-- title4 -->
-      <div id="section4" ref="section4" class="section section4 horizontal-bar">
+      <!-- =======================title4======================= -->
+      <div id="section4" ref="section4" class="section section4 ">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left-cur"></i>
@@ -138,13 +134,13 @@
               <p><em></em>我们对这 8 个工具的打分可靠性进行的独立评估，并使用机器学习算法构建了 meta-prediction 模型。</p>
               <p class="tit2"><i>o </i>从 OMIM 数据库中抽取已知的致病变异，作为正数据集，</p>
               <p class="tit2"><i>o </i>从 gnomeAD 数据库中抽取 OMIM 中未记载的，在全部人群中 MAF > 0.2 的变异，作为负数据集， </p>
-              <p class="clear mt30"></p>
             </div>
+            <div class="clear"></div>
           </div>
         </div>
       </div>
-
-      <div class="section4" style="padding-top:110px;">
+       <div class="clear"></div>
+      <div class="section4">
         <div class="section-txt">
           <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section40" border
             style="width:1300px; margin:0 auto;">
@@ -169,8 +165,8 @@
           </el-table>
         </div>
       </div>
-
-      <div class="section section4 horizontal-bar" style="margin-top:-15px;">
+       <div class="clear"></div>
+      <div class="section section4" style="margin-top:-15px;">
         <div class="section-cont">
           <div class="section4-cont">
             <div class="section-txt">
@@ -194,81 +190,81 @@
           </div>
         </div>
       </div>
-
-      <!-- title5 -->
-      <div id="section5" ref="section5" class="section section5 horizontal-bar">
+       <div class="clear"></div>
+      <!-- =======================title5======================= -->
+      <div id="section5" ref="section5" class="section section5 ">
         <div class="section-cont">
           <h2 class="title">
             <i class="icon-tit icon-tit-left"></i>
-            采用精准的种群特异性的次等位基因频率（MAF）对变异位点评估
+            采用精准的种群特异性的次等位基因频率（MAF）对变异位点评估。
           </h2>
-
           <div class="section-txt">
             <p class="tit1">MAF：变异在人群中出现的频率.</p>
             <p><em></em> <span>现有 MAF 资源有多个问题：</span></p>
             <p class="tit2"><i>o </i>最权威的 ExAC 数据库使用的数据源包含很多病人的数据，造成 MAF 计算的偏差， </p>
             <p class="tit2"><i>o </i>不同的种群 （例如 Asian vs. Caucasian）的 MAF 有显著差异，多数工具未予考虑。</p>
-            <p class="clear mt30"></p>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="section5" style="margin-top:15px;">
+        <div class="section-cont">
+          <div class="section-txt">
             <!-- section5 table -->
-            <vue-scroll :ops="scrollOps">
-              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border
-                style="width:1981px">
-                <el-table-column align="center" width="200px" prop="SNPID" label="SNP ID"></el-table-column>
-                <el-table-column align="center" width="220px" prop="Chromosome" label="Chromosome"></el-table-column>
-                <el-table-column align="center" width="200px" prop="Position" label="Position"></el-table-column>
-                <el-table-column align="center" width="240px" prop="ReferenceBase" label="Reference Base">
-                </el-table-column>
-                <el-table-column align="center" width="240px" prop="AlternativeBase" label="Alternative Base">
-                </el-table-column>
-                <el-table-column align="center" width="200px" prop="OverallMAF" label="Overall MAF"></el-table-column>
-                <el-table-column align="center" width="340px" prop="MAFAmongEastAsians" label="MAF Among East Asians">
-                </el-table-column>
-                <el-table-column align="center" width="340px" prop="DiseaseImplicated" label="Disease Implicated">
-                </el-table-column>
-              </el-table>
-            </vue-scroll>
-            <p class="clear mt30"></p>
+            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section5" border style="width:1080px; margin:0 auto;">
+              <el-table-column align="center" width="110px" prop="SNPID" label="SNP ID"></el-table-column>
+              <el-table-column align="center" width="120px" prop="Chromosome" label="Chromosome"></el-table-column>
+              <el-table-column align="center" width="110px" prop="Position" label="Position"></el-table-column>
+              <el-table-column align="center" width="120px" prop="ReferenceBase" label="Reference Base"></el-table-column>
+              <el-table-column align="center" width="120px" prop="AlternativeBase" label="Alternative Base"></el-table-column>
+              <el-table-column align="center" width="120px" prop="OverallMAF" label="Overall MAF"></el-table-column>
+              <el-table-column align="center" width="120px" prop="MAFAmongEastAsians" label="MAF Among East Asians"></el-table-column>
+              <el-table-column align="center" prop="DiseaseImplicated" label="Disease Implicated"></el-table-column>
+            </el-table>
+          </div>
+        </div>
+
+      </div>
+      <div class="clear"></div>
+      <div class="section5" style="margin-top: 30px;">
+        <div class="section-cont">
+          <div class="section-txt" style="width:980px; margin:0 auto;">
             <!-- section50 table -->
-            <vue-scroll :ops="scrollOps">
-              <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border
-                style="width:2461px">
-                <el-table-column align="center" width="200px" prop="MAF" label=""></el-table-column>
-                <el-table-column align="center" width="280px" prop="EastAsian" label="East Asian ancestry 东亚血统">
-                </el-table-column>
-                <el-table-column align="center" width="430px" prop="African"
-                  label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
-                <el-table-column align="center" width="370px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统">
-                </el-table-column>
-                <el-table-column align="center" width="410px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统">
-                </el-table-column>
-                <el-table-column align="center" width="220px" prop="Other" label="Other ancestry 其他 "></el-table-column>
-                <el-table-column align="center" width="310px" prop="South" label="South Asian ancestry 南亚血统 ">
-                </el-table-column>
-                <el-table-column align="center" width="240px" prop="Finnish" label="Finnish ancestry 芬兰血统 ">
-                </el-table-column>
-              </el-table>
-            </vue-scroll>
+            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border>
+              <el-table-column align="center" width="90px" prop="MAF" label=""></el-table-column>
+              <el-table-column align="center" width="100px" prop="EastAsian" label="East Asian ancestry 东亚血统"></el-table-column>
+              <el-table-column align="center" width="150px" prop="African" label="African-American/African ancestry 非裔美国人/非洲血统"></el-table-column>
+              <el-table-column align="center" width="160px" prop="Ashkenazi" label="Ashkenazi Jewish ancestry 德系犹太血统"></el-table-column>
+              <el-table-column align="center" width="160px" prop="Non" label="Non-Finnish European ancestry 非芬兰的欧洲血统"></el-table-column>
+              <el-table-column align="center" width="100px" prop="Other" label="Other ancestry 其他 "></el-table-column>
+              <el-table-column align="center" width="120px" prop="South" label="South Asian ancestry 南亚血统 "></el-table-column>
+              <el-table-column align="center" prop="Finnish" label="Finnish ancestry 芬兰血统 "></el-table-column>
+            </el-table>
             <p class="tip">（从 overall MAF > 0.1 的变异位点上得到的统计）</p>
-            <p class="clear mt30"></p>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="section section5" style="margin-top: -15px;">
+        <div class="section-cont">
+          <div class="section-txt">
             <p><em></em> <span>我们在积累大量中国人群/亚洲人群的变异数据基础上，精准计算各个位点的种群特异的 MAF 值，结合 PGG、GenomeAD
                 数据库提供的种群特异MAF数据，用于我们的解读系统。</span></p>
           </div>
           <div class="clear"></div>
         </div>
       </div>
-
-      <!-- title6 -->
+      <!-- =======================title6======================= -->
       <div id="section6" ref="section6" class="section section6">
         <div class="section-cont">
-          <h2 class="title">
+          <h2 class="title" style="margin-bottom:0;">
             <i class="icon-tit icon-tit-left-cur"></i>
-            实现由知识图谱技术支持的报告智能展示
+           实现由知识图谱技术支持的报告智能展示。
           </h2>
         </div>
         <div class="clear"></div>
       </div>
-
-      <!-- title7 -->
+      <!-- =======================title7======================= -->
       <div id="section7" ref="section7" class="section section7">
         <div class="section-cont">
           <h2 class="title">
@@ -327,34 +323,7 @@ export default {
           a: '{text: "We found that << geneB>> is the most frequently mutated gene in [[ diseaseA ]], but not geneC.", label: "is associated with"}',
           b: '{text: "We found that geneB is the most frequently mutated gene in [[ diseaseA ]], but not << geneC>>.", label: "is not associated with"}',
         },
-      },
-      scrollOps: {
-        vuescroll: {
-          mode: "native",
-        },
-        scrollPanel: {
-          initialScrollY: false,
-          initialScrollX: false,
-          scrollingX: true,
-          scrollingY: false,
-        },
-        // 轨道
-        rail: {
-          background: "#f1f1f1",
-          opacity: 1,
-          size: "5px",
-          specifyBorderRadius: "6px",
-          gutterOfEnds: "100px",
-        },
-        // 滚动条
-        bar: {
-          background: "#959595",
-          onlyShowBarOnScroll: true,
-          showDelay: 0,
-          keepShow: true,
-          size: "11px",
-        },
-      },
+      }
     };
   },
   mounted () {
@@ -379,7 +348,7 @@ export default {
     },
     // 表头样式设置
     headClass () {
-      return 'text-align: center; color:#333; font-size:24px; line-height: 35px;'
+      return 'text-align: center; color:#333; font-size:18px; line-height: 35px;'
     },
     // 表格样式设置
     rowClass () {
@@ -405,7 +374,7 @@ export default {
 }
 .home {
   width: 100%;
-  min-width: 900px;
+  min-width: 1297px;
   .more-banner {
     width: 100%;
     overflow: hidden;
@@ -452,8 +421,8 @@ export default {
         position: absolute;
         left: 0;
         top: 18px;
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         float: left;
         background: #666;
       }
@@ -488,7 +457,7 @@ export default {
         i {
           font-style: normal;
           padding: 0 30px;
-          padding-left: 56px;
+          padding-left: 30px;
           float: left;
         }
       }
@@ -523,8 +492,8 @@ export default {
         line-height: 36px;
         color: #333;
         em {
-          width: 10px;
-          height: 10px;
+          width: 6px;
+          height: 6px;
           background: #333;
           float: left;
           margin: 15px 35px 0 52px;
@@ -603,6 +572,11 @@ export default {
   }
   .el-table th > .cell {
     line-height: 35px;
+    font-size: 18px;
+    word-break: keep-all;
+    word-wrap: break-word;
+    width: 100%;
+    padding: 0;
   }
   .el-table td > .cell {
     word-break: keep-all;
