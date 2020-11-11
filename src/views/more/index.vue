@@ -143,7 +143,7 @@
       <div class="section4">
         <div class="section-txt">
           <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section40" border
-            style="width:1300px; margin:0 auto;">
+            style="width:1302px; margin:0 auto;">
             <el-table-column align="center" width="90px" prop="CHROM" label="CHROM"></el-table-column>
             <el-table-column align="center" width="90px" prop="POS" label="POS"></el-table-column>
             <el-table-column align="center" width="110px" prop="ID" label="ID"></el-table-column>
@@ -234,7 +234,7 @@
         <div class="section-cont">
           <div class="section-txt" style="width:980px; margin:0 auto;">
             <!-- section50 table -->
-            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border>
+            <el-table :cell-style="rowClass" :header-cell-style="headClass" :data="section50" border >
               <el-table-column align="center" width="90px" prop="MAF" label=""></el-table-column>
               <el-table-column align="center" width="100px" prop="EastAsian" label="East Asian ancestry 东亚血统">
               </el-table-column>
@@ -357,11 +357,11 @@ export default {
     },
     // 表头样式设置
     headClass () {
-      return 'text-align: center; color:#333; font-size:18px; line-height: 35px;'
+      return 'text-align: center; color:#333; font-size:18px; line-height: 35px; border-top:3px solid #3bcaff; border-left:3px solid #3bcaff'
     },
     // 表格样式设置
     rowClass () {
-      return 'color:#333; font-size:18px; padding-right:0; padding-left:0px; '
+      return 'color:#333; font-size:18px; padding-right:0; padding-left:0px; border-top:3px solid #3bcaff; border-left:3px solid #3bcaff'
     }
   },
 };
@@ -552,41 +552,25 @@ export default {
 <style lang="scss"  >
 .home {
 
+.el-table--border td, .el-table--border th, .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed{border:0;}
 
+  .el-table th.gutter{display: table-cell !important;}
 
   .el-table--border:after,
   .el-table--group:after,
   .el-table:before {
     background-color: #3bcaff;
-    width: 0;
+    width: 3px;
   }
 
   .el-table--border,
   .el-table--group {
-    // border: 3px solid #3bcaff;
-    // border-bottom-width: 0px;
-    // border-right-width: 0px;
-    border:0;
-    border-left: 3px solid #3bcaff;
+    border-bottom: 3px solid #3bcaff;
   }
 
   .el-table td,
   .el-table th.is-leaf {
-    border-bottom: 3px solid #3bcaff;
     padding: 10px 0;
-  }
-
-  .el-table--border th,
-  .el-table--border th.gutter:last-of-type {
-    border-bottom: 3px solid #3bcaff;
-  }
-
-  .el-table--border td,
-  .el-table--border th {
-    border-right: 3px solid #3bcaff;
-  }
-   .el-table--border th {
-    border-top: 3px solid #3bcaff;
   }
   .el-table th > .cell {
     line-height: 35px;
