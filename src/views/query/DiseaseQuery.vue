@@ -44,9 +44,9 @@
       <div class="block block2"  v-if="info.Description !='暂无'">
         <p class="title"><em>简要信息</em><span>Brief information</span></p>
         <ul class="brief-info">
-          <li><i>发病年龄</i><span>{{info.Age_of_onset_orp}}</span></li>
-          <li><i>遗传方式</i><span>{{info.Inheritance_orp}}</span></li>
-          <li><i>发病率</i><span>{{info.Prevalence_orp}}</span></li>
+          <li v-if="info.Age_of_onset_orp !='暂无'"><i>发病年龄</i><span>{{info.Age_of_onset_orp}}</span></li>
+          <li v-if="info.Inheritance_orp !='暂无'"><i>遗传方式</i><span>{{info.Inheritance_orp}}</span></li>
+          <li v-if="info.Prevalence_orp !='暂无'"><i>发病率</i><span>{{info.Prevalence_orp}}</span></li>
         </ul>
       </div>
       <div class="block block3" 
