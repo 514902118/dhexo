@@ -72,14 +72,18 @@
                   <p>{{ item["突变类型"] }}</p>
                   <p>
                       <template v-if="item['文献'].length <= 2">
-                        <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog(  ite.name,  index,  i, 'highAttention',  $event,  'variantPmid' )
+                        <!-- <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog(  ite.name,  index,  i, 'highAttention',  $event,  'variantPmid' )
                           " @click="handleHideDialog(ite)" class="spn">
+                          {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
+                        </span> -->
+                         <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)" class="spn">
                           {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
                         </span>
                       </template>
                       <template v-else>
-                         <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'highAttention',  $event, 'variantPmid' )
-                        " @click="handleHideDialog(ite)" class="spn">
+                         <!-- <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'highAttention',  $event, 'variantPmid' )
+                        " @click="handleHideDialog(ite)" class="spn"> -->
+                        <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)"  class="spn">
                         <template v-if="i < 2">
                           {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}
                         </template>
@@ -155,7 +159,7 @@
                   <p>{{ item["突变类型"] }}</p>
                   <p>
                     <template v-if="item['文献'].length <= 2">
-                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter="
+                      <!-- <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter="
                           handleShowDialog(
                             ite.name,
                             index,
@@ -167,11 +171,24 @@
                         " @click="handleHideDialog(ite)" class="spn">
                         {{ ite.name
                         }}{{ Number(i) !== item["文献"].length - 1 ? "," : "" }}
+                      </span> -->
+                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"  @click="literatureClickHandle(ite.name)" class="spn">
+                        {{ ite.name
+                        }}{{ Number(i) !== item["文献"].length - 1 ? "," : "" }}
                       </span>
+
+
+                      
                     </template>
                     <template v-else>
-                      <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'middleAttention',  $event, 'variantPmid' )
+                      <!-- <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'middleAttention',  $event, 'variantPmid' )
                         " @click="handleHideDialog(ite)" class="spn">
+                        <template v-if="i < 2">
+                          <span style="display: block">
+                            {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}</span>
+                        </template>
+                      </span> -->
+                      <span v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)" class="spn">
                         <template v-if="i < 2">
                           <span style="display: block">
                             {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}</span>
@@ -242,7 +259,12 @@
         <p class="title"><em>参考文献</em><span>references</span></p>
         <div class="references-cont">
           <p v-for="(item, index) in searchLiterature" :key="index">
-            <span>{{ index + 1 }}.</span>{{ item }}
+            <span>{{ index + 1 }}.</span>
+            <span v-html="item.author"></span>
+            <span v-html="item.title"></span>
+            <i v-html="item.periodicalName"></i>
+            <strong v-html="item.periodicalNumber"></strong>
+            <span v-html="item.publishingTime"></span>
           </p>
         </div>
         <!-- <div class="description">
@@ -257,9 +279,12 @@
     <!-- 展示更多 -->
     <el-dialog title="文献" :visible.sync="moreDialog" width="700px" append-to-body center class="eldialog more-dialog">
       <span></span>
-      <span v-for="(ite, i) in moreData" :key="i" @mouseenter="
+      <!-- <span v-for="(ite, i) in moreData" :key="i" @mouseenter="
           handleShowDialog(ite.name, 0, i, 'moreData', $event, 'variantPmid')
         " @click="handleHideDialog(ite)" class="spn">
+        {{ ite.name }}{{ Number(i) !== moreData.length - 1 ? "," : "" }}
+      </span> -->
+      <span v-for="(ite, i) in moreData" :key="i" @click="literatureClickHandle(ite.name)" class="spn">
         {{ ite.name }}{{ Number(i) !== moreData.length - 1 ? "," : "" }}
       </span>
     </el-dialog>
@@ -629,10 +654,6 @@ export default {
       this.references = this.references.filter((item) => item != "-");
       this.searchLiteratureHandle();
     },
-
-    /**
-     * 参考文献
-     */
     searchLiteratureHandle () {
       if (this.references.length != 0) {
         this.references.forEach((item, index) => {
@@ -645,14 +666,44 @@ export default {
     },
 
     viewLiteratureLayerHandle (txt) {
+      console.log(txt);
       this.$get(this.$Url.query.literature, {
         literatureId: txt,
       }).then((res) => {
         if (res.status === 200) {
-          this.searchLiterature.push(res.data.reference);
+          let resData = res.data;
+          let arr = {
+            author:`${resData.author}&nbsp;&nbsp;`, //作者
+            title:`${resData.title}&nbsp;&nbsp;`,//标题
+            periodicalName:`${resData.periodicalName}&nbsp;`, //期刊名
+            periodicalNumber:`${resData.periodicalNumber}&nbsp;`, //期刊号
+            publishingTime:`${resData.publishingTime}&nbsp;&nbsp;`, //出版时间
+            summary:`${resData.summary}`, // 摘要
+        }
+          this.searchLiterature.push(arr);
         }
       });
+      
+      // let arr = {
+      //     author:'GILLESPIE', //作者
+      //     title:'COVELLI, B. CRYSTALLINE CORNEAL DYSTROPHY. REPORT OF A CASE &nbsp;',//标题
+      //     periodicalName:'American journal of ophthalmology', //期刊名
+      //     periodicalNumber:'56', //期刊号
+      //     publishingTime:'465-7 (1963).', //出版时间
+      //     summary:'CRYSTALLINE CORNEAL DYSTROPHY.', // 摘要
+      // }
+
+      // this.searchLiterature.push(arr);
     },
+
+    /**
+     * 参考文献点击操作
+     */
+    literatureClickHandle(name){
+      // var tempwindow=window.open();
+      // tempwindow.location=`https://pubmed.ncbi.nlm.nih.gov/${name}`;
+      window.open(`https://pubmed.ncbi.nlm.nih.gov/${name}`)
+    }
   },
   mounted () {
     this.init();
@@ -783,6 +834,10 @@ export default {
       // text-indent: 25px;
       font-size: 22px;
       color: #333;
+      strong{
+         display:inline-block;
+         padding: 0 6px;
+      }
     }
   }
   .description {
