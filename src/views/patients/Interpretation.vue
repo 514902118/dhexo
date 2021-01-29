@@ -5,8 +5,6 @@
       <div class="box">
         <p class="title">{{ patientName }}</p>
         <div class="elbtn" @click="toPdf">下载</div>
-        <!-- <router-link :to="{ name: 'patientsReport', query: {id: this.$route.query.vcfId}}" tag="div" class="elbtn">下载</router-link> -->
-        <!-- <div class="elbtn" @></div> -->
       </div>
     </div>
     <div class="query-details">
@@ -23,19 +21,44 @@
           <vue-scroll :ops="scrollOps">
             <div class="tit tit2">
               <p>
-                <span>RS</span>
-                <span>染色体位置</span>
-                <span>Ref</span>
-                <span>Alt</span>
-                <span>基因型</span>
-                <span>MAF</span>
-                <span>基因</span>
-                <span>致病分值</span>
-                <span>关联疾病</span>
-                <span>来源</span>
-                <span>蛋白变化</span>
-                <span>突变影响</span>
-                <span>文献</span>
+
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异的RefSNP accession ID</div>
+                  <span>变异位点</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异所在在基因组上的位置</div>
+                  <span>染色体位置</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">该突变可能导致的疾病</div>
+                  <span>关联疾病</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">
+                    参考:不携带该致病基因的基因型，患者：患者基因型</div>
+                  <span>参考/患者</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异所在基因</div>
+                  <span>基因</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">最小等位基因频率</div>
+                  <span>MAF（亚洲）</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">该突变导致编码蛋白的变化情况</div>
+                  <span>蛋白变化</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">突变致病信息的数据库</div>
+                  <span>依据</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">相关文献的Pubmed ID</div>
+                  <span>文献</span>
+                </el-tooltip>
               </p>
             </div>
             <ul class="context">
@@ -43,16 +66,9 @@
                 <li v-for="(item, index) in this.highAttention" :key="index">
                   <p>{{ item["变异"] }}</p>
                   <p class="more" @click="toLineHandle(item['染色体位置'])">
-                    {{ item["染色体位置"] }}
+                    Chr{{ item["染色体位置"] }}
                   </p>
-                  <p>{{ item["Ref"] }}</p>
-                  <p>{{ item["Alt"] }}</p>
-                  <p>{{ item["基因型"] }}</p>
-                  <p>{{ item["MAF(亚洲)"] }}</p>
-                  <p>{{ item["基因"] }}</p>
-                  <p>{{ item["致病分值"] }}</p>
                   <p>
-                    <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
                     <span @mouseenter="showXGJBHandle(item['相关疾病'], $event)" style="display: block"
                       v-if="typeof item['相关疾病'] === 'string'">
                       {{ item["相关疾病"] }}</span>
@@ -61,36 +77,34 @@
                       {{ xgjbItem }}
                     </span>
                   </p>
+                  <p>{{ item["Ref"] }}{{ item["Ref"] }}/{{ item["基因型"] == '0/1'? "CA" :"AA" }}</p>
+                  <p>{{ item["基因"] }}</p>
+                  <p>{{ item["MAF(亚洲)"] }}</p>
+
+                  <p>{{ item["蛋白变化"] == "N" ? "unknown" : item["蛋白变化"] == "None" ? "unknown" : item["蛋白变化"]}}</p>
                   <p>
-                    <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
                     <span style="display: block" v-if="typeof item['来源'] === 'string'">{{ item["来源"] }}</span>
                     <span style="display: block" v-else v-for="(lyItem, lyIndex) in item['来源']" :key="lyIndex">
                       {{ lyItem }}
                     </span>
                   </p>
-                  <p>{{ item["蛋白变化"] }}</p>
-                  <p>{{ item["突变类型"] }}</p>
                   <p>
-                      <template v-if="item['文献'].length <= 2">
-                        <!-- <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog(  ite.name,  index,  i, 'highAttention',  $event,  'variantPmid' )
-                          " @click="handleHideDialog(ite)" class="spn">
-                          {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
-                        </span> -->
-                         <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)" class="spn">
-                          {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
-                        </span>
-                      </template>
-                      <template v-else>
-                         <!-- <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'highAttention',  $event, 'variantPmid' )
-                        " @click="handleHideDialog(ite)" class="spn"> -->
-                        <span  style="display: block" v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)"  class="spn">
+                    <template v-if="item['文献'].length <= 2">
+                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"
+                        @click="literatureClickHandle(ite.name)" class="spn">
+                        {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
+                      </span>
+                    </template>
+                    <template v-else>
+                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"
+                        @click="literatureClickHandle(ite.name)" class="spn">
                         <template v-if="i < 2">
                           {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}
                         </template>
                       </span>
                       <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
-                    
-                      </template>
+
+                    </template>
                   </p>
                 </li>
               </template>
@@ -110,19 +124,43 @@
           <vue-scroll :ops="scrollOps">
             <div class="tit tit2">
               <p>
-                <span>RS</span>
-                <span>染色体位置</span>
-                <span>Ref</span>
-                <span>Alt</span>
-                <span>基因型</span>
-                <span>MAF</span>
-                <span>基因</span>
-                <span>致病分值</span>
-                <span>关联疾病</span>
-                <span>来源</span>
-                <span>蛋白变化</span>
-                <span>突变影响</span>
-                <span>文献</span>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异的RefSNP accession ID</div>
+                  <span>变异位点</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异所在在基因组上的位置</div>
+                  <span>染色体位置</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">该突变可能导致的疾病</div>
+                  <span>关联疾病</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">
+                    参考:不携带该致病基因的基因型，患者：患者基因型</div>
+                  <span>参考/患者</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异所在基因</div>
+                  <span>基因</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">最小等位基因频率</div>
+                  <span>MAF（亚洲）</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">该突变导致编码蛋白的变化情况</div>
+                  <span>蛋白变化</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">突变致病信息的数据库</div>
+                  <span>依据</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">相关文献的Pubmed ID</div>
+                  <span>文献</span>
+                </el-tooltip>
               </p>
             </div>
             <ul class="context">
@@ -130,16 +168,9 @@
                 <li v-for="(item, index) in this.middleAttention" :key="index">
                   <p>{{ item["变异"] }}</p>
                   <p class="more" @click="toLineHandle(item['染色体位置'])">
-                    {{ item["染色体位置"] }}
+                    Chr{{ item["染色体位置"] }}
                   </p>
-                  <p>{{ item["Ref"] }}</p>
-                  <p>{{ item["Alt"] }}</p>
-                  <p>{{ item["基因型"] }}</p>
-                  <p>{{ item["MAF(亚洲)"] }}</p>
-                  <p>{{ item["基因"] }}</p>
-                  <p>{{ item["致病分值"] }}</p>
                   <p>
-                    <!-- {{typeof item['相关疾病'] === 'string' ? item['相关疾病'] : item['相关疾病'].join(',')}} -->
                     <span @mouseenter="showXGJBHandle(item['相关疾病'], $event)" style="display: block"
                       v-if="typeof item['相关疾病'] === 'string'">
                       {{ item["相关疾病"] }}</span>
@@ -148,47 +179,27 @@
                       {{ xgjbItem }}
                     </span>
                   </p>
+                  <p>{{ item["Ref"] }}{{ item["Ref"] }}/{{ item["基因型"] == '0/1'? "CA" :"AA" }}</p>
+                  <p>{{ item["基因"] }}</p>
+                  <p>{{ item["MAF(亚洲)"] }}</p>
+                  <p>{{ item["蛋白变化"] == "N" ? "unknown" : item["蛋白变化"] == "None" ? "unknown" : item["蛋白变化"]}}</p>
                   <p>
-                    <!-- {{typeof item['来源'] === 'string' ? item['来源'] : item['来源'].join(',')}} -->
                     <span style="display: block" v-if="typeof item['来源'] === 'string'">{{ item["来源"] }}</span>
                     <span style="display: block" v-else v-for="(lyItem, lyIndex) in item['来源']" :key="lyIndex">
                       {{ lyItem }}
                     </span>
                   </p>
-                  <p>{{ item["蛋白变化"] }}</p>
-                  <p>{{ item["突变类型"] }}</p>
                   <p>
                     <template v-if="item['文献'].length <= 2">
-                      <!-- <span style="display: block" v-for="(ite, i) in item['文献']" :key="i" @mouseenter="
-                          handleShowDialog(
-                            ite.name,
-                            index,
-                            i,
-                            'middleAttention',
-                            $event,
-                            'variantPmid'
-                          )
-                        " @click="handleHideDialog(ite)" class="spn">
-                        {{ ite.name
-                        }}{{ Number(i) !== item["文献"].length - 1 ? "," : "" }}
-                      </span> -->
-                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"  @click="literatureClickHandle(ite.name)" class="spn">
+                      <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"
+                        @click="literatureClickHandle(ite.name)" class="spn">
                         {{ ite.name
                         }}{{ Number(i) !== item["文献"].length - 1 ? "," : "" }}
                       </span>
-
-
-                      
                     </template>
                     <template v-else>
-                      <!-- <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter=" handleShowDialog( ite.name, index,i, 'middleAttention',  $event, 'variantPmid' )
-                        " @click="handleHideDialog(ite)" class="spn">
-                        <template v-if="i < 2">
-                          <span style="display: block">
-                            {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}</span>
-                        </template>
-                      </span> -->
-                      <span v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)" class="spn">
+                      <span v-for="(ite, i) in item['文献']" :key="i" @click="literatureClickHandle(ite.name)"
+                        class="spn">
                         <template v-if="i < 2">
                           <span style="display: block">
                             {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : ""}}</span>
@@ -196,9 +207,6 @@
                       </span>
                       <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
                     </template>
-                    <!-- <span v-for="(ite, i) in item['文献']" :key="i" @mouseenter="handleShowDialog(ite.name, index, i, 'middleAttention', $event)" @click="handleHideDialog" class="spn">
-                      {{ite.name}}{{Number(i) !== (item['文献'].length - 1) ? ',' : ''}}
-                    </span> -->
                   </p>
                 </li>
               </template>
@@ -218,16 +226,31 @@
           <vue-scroll :ops="scrollOps">
             <div class="tit tit2">
               <p>
-                <span>RS</span>
-                <span>染色体位置</span>
-                <span>Ref</span>
-                <span>Alt</span>
-                <span>基因型</span>
-                <span>MAF</span>
-                <span>基因</span>
-                <span>致病分值</span>
-                <span>蛋白变化</span>
-                <span>突变影响</span>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异的RefSNP accession ID</div>
+                  <span>变异位点</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异所在在基因组上的位置</div>
+                  <span>染色体位置</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">
+                    参考:不携带该致病基因的基因型，患者：患者基因型</div>
+                  <span>参考/患者</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">变异所在基因</div>
+                  <span>基因</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">最小等位基因频率</div>
+                  <span>MAF（亚洲）</span>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top">
+                  <div slot="content" class="tip-style">该突变导致编码蛋白的变化情况</div>
+                  <span>蛋白变化</span>
+                </el-tooltip>
               </p>
             </div>
             <ul class="context">
@@ -235,16 +258,12 @@
                 <li v-for="(item, index) in this.otherAttention" :key="index">
                   <p>{{ item["变异"] }}</p>
                   <p class="more" @click="toLineHandle(item['染色体位置'])">
-                    {{ item["染色体位置"] }}
+                    Chr{{ item["染色体位置"] }}
                   </p>
-                  <p>{{ item["Ref"] }}</p>
-                  <p>{{ item["Alt"] }}</p>
-                  <p>{{ item["基因型"] }}</p>
-                  <p>{{ item["MAF(亚洲)"] }}</p>
+                  <p>{{ item["Ref"] }}{{ item["Ref"] }}/{{ item["基因型"] == '0/1'? "CA" :"AA" }}</p>
                   <p>{{ item["基因"] }}</p>
-                  <p>{{ item["致病分值"] }}</p>
-                  <p>{{ item["蛋白变化"] }}</p>
-                  <p>{{ item["突变类型"] }}</p>
+                  <p>{{ item["MAF(亚洲)"] }}</p>
+                  <p>{{ item["蛋白变化"] == "N" ? "unknown" : item["蛋白变化"] == "None" ? "unknown" : item["蛋白变化"]}}</p>
                 </li>
               </template>
               <template v-else>
@@ -279,11 +298,6 @@
     <!-- 展示更多 -->
     <el-dialog title="文献" :visible.sync="moreDialog" width="700px" append-to-body center class="eldialog more-dialog">
       <span></span>
-      <!-- <span v-for="(ite, i) in moreData" :key="i" @mouseenter="
-          handleShowDialog(ite.name, 0, i, 'moreData', $event, 'variantPmid')
-        " @click="handleHideDialog(ite)" class="spn">
-        {{ ite.name }}{{ Number(i) !== moreData.length - 1 ? "," : "" }}
-      </span> -->
       <span v-for="(ite, i) in moreData" :key="i" @click="literatureClickHandle(ite.name)" class="spn">
         {{ ite.name }}{{ Number(i) !== moreData.length - 1 ? "," : "" }}
       </span>
@@ -673,17 +687,17 @@ export default {
         if (res.status === 200) {
           let resData = res.data;
           let arr = {
-            author:`${resData.author}&nbsp;&nbsp;`, //作者
-            title:`${resData.title}&nbsp;&nbsp;`,//标题
-            periodicalName:`${resData.periodicalName}&nbsp;`, //期刊名
-            periodicalNumber:`${resData.periodicalNumber}&nbsp;`, //期刊号
-            publishingTime:`${resData.publishingTime}&nbsp;&nbsp;`, //出版时间
-            summary:`${resData.summary}`, // 摘要
-        }
+            author: `${resData.author}&nbsp;&nbsp;`, //作者
+            title: `${resData.title}&nbsp;&nbsp;`,//标题
+            periodicalName: `${resData.periodicalName}&nbsp;`, //期刊名
+            periodicalNumber: `${resData.periodicalNumber}&nbsp;`, //期刊号
+            publishingTime: `${resData.publishingTime}&nbsp;&nbsp;`, //出版时间
+            summary: `${resData.summary}`, // 摘要
+          }
           this.searchLiterature.push(arr);
         }
       });
-      
+
       // let arr = {
       //     author:'GILLESPIE', //作者
       //     title:'COVELLI, B. CRYSTALLINE CORNEAL DYSTROPHY. REPORT OF A CASE &nbsp;',//标题
@@ -699,7 +713,7 @@ export default {
     /**
      * 参考文献点击操作
      */
-    literatureClickHandle(name){
+    literatureClickHandle (name) {
       // var tempwindow=window.open();
       // tempwindow.location=`https://pubmed.ncbi.nlm.nih.gov/${name}`;
       window.open(`https://pubmed.ncbi.nlm.nih.gov/${name}`)
@@ -834,9 +848,9 @@ export default {
       // text-indent: 25px;
       font-size: 22px;
       color: #333;
-      strong{
-         display:inline-block;
-         padding: 0 6px;
+      strong {
+        display: inline-block;
+        padding: 0 6px;
       }
     }
   }
@@ -855,5 +869,25 @@ export default {
       }
     }
   }
+}
+</style>
+<style lang="scss" scoped>
+/**2021130--tony修改 */
+.tip-style {
+  padding: 0 8px;
+  font-size: 18px;
+  color: #656565;
+}
+.tit span {
+  font-size: 18px !important;
+}
+.tit p {
+  width: calc(100%) !important;
+}
+.context {
+  width: calc(100%) !important;
+}
+.context li p {
+  font-size: 16px !important;
 }
 </style>

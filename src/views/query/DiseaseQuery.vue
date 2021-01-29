@@ -15,7 +15,7 @@
             class="query-inp"
             v-model="queryInp"
             :fetch-suggestions="querySearch"
-            :placeholder="placeholder"
+            placeholder="请输入全大写英文疾病名"
             :trigger-on-focus="false"
             @select="handleSelect">
             <i slot="append" class="el-input__icon iconfont icon-sousuo1" @click="search"></i>
