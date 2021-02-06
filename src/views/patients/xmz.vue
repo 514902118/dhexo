@@ -114,7 +114,7 @@
                     <span @click=" linkXGJBHandle(item['相关疾病'], $event)" class="spn" style="display: block"
                       v-if="typeof item['相关疾病'] === 'string'">
                       {{ item["相关疾病"] }}</span>
-                    <span @click=" linkXGJBHandle(xgjbItem, $event)"  class="spn"style="display: block" v-else
+                    <span @click=" linkXGJBHandle(xgjbItem, $event)"  class="spn" style="display: block" v-else
                       v-for="(xgjbItem, xgjbIndex) in item['相关疾病']" :key="xgjbIndex">
                       {{ xgjbItem }}
                     </span>
@@ -322,7 +322,7 @@
       </div>
       <!-- 参考文献 -->
       <div class="block block4 references">
-        <p class="title"><em>参考文献</em><span>references</span></p>
+        <p class="title"><em>参考文献</em><span>Reference</span></p>
         <div class="references-cont">
           <p> <span style="padding-right:10px;">1.</span> Bajt, M. L.et al. A spontaneous mutation of integrin alpha IIb beta 3 (platelet glycoprotein IIb-IIIa) helps define a
           ligand binding site. <i>The Journal of biological chemistry</i> <strong>267(6)</strong>, 3789-94 (1992).</p>

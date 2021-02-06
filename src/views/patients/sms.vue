@@ -326,7 +326,7 @@
       </div>
       <!-- 参考文献 -->
       <div class="block block4 references">
-        <p class="title"><em>参考文献</em><span>references</span></p>
+        <p class="title"><em>参考文献</em><span>Reference</span></p>
         <div class="references-cont">
           <p><span style="padding-right:10px;">1.</span> lermont, O.et al. SMN gene deletions in adult-onset spinal
             muscular atrophy. <i> Lancet

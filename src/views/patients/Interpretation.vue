@@ -8,6 +8,9 @@
       </div>
     </div>
     <div class="query-details">
+    <div class="section-tip">
+      发现了高度关注 <span>{{ sectionTip.gdNum }}</span>个 ,中度关注 <span>{{ sectionTip.zdNum }}</span>个, 其他变异 <span>{{ sectionTip.otherNum }}</span>个
+    </div>
       <!-- 高度关注 -->
       <div class="block block1 horizontal-bar">
         <p class="title"><em>高度关注</em><span><!--High attention-->Variants of High Interest</span></p>
@@ -89,7 +92,13 @@
                     </span>
                   </p>
                   <p>
-                    <template v-if="item['文献'].length <= 2">
+                    <template v-if="item['weiXianKey']">
+                     {{item['weiXianKey']}}
+                    </template>
+                    <template v-else>
+                     -
+                    </template>
+                    <!-- <template v-if="item['文献'].length <= 2">
                       <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"
                         @click="literatureClickHandle(ite.name)" class="spn">
                         {{ ite.name }}{{ Number(i) !== item["文献"].length - 1 ? "" : "" }}
@@ -104,7 +113,7 @@
                       </span>
                       <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
 
-                    </template>
+                    </template> -->
                   </p>
                 </li>
               </template>
@@ -190,7 +199,13 @@
                     </span>
                   </p>
                   <p>
-                    <template v-if="item['文献'].length <= 2">
+                     <template v-if="item['weiXianKey']">
+                     {{item['weiXianKey']}}
+                    </template>
+                    <template v-else>
+                     -
+                    </template>
+                    <!-- <template v-if="item['文献'].length <= 2">
                       <span style="display: block" v-for="(ite, i) in item['文献']" :key="i"
                         @click="literatureClickHandle(ite.name)" class="spn">
                         {{ ite.name
@@ -206,7 +221,7 @@
                         </template>
                       </span>
                       <span class="spn more" @click="showMoreDialog(item['文献'])">更多>></span>
-                    </template>
+                    </template> -->
                   </p>
                 </li>
               </template>
@@ -275,7 +290,7 @@
       </div>
       <!-- 参考文献 -->
       <div class="block block4 references" v-if="searchLiterature.length > 0">
-        <p class="title"><em>参考文献</em><span>references</span></p>
+        <p class="title"><em>参考文献</em><span>Reference</span></p>
         <div class="references-cont">
           <p v-for="(item, index) in searchLiterature" :key="index">
             <span style="padding-right:10px;">{{ index + 1 }}.</span>
@@ -339,6 +354,11 @@ export default {
     }
 
     return {
+      sectionTip:{
+        gdNum :0,
+        zdNum :0,
+        otherNum :0,
+      },
       patientName: this.$route.query.patientName || "",
       allData: {},
       // 高度关注
@@ -404,7 +424,55 @@ export default {
 
             this.otherAttention = allData["其他"];
 
-            this.concatHandle();
+            // 中度关注_num
+            this.sectionTip = {
+              gdNum :allData['高度关注_num'],
+              zdNum :allData['中度关注_num'],
+              otherNum :allData['其他_num']
+            }
+
+             // 处理高度关注文献
+             
+              Object.keys(this.highAttention).forEach((item)=>{
+                let weiXianKeyArr = [];
+                let weiXianKeyArrs = [];
+                  if(this.highAttention[item]['wenXian']){
+                     Object.keys(this.highAttention[item]['wenXian']).forEach(key => {
+                       let obj = {
+                         name:this.highAttention[item]['wenXian'][key]
+                       }
+                      weiXianKeyArr.push(key);
+                      weiXianKeyArrs.push(obj);
+                    }); 
+                     this.highAttention[item]['weiXianKey'] = weiXianKeyArr[0] + '-'+  weiXianKeyArr[weiXianKeyArr.length-1] ;
+                     this.highAttention[item]['weiXianKeys'] = weiXianKeyArrs;
+                  }
+              });
+
+              
+              // 处理中度关注文献
+           
+              Object.keys(this.middleAttention).forEach((item)=>{
+                  let middleweiXianKeyArr = [];
+                  let middleweiXianKeyArrs = [];
+                  if(this.middleAttention[item]['wenXian']){
+                     Object.keys(this.middleAttention[item]['wenXian']).forEach(key => {
+                       let obj = {
+                         name:this.middleAttention[item]['wenXian'][key]
+                       }
+                      middleweiXianKeyArr.push(key)
+                      middleweiXianKeyArrs.push(obj);
+                    }); 
+                     this.middleAttention[item]['weiXianKey'] = middleweiXianKeyArr[0] + '-'+  middleweiXianKeyArr[middleweiXianKeyArr.length-1] ;
+                     this.middleAttention[item]['weiXianKeys'] = middleweiXianKeyArrs;
+                  }
+              });
+            
+            setTimeout(() => {
+                 this.concatHandle();
+            }, 1000);
+
+           
           }
         })
         .catch((err) => { });
@@ -520,7 +588,6 @@ export default {
             literatureId: txt,
           },
           success: (res) => {
-            console.log(res);
             this.dialogInfo = {
               title: txt,
               description: res.data.literatureData,
@@ -622,7 +689,6 @@ export default {
         },
         success: (res) => {
           if (res.status === 200) {
-            console.log("相关疾病", res.data);
             let data = res.data;
             this.dialogInfo = {
               title: txt,
@@ -651,23 +717,30 @@ export default {
       // 高度关注 合并 中毒关注
 
       let highAttentionObj = Object.keys(this.highAttention).map((item) => {
-        let highAttentionItem = this.highAttention[item]["文献"].map(
+        let highAttentionItem;
+        if(this.highAttention[item]["weiXianKeys"]){
+          highAttentionItem = this.highAttention[item]["weiXianKeys"].map(
           (fItem) => fItem.name
         );
+        }
         return highAttentionItem;
       });
-
+     
       let middleAttentionObj = Object.keys(this.middleAttention).map((item) => {
-        let middleAttentionItem = this.middleAttention[item]["文献"].map(
-          (fItem) => fItem.name
-        );
+         let middleAttentionItem;
+         if(this.middleAttention[item]["weiXianKeys"]){
+            middleAttentionItem = this.middleAttention[item]["weiXianKeys"].map(
+            (fItem) => fItem.name
+          );
+         }
         return middleAttentionItem;
       });
-
+      
       let highAttentionArr = [].concat(...highAttentionObj);
       let middleAttentionArr = [].concat(...middleAttentionObj);
       this.references = highAttentionArr.concat(middleAttentionArr);
-      this.references = this.references.filter((item) => item != "-");
+      this.references = this.references.filter((item) => item != undefined);
+      console.log(this.references);
       this.searchLiteratureHandle();
     },
     searchLiteratureHandle () {
@@ -678,11 +751,9 @@ export default {
           }
         });
       }
-      console.log(this.searchLiterature);
     },
 
     viewLiteratureLayerHandle (txt) {
-      console.log(txt);
       this.$get(this.$Url.query.literature, {
         literatureId: txt,
       }).then((res) => {
@@ -891,5 +962,16 @@ export default {
 }
 .context li p {
   font-size: 16px !important;
+}
+.section-tip{
+    line-height: 40px;
+    font-size: 22px;
+    color: #999;
+    span{
+      display: inline-block;
+      padding: 0 5px;
+      color: #3bcaff;
+      font-weight: 600;
+    }
 }
 </style>

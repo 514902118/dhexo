@@ -43,7 +43,10 @@
                   <p>{{item.sex === 1 ? '男' : '女'}}</p>
                   <p>{{item.age}}</p>
                   <p>
-                    <span>{{item.jobName ? `${item.jobName}【${item.isResolve}】`: ''}}</span>
+                    <span>
+                      {{item.jobName ? `${item.jobName}`: ''}}
+                      <em style="font-style:inherit; font-size:18px;">{{item.jobName ? `【${item.isResolve}】`: ''}}</em>
+                    </span>
                     <span v-show="item.jobName"><i class="high" @click="toVcf(item)">查看</i><i @click="deleteVcf(item)">删除</i></span>
                   </p>
                   <p>
@@ -572,10 +575,10 @@ export default {
           width: 50px;
         }
         &:nth-of-type(5) {
-          flex: 2.2;
+          flex: 3;
         }
         &:nth-of-type(6) {
-          flex: 1.6;
+          flex: 1.4;
         }
         &:last-of-type {
           flex: none;
@@ -606,11 +609,11 @@ export default {
           }
           &:nth-of-type(5) {
             display: flex;
-            flex: 2.2;
+            flex: 3;
           }
           &:nth-of-type(6) {
             display: flex;
-            flex: 1.6;
+            flex: 1.4;
           }
           &:last-of-type {
             flex: none !important;
