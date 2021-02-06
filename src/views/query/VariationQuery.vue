@@ -1,20 +1,37 @@
 <template>
   <!-- 变异查询 -->
   <div @click="handleHideDialog">
-    <vHeader/>
+    <vHeader />
     <div class="query-box query-box3">
       <h5>查找变异</h5>
       <div class="box">
-        <el-input class="query-inp" v-model="queryInp" placeholder="请输入变异RS号" @keyup.enter.native="search">
-          <i slot="append" class="el-input__icon iconfont icon-sousuo1" @click="search"></i>
+        <el-input
+          class="query-inp"
+          v-model="queryInp"
+          placeholder="请输入变异RS号"
+          @keyup.enter.native="search"
+        >
+          <i
+            slot="append"
+            class="el-input__icon iconfont icon-sousuo1"
+            @click="search"
+          ></i>
         </el-input>
       </div>
     </div>
-    <div v-show="showDetails" class="query-details">
+    <div
+      v-show="showDetails"
+      class="query-details"
+    >
       <h4>
         <p class="tit">
           <span>{{info.queryInpTxt}}</span>
-          <i v-if="info.queryInpTxt && info.queryInpTxt !== ''" class="collect" :class="{'collected': isCollected}" @click="changeCollect">{{isCollected ? '已收藏': '收藏'}}</i>
+          <i
+            v-if="info.queryInpTxt && info.queryInpTxt !== ''"
+            class="collect"
+            :class="{'collected': isCollected}"
+            @click="changeCollect"
+          >{{isCollected ? '已收藏': '收藏'}}</i>
         </p>
       </h4>
       <!-- <h4>{{info.queryInpTxt}}</h4> -->
@@ -45,41 +62,85 @@
               <p style="text-align:center; flex:1.6;">
                 <template v-if="typeof info.variantName === 'string'">{{info.variantName}}</template>
                 <template v-else>
-                  <span v-for="(item, index) in info.variantName" :key="index">{{item}}<br/></span>
+                  <p>
+                    <span
+                      v-for="(item, index) in info.variantName"
+                      :key="index"
+                    >{{item.diseaseName}}<br /></span>
+                  </p>
                 </template>
               </p>
               <p>
                 <template v-if="typeof info.variantPhenotype === 'string'">
-                  <span class="spn" @mouseenter="handleShowDialog(info.variantPhenotype, 'variantPhenotype', $event,'variantPhenotype')" @click="handleHideDialog2(info.variantPhenotype)">
+                  <span
+                    class="spn"
+                    @mouseenter="handleShowDialog(info.variantPhenotype, 'variantPhenotype', $event,'variantPhenotype')"
+                    @click="handleHideDialog2(info.variantPhenotype)"
+                  >
                     {{info.variantPhenotype}}
                   </span>
                 </template>
                 <template v-else>
-                  <span v-for="(item, index) in info.variantPhenotype" :key="index" class="spn" @mouseenter="handleShowDialog(item, 'variantPhenotype', $event,'variantPhenotype')" @click="handleHideDialog2(item)">
-                    {{item}}<br/>
+                  <span
+                    v-for="(item, index) in info.variantPhenotype"
+                    :key="index"
+                    class="spn"
+                    @mouseenter="handleShowDialog(item, 'variantPhenotype', $event,'variantPhenotype')"
+                    @click="handleHideDialog2(item)"
+                  >
+                    {{item}}<br />
                   </span>
                 </template>
               </p>
               <p>
                 <template v-if="typeof info.variantInheritance === 'string'">{{info.variantInheritance}}</template>
                 <template v-else>
-                    <!-- {{info.variantInheritance.join(',')}} -->
-                    <span style="display:block;" v-for="(item,index) in info.variantInheritance" :key="index">
-                      {{ item }}
-                    </span>
+                  <!-- {{info.variantInheritance.join(',')}} -->
+                  <span
+                    style="display:block;"
+                    v-for="(item,index) in info.variantInheritance"
+                    :key="index"
+                  >
+                    {{ item }}
+                  </span>
                 </template>
               </p>
               <p>
                 <template v-if="typeof info.variantSource === 'string'">{{info.variantSource}}</template>
                 <template v-else>
                   <!-- {{info.variantSource.join(',')}} -->
-                  <span style="display:block;" v-for="(item,index) in info.variantSource" :key="index">
+                  <span
+                    style="display:block;"
+                    v-for="(item,index) in info.variantSource"
+                    :key="index"
+                  >
                     {{ item }}
                   </span>
                 </template>
               </p>
               <p>
+
                 <template v-if="typeof info.variantPmid === 'string'">
+                  <span
+                    class="spn"
+                    @click="literatureClickHandle(info.variantPmid)"
+                  >
+                    {{info.variantPmid}}
+                  </span>
+                </template>
+                <template v-else>
+                  <span
+                    style="display:block;"
+                    v-for="(ite, i) in info.variantPmid"
+                    :key="i"
+                    @click="literatureClickHandle(ite)"
+                    class="spn"
+                  >
+                    {{ite}}{{Number(i) !== (info.variantPmid.length - 1) ? ' ' : ''}}
+                  </span>
+                </template>
+
+                <!-- <template v-if="typeof info.variantPmid === 'string'">
                   <span class="spn" @mouseenter="handleShowDialog(info.variantPmid, 'variantPmid', $event,'variantPmid')" @click="handleHideDialog">
                     {{info.variantPmid}}
                   </span>
@@ -91,7 +152,7 @@
                       @click="handleHideDialog" class="spn">
                     {{ite}}{{Number(i) !== (info.variantPmid.length - 1) ? ' ' : ''}}
                   </span>
-                </template>
+                </template> -->
               </p>
             </li>
           </ul>
@@ -107,41 +168,55 @@
       append-to-body
       center
       :close-on-click-modal="false"
-      class="eldialog diff-dialog">
+      class="eldialog diff-dialog"
+    >
       <el-table
         :data="diffListData"
         border
-        style="width: 100%">
+        style="width: 100%"
+      >
         <el-table-column
           type="index"
           label="序号"
-          width="70">
+          width="70"
+        >
         </el-table-column>
         <el-table-column
           prop="rs"
-          label="RS">
+          label="RS"
+        >
         </el-table-column>
         <el-table-column
           prop="chrStart"
-          label="染色体位置">
+          label="染色体位置"
+        >
         </el-table-column>
         <el-table-column
           prop="refAlt"
-          label="突变位点">
+          label="突变位点"
+        >
         </el-table-column>
         <el-table-column
           prop=""
           label="操作"
-          width="100">
+          width="100"
+        >
           <template slot-scope="scope">
-            <el-button type="primary" @click="toDiff(scope)">跳转</el-button>
+            <el-button
+              type="primary"
+              @click="toDiff(scope)"
+            >跳转</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-dialog>
-    <InfoDialog :pos="InfoDiaPos" :data="dialogInfo" v-if="showDialog1"/>
-    <AsideFix/>
-    <vFooter/>
+    <InfoDialog
+      :pos="InfoDiaPos"
+      :data="dialogInfo"
+      v-if="showDialog1"
+    />
+    <AsideFix />
+    <vFooter />
   </div>
 </template>
 
@@ -158,7 +233,7 @@ export default {
     AsideFix,
     InfoDialog
   },
-  data() {
+  data () {
     return {
       showDetails: false,
       queryInp: '', // rs774656178 rs121913078
@@ -189,7 +264,7 @@ export default {
     }
   },
   methods: {
-    search() {
+    search () {
       if (this.queryInp === '') {
         this.$message({
           type: 'error',
@@ -198,7 +273,7 @@ export default {
         })
         return
       }
-      
+
       this.$get(this.$Url.query.variationbyRsId, {
         rsId: this.queryInp
       }).then(res => {
@@ -224,7 +299,7 @@ export default {
 
             if (this.hasDiffIndex === -1) {
               this.diffListData = []
-              for (let i=1; i<data.length; i++) {
+              for (let i = 1; i < data.length; i++) {
                 if (data[i].rs !== initInfo.rs ||
                   data[i].chr !== initInfo.chr ||
                   data[i].start !== initInfo.start ||
@@ -241,7 +316,7 @@ export default {
                 }
               }
             }
-            
+
           } else {
             this.getInfo(data)
           }
@@ -253,9 +328,10 @@ export default {
           })
           this.getIsCollect()
         }
-      }).catch(err => {})
+      }).catch(err => { })
     },
-    getInfo(data) {
+    getInfo (data) {
+      console.log(data);
       this.info.queryInpTxt = this.queryInp
       this.info.chrStart = (data.chr + ':' + (data.start === data.end ? data.start : (data.start + '-' + data.end))) || '暂无'
       this.info.gene = data.gene || '暂无'
@@ -276,21 +352,14 @@ export default {
           this.info.variantName = '暂无'
         }
       } else {
-         
-        let variantName = []
-        data.variantPhenotype11.forEach(v => {
-          Number(v)
-          console.log(v);
-          this.getDiseaseName(v, data => {
-            variantName.push(data[0].diseaseName)
-            this.info.variantName = variantName
-          })
-        })
+
+        this.info.variantName = data.diseaseOmimList || '暂无'
+        this.info.variantName = this.info.variantName.length == 0 ? '暂无' : this.info.variantName
       }
       // 疾病ID
       this.info.variantPhenotype = data.variantPhenotype11 || '暂无'
 
-      
+
       this.info.variantInheritance = data.variantInheritance11 || '暂无'
       this.info.variantSource = data.variantSource11 || '暂无'
 
@@ -300,11 +369,11 @@ export default {
         let arr = data.variantPmid11 ? data.variantPmid11.split(',') : []
         this.info.variantPmid = arr.length > 0 ? arr : '暂无'
       } else {
-        this.info.variantPmid =  data.variantPmid11
+        this.info.variantPmid = data.variantPmid11 || '暂无'
       }
-      
+
     },
-    handleShowDialog(txt, index, $event,type) {
+    handleShowDialog (txt, index, $event, type) {
       if (txt === '-') {
         this.showDialog1 = false
         return
@@ -325,7 +394,7 @@ export default {
         }
       }
 
-      if (!thisDescription && type=="variantPhenotype") {
+      if (!thisDescription && type == "variantPhenotype") {
         this.$get(this.$Url.query.diseaseInformation, {
           OMIM_id: txt
         }).then(res => {
@@ -333,9 +402,9 @@ export default {
             let data = res.data
             if (data) {
               this.dialogInfo = {
-                title: txt ,
+                title: txt,
                 description: data.Description || data.definition_orp || '暂无',
-                type:index == 'variantPhenotype'? 'OMIM:'+ txt : 'PMID:' + txt
+                type: index == 'variantPhenotype' ? 'OMIM:' + txt : 'PMID:' + txt
               }
 
               if (index === 'variantPhenotype') {
@@ -344,12 +413,12 @@ export default {
                 this.$set(this.info, 'variantPmid_thisDescription', this.dialogInfo.description)
               } else {
                 this.info.variantPmidArr.push({
-                  title: txt ,
+                  title: txt,
                   description: this.dialogInfo.description,
-                  type:index == 'variantPhenotype'? 'OMIM:'+ txt : 'PMID:' + txt
+                  type: index == 'variantPhenotype' ? 'OMIM:' + txt : 'PMID:' + txt
                 })
               }
-              
+
               this.showDialog1 = true
               let width = document.body.clientWidth
               let height = document.body.clientHeight
@@ -359,31 +428,31 @@ export default {
               }
             }
           }
-        }).catch(err => {})
-      } else if(!thisDescription && type=="variantPmid"){
+        }).catch(err => { })
+      } else if (!thisDescription && type == "variantPmid") {
 
-          /**
-           * 查询文献接口
-           */
-           this.$get(this.$Url.query.literature, {
-              literatureId: txt
-            }).then(res => {
-              console.log('查询文献接口=========成功');
-              let data = res.data
-              if (data) {
-                this.info.variantPmidArr.push({
-                  title: txt ,
-                  description: res.data.literatureData,
-                  type:'PMID:' + txt
-                })
-              }
-            }).catch(err => { })
+        /**
+         * 查询文献接口
+         */
+        this.$get(this.$Url.query.literature, {
+          literatureId: txt
+        }).then(res => {
+          console.log('查询文献接口=========成功');
+          let data = res.data
+          if (data) {
+            this.info.variantPmidArr.push({
+              title: txt,
+              description: res.data.literatureData,
+              type: 'PMID:' + txt
+            })
+          }
+        }).catch(err => { })
 
       } else {
         this.dialogInfo = {
-          title: txt ,
+          title: txt,
           description: thisDescription,
-          type:index == 'variantPhenotype'? 'OMIM:'+ txt : 'PMID:' + txt
+          type: index == 'variantPhenotype' ? 'OMIM:' + txt : 'PMID:' + txt
         }
         this.showDialog1 = true
         let width = document.body.clientWidth
@@ -394,10 +463,10 @@ export default {
         }
       }
     },
-    handleHideDialog() {
+    handleHideDialog () {
       this.showDialog1 = false
     },
-    handleHideDialog2(item) {
+    handleHideDialog2 (item) {
       let url = this.$router.resolve({
         name: 'diseaseQuery',
         query: {
@@ -407,7 +476,7 @@ export default {
       })
       window.open(url.href, '_blank')
     },
-    toDiff(scope) {
+    toDiff (scope) {
       let url = this.$router.resolve({
         name: 'variationQuery',
         query: {
@@ -418,7 +487,7 @@ export default {
       window.open(url.href, '_blank')
     },
     // 根据疾病ID获取疾病名
-    getDiseaseName(id, func) {
+    getDiseaseName (id, func) {
       this.$get(this.$Url.query.diseaseName, {
         rsId: id
       }).then(res => {
@@ -426,10 +495,10 @@ export default {
         if (data) {
           func && func(data)
         }
-      }).catch(err => {})
+      }).catch(err => { })
     },
     // 查询是否收藏
-    getIsCollect() {
+    getIsCollect () {
       this.$post(this.$Url.collect.list).then(res => {
         if (res.status === 200) {
           let data = res.data
@@ -441,13 +510,13 @@ export default {
             } else {
               this.isCollected = false
             }
-            
+
           }
         }
-      }).catch(err => {})
+      }).catch(err => { })
     },
     // 切换收藏
-    changeCollect() {
+    changeCollect () {
       if (this.isCollected) {
         this.$get(this.$Url.collect.delete, {
           collectId: this.currentCollectId
@@ -460,11 +529,11 @@ export default {
             })
             this.isCollected = false
           }
-        }).catch(err => {})
+        }).catch(err => { })
       } else {
         this.$post(this.$Url.collect.add, {
           name: this.queryInp,
-          type: 2, 
+          type: 2,
           reservedOne: '',
           reservedTow: ''
         }).then(res => {
@@ -483,11 +552,20 @@ export default {
               message: res.msg
             })
           }
-        }).catch(err => {})
+        }).catch(err => { })
       }
+    },
+    /**
+ * 参考文献点击操作
+ */
+    literatureClickHandle (name) {
+      console.log(name);
+      // var tempwindow=window.open();
+      // tempwindow.location=`https://pubmed.ncbi.nlm.nih.gov/${name}`;
+      window.open(`https://pubmed.ncbi.nlm.nih.gov/${name}`)
     }
   },
-  mounted() {
+  mounted () {
     let query = this.$route.query
     if (query.search) {
       this.queryInp = query.search
@@ -504,7 +582,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/_common';
+@import "@/static/_common";
 .block1 {
   .brief-info {
     li {

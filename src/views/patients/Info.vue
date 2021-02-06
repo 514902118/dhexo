@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vLoginHeader/>
+    <vLoginHeader />
     <div class="top">
       <div class="box">
         <div class="elbtn" @click="showDialogAdd">新&nbsp;&nbsp;&nbsp;建</div>
@@ -10,7 +10,7 @@
     <div class="main">
       <div class="query-details patients-info">
         <div class="block block1">
-            <div class="patients-tab">
+          <div class="patients-tab">
             <p class="tit">
               <span></span>
               <span>姓名</span>
@@ -26,15 +26,29 @@
             <ul class="context">
               <template v-if="patientList.length > 0">
                 <li v-for="(item, index) in patientList" :key="index">
-                  <i class="el-icon-check edit-btn" :class="{'is-edit': item.disabled}" @click="handleUpdate(item, index)"></i>
+                  <i class="el-icon-check edit-btn" :class="{'is-edit': item.disabled}"
+                    @click="handleUpdate(item, index)"></i>
                   <p>{{index + 1}}</p>
-                  <p><el-input v-model="item.patientName" :disabled="item.disabled"></el-input></p>
-                  <p><el-input v-model="item.showSex" :disabled="item.disabled"></el-input></p>
-                  <p><el-input v-model="item.age" :disabled="item.disabled"></el-input></p>
+                  <p>
+                    <el-input v-model="item.patientName" :disabled="item.disabled"></el-input>
+                  </p>
+                  <p>
+                    <el-input v-model="item.showSex" :disabled="item.disabled"></el-input>
+                  </p>
+                  <p>
+                    <el-input v-model="item.age" :disabled="item.disabled"></el-input>
+                  </p>
                   <p class="idcard">{{item.idCard}}</p>
-                  <p><el-input v-model="item.symptom" :disabled="item.disabled"></el-input></p>
-                  <p><el-input v-model="item.familyMedicalHistory" :disabled="item.disabled"></el-input></p>
-                  <p >{{item.isResolve}}</p>
+                  <p>
+                    <el-tooltip placement="top" effect="light">
+                      <div slot="content" class="tip-style">{{item.symptom}}</div>
+                      <el-input v-model="item.symptom" :disabled="item.disabled"></el-input>
+                    </el-tooltip>
+                  </p>
+                  <p>
+                    <el-input v-model="item.familyMedicalHistory" :disabled="item.disabled"></el-input>
+                  </p>
+                  <p>{{item.isResolve}}</p>
                   <p>{{item.showCreateTime}}</p>
                   <p class="tools">
                     <span @click="handleDeletePatient(item)">删除</span>
@@ -47,14 +61,8 @@
             </ul>
             <!-- 分页 -->
             <div class="pagination">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="total"
-                :page-size="pageSize"
-                :current-page.sync="patientListParams.pageNum"
-                @current-change="getCurrentPage"
-                class="el-pagination">
+              <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"
+                :current-page.sync="patientListParams.pageNum" @current-change="getCurrentPage" class="el-pagination">
               </el-pagination>
             </div>
           </div>
@@ -62,16 +70,10 @@
       </div>
     </div>
     <!-- 新建 -->
-    <el-dialog
-      title="新建患者"
-      :visible.sync="dialogAdd"
-      width="682px"
-      append-to-body
-      center
-      :close-on-click-modal="false"
-      :before-close="closeAddDialog"
-      class="eldialog add-dialog">
-      <el-form v-if="showDialogAddForm" class="add-form" ref="addForm" :rules="rules" :model="addForm" label-width="200px">
+    <el-dialog title="新建患者" :visible.sync="dialogAdd" width="682px" append-to-body center :close-on-click-modal="false"
+      :before-close="closeAddDialog" class="eldialog add-dialog">
+      <el-form v-if="showDialogAddForm" class="add-form" ref="addForm" :rules="rules" :model="addForm"
+        label-width="200px">
         <el-form-item label="姓名：" prop="patientName">
           <el-input class="elinput" v-model="addForm.patientName" placeholder="请输入姓名">
           </el-input>
@@ -104,8 +106,8 @@
         <div class="elbtn" @click="addPatient">确定</div>
       </div>
     </el-dialog>
-    <AsideFix/>
-    <vFooter/>
+    <AsideFix />
+    <vFooter />
   </div>
 </template>
 
@@ -118,7 +120,7 @@ import checkIdCardFunc from '@/utils/checkIdCard'
 
 export default {
   inject: ['reload'],
-  data() {
+  data () {
     var checkAge = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('请输入年龄'));
@@ -137,7 +139,7 @@ export default {
       if (!value) {
         return callback(new Error('请输入身份证'));
       }
-      let {pass, tip} = checkIdCardFunc(value)
+      let { pass, tip } = checkIdCardFunc(value)
       if (!pass) {
         callback(new Error(tip))
       } else {
@@ -146,6 +148,8 @@ export default {
       callback()
     }
     return {
+      once: 0,
+      itemInit: '',
       patientList: [],
       patientListParams: {
         isAgeAsc: 'asc',
@@ -202,11 +206,11 @@ export default {
   },
   methods: {
     // 新建患者
-    showDialogAdd() {
+    showDialogAdd () {
       this.dialogAdd = true
       this.showDialogAddForm = true
     },
-    addPatient() {
+    addPatient () {
       this.$refs['addForm'].validate((valid) => {
         if (valid) {
           this.$post(this.$Url.account.addPatient, {
@@ -237,16 +241,16 @@ export default {
                 message: res.msg
               })
             }
-          }).catch(err => {})
+          }).catch(err => { })
         }
       })
     },
-    closeAddDialog() {
+    closeAddDialog () {
       this.dialogAdd = false
       this.$refs['addForm'].resetFields()
     },
     // 患者列表
-    getPatientList() {
+    getPatientList () {
       this.$post(this.$Url.account.patientList, this.patientListParams).then(res => {
         if (res.status === 200) {
           let data = res.data
@@ -262,7 +266,7 @@ export default {
               }
               v.isResolve = v.isResolve === 1 ? '已解读' :
                 v.isResolve === 2 ? '未解读' : '正在解读'
-              
+
               let time = moment(data.createTime).format('YYYY MM DD')
               let arr = time.split(' ')
               v.showCreateTime = `${arr[0]}/${arr[1]}/${arr[2]}`
@@ -271,7 +275,7 @@ export default {
             this.totle = data.total
             this.pageSize = data.pageSize
           }
-          
+
         } else {
           this.$message({
             type: 'error',
@@ -279,26 +283,15 @@ export default {
             message: res.msg
           })
         }
-      }).catch(err => {})
+      }).catch(err => { })
     },
     // 分页
-    getCurrentPage(val) {
+    getCurrentPage (val) {
       this.patientListParams.pageNum = val
       this.getPatientList()
     },
-    handleUpdate(item, index, isMore = false) {
-      if (item.disabled) {
-        this.$set(this.patientList[index], 'disabled', false)
-      } else {
-        let patientName = item.patientName
-        let sex = item.showSex === '男' ? 'MAN' : 'GIRL'
-        let age = item.age
-        let idCard = item.idCard
-        let symptom = item.symptom
-        let familyMedicalHistory = item.familyMedicalHistory
-        let patientId = item.patientId
-
-        if (patientName === '') {
+    handleUpdate (item, index, isMore = false) {
+       if (item.patientName === '') {
           this.$message({
             type: 'error',
             duration: 2000,
@@ -312,7 +305,7 @@ export default {
             message: '请输入正确的患者性别'
           })
           return
-        } else if (Number(age) > 300) {
+        } else if (Number(item.age) > 300) {
           this.$message({
             type: 'error',
             duration: 2000,
@@ -320,6 +313,18 @@ export default {
           })
           return
         }
+
+      if (item.disabled) {
+        this.$set(this.patientList[index], 'disabled', false)
+      } else {
+        let patientName = item.patientName
+        let sex = item.showSex === '男' ? 'MAN' : 'GIRL'
+        let age = item.age
+        let idCard = item.idCard
+        let symptom = item.symptom
+        let familyMedicalHistory = item.familyMedicalHistory
+        let patientId = item.patientId
+        
         this.$post(this.$Url.account.patientUpdate, {
           patientName,
           patientId,
@@ -340,6 +345,9 @@ export default {
               this.moreArr++
             }
             this.$set(this.patientList[index], 'disabled', true)
+
+
+
           } else {
             this.$message({
               type: 'error',
@@ -347,10 +355,10 @@ export default {
               message: res.msg
             })
           }
-        }).catch(err => {})
+        }).catch(err => { })
       }
     },
-    handleUpdateAll() {
+    handleUpdateAll () {
       let isHasDis = this.patientList.filter(item => item.disabled === false)
       if (isHasDis.length === this.patientList.length) {
         this.moreArr = 0
@@ -367,9 +375,9 @@ export default {
           this.handleUpdate(v, i, true)
         })
       }
-      
+
     },
-    toInterpretation(item) {
+    toInterpretation (item) {
       let url = this.$router.resolve({
         name: 'patientsInterpretation',
         query: {
@@ -380,7 +388,7 @@ export default {
       window.open(url.href, '_blank')
     },
     // 删除患者
-    handleDeletePatient(item) {
+    handleDeletePatient (item) {
       this.$confirm('是否删除患者?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -402,8 +410,8 @@ export default {
               message: res.msg
             })
           }
-        }).catch(err => {})
-        
+        }).catch(err => { })
+
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -413,7 +421,7 @@ export default {
     },
   },
   watch: {
-    moreArr() {
+    moreArr () {
       if (this.moreArr > 0 && this.moreArr >= this.patientList.length) {
         this.$message({
           type: 'success',
@@ -423,14 +431,14 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.getPatientList()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/static/_common';
+@import "@/static/_common";
 .top {
   position: relative;
   width: 100%;
@@ -474,7 +482,9 @@ export default {
         flex: none;
         width: 50px;
       }
-      &:nth-of-type(6), &:nth-of-type(7), &:nth-of-type(8) {
+      &:nth-of-type(6),
+      &:nth-of-type(7),
+      &:nth-of-type(8) {
         flex: 1.7;
       }
     }
@@ -520,7 +530,9 @@ export default {
             width: 0;
           }
         }
-        &:nth-of-type(6), &:nth-of-type(7), &:nth-of-type(8) {
+        &:nth-of-type(6),
+        &:nth-of-type(7),
+        &:nth-of-type(8) {
           flex: 1.7;
         }
         &:last-of-type {
@@ -536,7 +548,7 @@ export default {
           height: 28px;
           margin-top: -14px;
           border-right: 1px solid $bgColor2;
-          content: '';
+          content: "";
         }
         &.show {
           &:hover {
@@ -588,5 +600,13 @@ export default {
     background-image: $bgGradient2;
     cursor: pointer;
   }
+}
+</style>
+<style lang="scss" scoped>
+/**20210204--tony修改 */
+.tip-style {
+  padding: 0 8px;
+  font-size: 18px;
+  color: #656565;
 }
 </style>

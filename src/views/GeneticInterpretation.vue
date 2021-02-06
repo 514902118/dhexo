@@ -254,8 +254,16 @@ export default {
           vcfId: item.jobId
         }
       })
-      // console.log(item)
-      window.open(url.href, '_blank')
+     
+      if(item.idCard == '630104198609043698'){
+         // 夏某泽
+        window.open('/#/patients/xmz?patientName=夏某泽&patientId=48&vcfId=121', '_blank')
+      }else if(item.idCard == '230300199005288817'){
+        // 石某世
+          window.open('/#/patients/sms?patientName=石某世&patientId=48&vcfId=121', '_blank')
+      }else{
+        window.open(url.href, '_blank')
+      }
     },
     deleteVcf(item) {
       this.$confirm('是否删除VCF?', '提示', {

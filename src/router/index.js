@@ -89,6 +89,18 @@ Vue.use(VueRouter)
         name: 'patientsInterpretation',
         component: () => import(/* webpackChunkName: "patientsInterpretation" */ '../views/patients/Interpretation.vue')
       },
+      // 石某世
+      {
+        path: 'sms',
+        name: 'Sms',
+        component: () => import(/* webpackChunkName: "patientsInterpretation" */ '../views/patients/sms.vue')
+      },
+      // 夏某泽
+      {
+        path: 'xmz',
+        name: 'Xmz',
+        component: () => import(/* webpackChunkName: "patientsInterpretation" */ '../views/patients/xmz.vue')
+      },
       // 全外解读报告
       {
         path: 'report',

@@ -53,6 +53,8 @@ const URL = {
   },
   pdf: {
     export: base + 'mtApi/vcf/export', // pdf下载 
+    shimoshi: base + 'shimoshi.pdf', // shimoshipdf下载 
+    xiamoushi: base + 'xiaomouze.pdf', // shimoshipdf下载 
   },
   message: {
     leaveMessage: base + 'mtApi/add/leaveMessage', // 留言
