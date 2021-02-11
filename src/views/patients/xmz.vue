@@ -8,6 +8,9 @@
       </div>
     </div>
     <div class="query-details">
+      <div class="section-tip">
+        用时 <span>1.25</span> s，检索了 <span>16,257</span> 个基因， <span>9,014</span>个疾病 ，<span>12,568,986</span> 个变异后，发现了高度关注 <span>{{ highAttention.length }}</span>个 ,中度关注 <span>{{ middleAttention.length }}</span>个, 其他变异 <span>{{ otherAttention.length }}</span>个
+      </div>
       <!-- 患者信息 -->
       <div class="block block1">
         <p class="title"><em>患者信息 </em></p>
@@ -24,11 +27,11 @@
           </li>
           <li class="gray">
             <span style="width: 50%;">药物过敏史</span>
-            <span style="width: 49.9%; border-right: 0">家族遗传病史</span>
+            <span style="width: 49.8%; border-right: 0; box-sizing: border-box;">家族遗传病史</span>
           </li>
           <li>
             <p style="width: 50%;">无</p>
-            <p style="width: 49.9%; border-right: 0">无</p>
+            <p style="width: 49.8%; border-right: 0; box-sizing: border-box;">无</p>
           </li>
           <li class="gray"> 病历摘要 </li>
           <li style=" text-align: left;">
@@ -322,7 +325,7 @@
       </div>
       <!-- 参考文献 -->
       <div class="block block4 references">
-        <p class="title"><em>参考文献</em><span>Reference</span></p>
+        <p class="title"><em>参考文献</em><span>References</span></p>
         <div class="references-cont">
           <p> <span style="padding-right:10px;">1.</span> Bajt, M. L.et al. A spontaneous mutation of integrin alpha IIb beta 3 (platelet glycoprotein IIb-IIIa) helps define a
           ligand binding site. <i>The Journal of biological chemistry</i> <strong>267(6)</strong>, 3789-94 (1992).</p>
@@ -1103,5 +1106,16 @@ export default {
   color: #333;
   line-height: 40px;
   font-size: 22px;
+}
+.section-tip {
+    line-height: 40px;
+    font-size: 20px;
+    color: #999;
+    span {
+        display: inline-block;
+        padding: 0 5px;
+        color: #3bcaff;
+        font-weight: 600;
+    }
 }
 </style>

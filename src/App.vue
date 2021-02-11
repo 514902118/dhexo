@@ -534,9 +534,9 @@ textarea {
         text-align: center;
         // word-break: break-all;
         word-wrap: break-word;
-        &:nth-of-type(1) {
-          text-align: left;
-        }
+        // &:nth-of-type(1) {
+        //   text-align: left;
+        // }
         span {
           position: relative;
           &.active {

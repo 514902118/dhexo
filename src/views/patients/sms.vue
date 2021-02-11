@@ -8,6 +8,9 @@
       </div>
     </div>
     <div class="query-details">
+      <div class="section-tip">
+        用时 <span>0.88</span> s，检索了 <span>16,257</span> 个基因， <span>9,014</span>个疾病 ，<span>12,568,986</span> 个变异后，发现了高度关注 <span>{{ highAttention.length }}</span>个 ,中度关注 <span>{{ middleAttention.length }}</span>个, 其他变异 <span>{{ otherAttention.length }}</span>个
+      </div>
       <!-- 患者信息 -->
       <div class="block block1">
         <p class="title"><em>患者信息 </em></p>
@@ -24,11 +27,11 @@
           </li>
           <li class="gray">
             <span style="width: 50%;">药物过敏史</span>
-            <span style="width: 49.9%; border-right: 0">家族遗传病史</span>
+            <span style="width: 49.8%; border-right: 0; box-sizing: border-box;">家族遗传病史</span>
           </li>
           <li>
             <p style="width: 50%;">无</p>
-            <p style="width: 49.9%; border-right: 0">无</p>
+            <p style="width: 49.8%; border-right: 0; box-sizing: border-box;">无</p>
           </li>
           <li class="gray"> 病历摘要 </li>
           <li style=" text-align: left;">
@@ -225,10 +228,10 @@
                   <div slot="content" class="tip-style">突变致病信息的数据库</div>
                   <span>依据</span>
                 </el-tooltip>
-                <el-tooltip effect="light" placement="top">
+                <!-- <el-tooltip effect="light" placement="top">
                   <div slot="content" class="tip-style">相关文献的Pubmed ID</div>
                   <span>文献</span>
-                </el-tooltip>
+                </el-tooltip> -->
               </p>
             </div>
             <ul class="context">
@@ -326,7 +329,7 @@
       </div>
       <!-- 参考文献 -->
       <div class="block block4 references">
-        <p class="title"><em>参考文献</em><span>Reference</span></p>
+        <p class="title"><em>参考文献</em><span>References</span></p>
         <div class="references-cont">
           <p><span style="padding-right:10px;">1.</span> lermont, O.et al. SMN gene deletions in adult-onset spinal
             muscular atrophy. <i> Lancet
@@ -368,7 +371,7 @@
             muscular atrophy. <i>Human molecular genetics</i> <strong>12(19)</strong>, 2481-9 (2003).</p>
           <p><span style="padding-right:10px;">9.</span> TSUKAGOSHI, H.et al. HEREDITARY PROXIMAL NEUROGENIC MUSCULAR
             ATROPHY IN ADULT. <i>Archives of neurology</i> <strong>12</strong>, 597-603 (1965).
-          </p><br>
+          </p>
           <p><span style="padding-right:10px;">10.</span> Weihl, C. C.et al. Valproate may improve strength and function
             in patients with type
             III/IV spinal muscle
@@ -1241,5 +1244,16 @@ export default {
   color: #333;
   line-height: 40px;
   font-size: 22px;
+}
+.section-tip {
+    line-height: 40px;
+    font-size: 20px;
+    color: #999;
+    span {
+        display: inline-block;
+        padding: 0 5px;
+        color: #3bcaff;
+        font-weight: 600;
+    }
 }
 </style>
