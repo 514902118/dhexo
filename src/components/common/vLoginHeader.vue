@@ -6,7 +6,7 @@
     <div class="no-login">
       <span>{{title}}</span>
       <div class="link-box">
-        <router-link v-if="!showUserBox && $route.name === 'patientsInterpretation'" :to="{ name: 'geneticInterpretation' }" tag="span"><i class="el-icon-d-arrow-left"></i>返回上一页</router-link>
+        <router-link v-if="(!showUserBox && $route.name === 'patientsInterpretation') || $route.name === 'Sms' || $route.name === 'Xmz'" :to="{ name: 'geneticInterpretation' }" tag="span"><i class="el-icon-d-arrow-left"></i>返回上一页</router-link>
         <router-link v-if="!showUserBox" :to="{ name: 'home' }" tag="span"><i class="el-icon-d-arrow-left"></i>返回首页</router-link>
       </div>
       <span v-if="showUserBox" class="user-box" style="text-align:center">
@@ -40,7 +40,7 @@ export default {
           // } else {
           //   this.title = '忘记密码'
           // }
-          
+
           break;
         case 'favorite':
           this.title = '收藏夹'

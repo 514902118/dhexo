@@ -358,7 +358,7 @@ export default {
           })
           
           this.patientList = list
-          this.totle = data.total
+          this.total = data.total
           this.pageSize = data.pageSize
         } else {
           this.$message({

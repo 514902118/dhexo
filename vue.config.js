@@ -18,7 +18,8 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'http://39.105.58.173:18081',
-        target: 'http://52.82.15.67:18081',  // 测试vcf
+        // target: 'http://52.82.15.67:18081',  // 测试vcf
+        target: 'https://dhexo.dhtongliang.cn',  // 测试vcf
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

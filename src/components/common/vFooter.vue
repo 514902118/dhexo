@@ -12,11 +12,11 @@
       </div>
       <div class="link">
         <h5>友情链接</h5>
-        <p> <a href="https://www.accurascience.com" target="_blank">美国&nbsp;AccuraScience&nbsp;公司</a> </p>
+        <p> <a style="color: #939fa5" href="https://www.accurascience.com" target="_blank">美国&nbsp;AccuraScience&nbsp;公司</a> </p>
       </div>
     </div>
     <footer>
-      Copyright 2020 - 2021宁波鼎禾桐梁科技有限公司 版权所有 浙ICP备18888888号-8
+      Copyright 2020 - 2021宁波鼎禾桐梁科技有限公司 版权所有 浙ICP备2021004972号-1
     </footer>
   </div>
 </template>

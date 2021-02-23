@@ -272,7 +272,7 @@ export default {
               v.showCreateTime = `${arr[0]}/${arr[1]}/${arr[2]}`
             })
             this.patientList = data.list
-            this.totle = data.total
+            this.total = data.total
             this.pageSize = data.pageSize
           }
 
