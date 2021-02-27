@@ -16,7 +16,10 @@
       </div>
     </div>
     <footer>
-      Copyright 2020 - 2021宁波鼎禾桐梁科技有限公司 版权所有 浙ICP备2021004972号-1
+
+      Copyright 2020 - 2021宁波鼎禾桐梁科技有限公司 版权所有 浙ICP备2021004972号-1 <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33028202000750" target="_blank">
+      <img src="../../assets/gongan.png" alt="">浙公网安备 33028202000750号</a>
+
     </footer>
   </div>
 </template>
@@ -96,6 +99,18 @@ export default {}
         font-size: 14px;
         color: $fontColor4;
         background-color: $bgColor3;
+      a{
+        font-size: 14px;
+        color: $fontColor4;
+        text-decoration: none;
+        img{
+          vertical-align: middle;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          margin-top: -4px;
+        }
+      }
     }
 }
 </style>
